@@ -159,7 +159,9 @@ public class Multiplexer<X, Y, Message> implements Channel<Either<X, Y>, Message
     }
 
     @Override
-    public Connection<Either<X, Y>, Message> open(final Listener<Either<X, Y>, Message> listener) {
+    public Connection<Either<X, Y>, Message> open(final Listener<Either<X, Y>, Message> listener)
+            throws InterruptedException {
+        
         Connection<X, Message> cx = x.open(new Listener<X, Message>(){
             @Override
             public Receiver<Message> newSession(Session<X, Message> session) {
