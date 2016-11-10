@@ -4,17 +4,17 @@ import com.google.common.primitives.Ints;
 import com.neemre.btcdcli4j.core.BitcoindException;
 import com.neemre.btcdcli4j.core.CommunicationException;
 import com.shuffle.bitcoin.Address;
+import com.shuffle.bitcoin.Coin;
 import com.shuffle.bitcoin.CoinNetworkException;
+import com.shuffle.bitcoin.Crypto;
 import com.shuffle.bitcoin.SigningKey;
+import com.shuffle.bitcoin.VerificationKey;
 import com.shuffle.bitcoin.blockchain.BitcoinCore;
 import com.shuffle.bitcoin.blockchain.BlockCypherDotCom;
-import com.shuffle.bitcoin.impl.BitcoinCrypto;
-import com.shuffle.bitcoin.Coin;
-import com.shuffle.bitcoin.Crypto;
-import com.shuffle.bitcoin.VerificationKey;
 import com.shuffle.bitcoin.blockchain.BlockchainDotInfo;
 import com.shuffle.bitcoin.blockchain.Btcd;
 import com.shuffle.bitcoin.impl.AddressImpl;
+import com.shuffle.bitcoin.impl.BitcoinCrypto;
 import com.shuffle.bitcoin.impl.CryptoProtobuf;
 import com.shuffle.bitcoin.impl.SigningKeyImpl;
 import com.shuffle.bitcoin.impl.VerificationKeyImpl;
@@ -50,7 +50,6 @@ import org.bitcoinj.params.TestNet3Params;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import org.json.simple.parser.JSONParser;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -96,115 +95,6 @@ public class Shuffle {
 
     // Entropy checker must think there is at least this much entropy.
     private static int MIN_APPARENT_ENTROPY = 128;
-
-    public static OptionParser getShuffleOptionsParser() {
-        OptionParser parser = new OptionParser();
-        parser.accepts("help", "print help message.");
-
-        ArgumentAcceptingOptionSpec<String> query = parser.acceptsAll(Arrays.asList("q", "query"),
-                "Means of performing blockchain queries. btcd, blockcypher.com and blockchain.info are supported")
-                .withRequiredArg().ofType(String.class);
-
-        ArgumentAcceptingOptionSpec<String> blockchain = parser.acceptsAll(Arrays.asList("b", "blockchain"),
-                "Which blockchain to query (test or main)")
-                .withRequiredArg().ofType(String.class);
-
-        ArgumentAcceptingOptionSpec<Long> time = parser.acceptsAll(Arrays.asList("t", "time"),
-                "time at which protocol is scheduled to take place.")
-                .withRequiredArg()
-                .ofType(Long.class);
-
-        if (TEST_MODE) {
-            parser.accepts("crypto")
-                    .withRequiredArg()
-                    .ofType(String.class)
-                    .defaultsTo("mock");
-
-            query.defaultsTo("mock");
-            blockchain.defaultsTo("test");
-
-            // TODO
-            // What does this do?
-            parser.accepts("coin")
-                    .withRequiredArg()
-                    .ofType(String.class)
-                    .defaultsTo("{\"outputs\":[],\"transactions\":[]}");
-
-            parser.accepts("me").withRequiredArg().ofType(String.class);
-
-            parser.accepts("local").withRequiredArg().ofType(String.class);
-
-            parser.accepts("format").withRequiredArg().ofType(String.class)
-                    .defaultsTo("protobuf");
-
-            // Five seconds from now.
-            // time.defaultsTo(System.currentTimeMillis() + 5000L);
-
-        } else {
-            query.defaultsTo("blockcypher.com");
-            blockchain.defaultsTo("main");
-        }
-
-        parser.acceptsAll(Arrays.asList("S", "session"),
-                "The session identifier for this round")
-                .withRequiredArg()
-                .ofType(String.class);
-
-        parser.acceptsAll(Arrays.asList("B", "amount"),
-                "amount to be transferred (satoshis)")
-                .withRequiredArg()
-                .ofType(Long.class);
-        parser.acceptsAll(Arrays.asList("f", "fee"),
-                "miner fee to be paid (satoshis)")
-                .withRequiredArg()
-                .ofType(Long.class);
-        parser.acceptsAll(Arrays.asList("s", "seed"),
-                "random number seed")
-                .withRequiredArg()
-                .ofType(String.class);
-
-        OptionSpecBuilder key = parser.acceptsAll(Arrays.asList("k", "key"), "Your private key.");
-        OptionSpecBuilder port = parser.accepts("port", "Port on which to listen for connections.");
-        OptionSpecBuilder change = parser.accepts("change", "Your change address. Optional.");
-        OptionSpecBuilder anon = parser.accepts("anon", "A Bitcoin address to which the anonymized coins are sent.");
-        OptionSpecBuilder utxos = parser.acceptsAll(Arrays.asList("u", "utxos"), "The list of utxos we will spend from, formatted as a JSON array.");
-
-        if (TEST_MODE) {
-            key.requiredUnless("local");
-            port.requiredUnless("local");
-            change.requiredUnless("local");
-            anon.requiredUnless("local");
-            utxos.requiredUnless("local");
-        }
-
-        key.withRequiredArg().ofType(String.class);
-        port.withRequiredArg().ofType(Long.class);
-        change.withRequiredArg().ofType(String.class);
-        anon.withRequiredArg().ofType(String.class);
-        utxos.withRequiredArg().ofType(String.class);
-
-        parser.accepts("timeout", "The time in milliseconds that Shufflepuff waits before disconnecting due to a timeout.")
-                .withRequiredArg()
-                .ofType(Long.class)
-                .defaultsTo(1000L);
-
-        parser.accepts("minbitcoinnetworkpeers", "Minimum peers to be connected to before broadcasting transaction. Only used with blockchain.info and blockcypher.com.")
-                .withRequiredArg().ofType(Long.class).defaultsTo(5L);
-        parser.accepts("rpcuser", "Username to log in to btcd.")
-                .withRequiredArg().ofType(String.class);
-        parser.accepts("rpcpass", "Password to log in to btcd.")
-                .withRequiredArg().ofType(String.class);
-
-        parser.accepts("peers",
-                "The peers we will be connecting to, formatted as a JSON array.")
-                .withRequiredArg().ofType(String.class);
-
-        parser.accepts("report", "Path to store report file.")
-                .withRequiredArg().ofType(String.class);
-
-        return parser;
-    }
-
     public final Coin coin;
     public final String seed;
     public final long time;
@@ -213,15 +103,13 @@ public class Shuffle {
     public final long timeout;
     public final Bytestring session;
     public final Crypto crypto;
+    public final String report; // Where to save the report.
+    public final NetworkParameters netParams;
+    public final ExecutorService executor;
+    private final MockNetwork<Integer, Signed<Packet<VerificationKey, Payload>>> mock = new MockNetwork<>();
     Set<Player> local = new HashSet<>();
     Map<VerificationKey, Either<InetSocketAddress, Integer>> peers = new HashMap<>();
     SortedSet<VerificationKey> keys = new TreeSet<>();
-    public final String report; // Where to save the report.
-    public final NetworkParameters netParams;
-
-    public final ExecutorService executor;
-
-    private final MockNetwork<Integer, Signed<Packet<VerificationKey, Payload>>> mock = new MockNetwork<>();
 
     public Shuffle(OptionSet options, PrintStream stream)
             throws IllegalArgumentException, ParseException, UnknownHostException, FormatException, NoSuchAlgorithmException, AddressFormatException, MalformedURLException, BitcoinCrypto.Exception, BitcoindException, CommunicationException {
@@ -262,7 +150,7 @@ public class Shuffle {
         }
 
         // Check on the time.
-        time = (Long)options.valueOf("time");
+        time = (Long) options.valueOf("time") * 1000;
         long now = System.currentTimeMillis();
 
         if (time < now) {
@@ -787,77 +675,112 @@ public class Shuffle {
 
     }
 
-    private Player readPlayer(
-            OptionSet options,
-            String key,
-            int id,
-            HashSet<TransactionOutPoint> utxos,
-            long port,
-            String anon,
-            String change,
-            Messages.ShuffleMarshaller m) throws UnknownHostException, FormatException, AddressFormatException {
+    public static OptionParser getShuffleOptionsParser() {
+        OptionParser parser = new OptionParser();
+        parser.accepts("help", "print help message.");
 
-        SigningKey sk;
-        Address anonAddress;
-        Address changeAddress;
+        ArgumentAcceptingOptionSpec<String> query = parser.acceptsAll(Arrays.asList("q", "query"),
+              "Means of performing blockchain queries. btcd, blockcypher.com and blockchain.info are supported")
+              .withRequiredArg().ofType(String.class);
+
+        ArgumentAcceptingOptionSpec<String> blockchain = parser.acceptsAll(Arrays.asList("b", "blockchain"),
+              "Which blockchain to query (test or main)")
+              .withRequiredArg().ofType(String.class);
+
+        ArgumentAcceptingOptionSpec<Long> time = parser.acceptsAll(Arrays.asList("t", "time"),
+              "time at which protocol is scheduled to take place.")
+              .withRequiredArg()
+              .ofType(Long.class);
+
         if (TEST_MODE) {
-            switch ((String)options.valueOf("crypto")) {
-                case "mock" : {
-                    sk = new MockSigningKey(Integer.parseInt(key));
-                    anonAddress = new MockAddress(anon);
-                    if (change == null) {
-                        changeAddress = null;
-                    } else {
-                        changeAddress = new MockAddress(change);
-                    }
-                    break;
-                }
-                case "real" : {
-                    sk = new SigningKeyImpl(key, ((BitcoinCrypto)crypto).getParams());
-                    anonAddress = new AddressImpl(anon);
-                    if (change == null) {
-                        changeAddress = null;
-                    } else {
-                        changeAddress = new AddressImpl(change);
-                    }
-                    break;
-                }
-                default: {
-                    throw new IllegalArgumentException("Only test crypto supported in this pre-alpha version.");
-                }
-            }
+            parser.accepts("crypto")
+                  .withRequiredArg()
+                  .ofType(String.class)
+                  .defaultsTo("mock");
+
+            query.defaultsTo("mock");
+            blockchain.defaultsTo("test");
+
+            // TODO
+            // What does this do?
+            parser.accepts("coin")
+                  .withRequiredArg()
+                  .ofType(String.class)
+                  .defaultsTo("{\"outputs\":[],\"transactions\":[]}");
+
+            parser.accepts("me").withRequiredArg().ofType(String.class);
+
+            parser.accepts("local").withRequiredArg().ofType(String.class);
+
+            parser.accepts("format").withRequiredArg().ofType(String.class)
+                  .defaultsTo("protobuf");
+
+            // Five seconds from now.
+            // time.defaultsTo(System.currentTimeMillis() + 5000L);
+
         } else {
-            sk = new SigningKeyImpl(key, ((BitcoinCrypto)crypto).getParams());
-            anonAddress = new AddressImpl(anon);
-            if (change == null) {
-                changeAddress = null;
-            } else {
-                changeAddress = new AddressImpl(change);
-            }
+            query.defaultsTo("blockcypher.com");
+            blockchain.defaultsTo("main");
         }
 
-        VerificationKey vk = sk.VerificationKey();
-        if (keys.contains(vk)) {
-            throw new IllegalArgumentException("Duplicate key.");
+        parser.acceptsAll(Arrays.asList("S", "session"),
+              "The session identifier for this round")
+              .withRequiredArg()
+              .ofType(String.class);
+
+        parser.acceptsAll(Arrays.asList("B", "amount"),
+              "amount to be transferred (satoshis)")
+              .withRequiredArg()
+              .ofType(Long.class);
+        parser.acceptsAll(Arrays.asList("f", "fee"),
+              "miner fee to be paid (satoshis)")
+              .withRequiredArg()
+              .ofType(Long.class);
+        parser.acceptsAll(Arrays.asList("s", "seed"),
+              "random number seed")
+              .withRequiredArg()
+              .ofType(String.class);
+
+        OptionSpecBuilder key = parser.acceptsAll(Arrays.asList("k", "key"), "Your private key.");
+        OptionSpecBuilder port = parser.accepts("port", "Port on which to listen for connections.");
+        OptionSpecBuilder change = parser.accepts("change", "Your change address. Optional.");
+        OptionSpecBuilder anon = parser.accepts("anon", "A Bitcoin address to which the anonymized coins are sent.");
+        OptionSpecBuilder utxos = parser.acceptsAll(Arrays.asList("u", "utxos"), "The list of utxos we will spend from, formatted as a JSON array.");
+
+        if (TEST_MODE) {
+            key.requiredUnless("local");
+            port.requiredUnless("local");
+            change.requiredUnless("local");
+            anon.requiredUnless("local");
+            utxos.requiredUnless("local");
         }
 
-        keys.add(vk);
-        peers.put(vk, new Either<>(null, id));
+        key.withRequiredArg().ofType(String.class);
+        port.withRequiredArg().ofType(Long.class);
+        change.withRequiredArg().ofType(String.class);
+        anon.withRequiredArg().ofType(String.class);
+        utxos.withRequiredArg().ofType(String.class);
 
-        Channel<VerificationKey, Signed<Packet<VerificationKey, Payload>>> channel =
-                new MappedChannel<>(
-                        new Multiplexer<>(
-                                new MarshallChannel<>(
-                                        new TcpChannel(
-                                                new InetSocketAddress(InetAddress.getLocalHost(), (int)port)),
-                                        m.signedMarshaller()),
-                                mock.node(id)),
-                        peers);
+        parser.accepts("timeout", "The time in milliseconds that Shufflepuff waits before disconnecting due to a timeout.")
+              .withRequiredArg()
+              .ofType(Long.class)
+              .defaultsTo(1000L);
 
-        return new Player(
-                sk, session, anonAddress,
-                changeAddress, keys, time,
-                amount, fee, coin, crypto, channel, m, System.out, utxos, netParams);
+        parser.accepts("minbitcoinnetworkpeers", "Minimum peers to be connected to before broadcasting transaction. Only used with blockchain.info and blockcypher.com.")
+              .withRequiredArg().ofType(Long.class).defaultsTo(5L);
+        parser.accepts("rpcuser", "Username to log in to btcd.")
+              .withRequiredArg().ofType(String.class);
+        parser.accepts("rpcpass", "Password to log in to btcd.")
+              .withRequiredArg().ofType(String.class);
+
+        parser.accepts("peers",
+              "The peers we will be connecting to, formatted as a JSON array.")
+              .withRequiredArg().ofType(String.class);
+
+        parser.accepts("report", "Path to store report file.")
+              .withRequiredArg().ofType(String.class);
+
+        return parser;
     }
 
     private static JSONArray readJSONArray(String ar) {
@@ -917,53 +840,6 @@ public class Shuffle {
             throw new IllegalArgumentException("Could not parse json object " + ar + ".");
         }
 
-    }
-
-    public Collection<Player.Report> cycle()
-            throws IOException, InterruptedException, ExecutionException,
-            CoinNetworkException, AddressFormatException, ProtocolFailure {
-
-        List<Player.Running> running = new LinkedList<>();
-
-        for(Player p : local) {
-            running.add(p.start());
-        }
-
-        // If there's just one player, we don't need to run in a separate thread.
-        if (running.size() == 1) {
-            for (Player.Running p : running) {
-                Collection<Player.Report> reports = new HashSet<>();
-                reports.add(p.play());
-                return reports; // Only one here, so we can return immediately.
-            }
-        }
-
-        // Construct the future which represents all players' results.
-        SummableFuture<Map<VerificationKey, Player.Report>> future
-                = new SummableFutureZero<>(
-                new SummableMaps<VerificationKey, Player.Report>());
-
-        // Start the connection (this must be done after all Channel objects have been created
-        // because everyone must be connected to the internet at the time they attempt to start
-        // connecting to one another.
-        for (Player.Running p : running) {
-            future = future.plus(new NaturalSummableFuture<>(p.playConcurrent()));
-        }
-
-        Map<VerificationKey, Player.Report> reportMap = future.get();
-        if (reportMap == null) {
-            throw new ProtocolFailure();
-        }
-
-        return reportMap.values();
-    }
-
-    public static class ProtocolFailure extends Exception {
-
-    }
-
-    public void close() {
-        executor.shutdownNow();
     }
 
     public static void main(String[] opts) throws IOException, BitcoindException, CommunicationException {
@@ -1032,5 +908,125 @@ public class Shuffle {
         for (Player.Report report : reports) {
             System.out.println(report.toString());
         }
+    }
+
+    private Player readPlayer(
+          OptionSet options,
+          String key,
+          int id,
+          HashSet<TransactionOutPoint> utxos,
+          long port,
+          String anon,
+          String change,
+          Messages.ShuffleMarshaller m) throws UnknownHostException, FormatException, AddressFormatException {
+
+        SigningKey sk;
+        Address anonAddress;
+        Address changeAddress;
+        if (TEST_MODE) {
+            switch ((String) options.valueOf("crypto")) {
+                case "mock": {
+                    sk = new MockSigningKey(Integer.parseInt(key));
+                    anonAddress = new MockAddress(anon);
+                    if (change == null) {
+                        changeAddress = null;
+                    } else {
+                        changeAddress = new MockAddress(change);
+                    }
+                    break;
+                }
+                case "real": {
+                    sk = new SigningKeyImpl(key, ((BitcoinCrypto) crypto).getParams());
+                    anonAddress = new AddressImpl(anon);
+                    if (change == null) {
+                        changeAddress = null;
+                    } else {
+                        changeAddress = new AddressImpl(change);
+                    }
+                    break;
+                }
+                default: {
+                    throw new IllegalArgumentException("Only test crypto supported in this pre-alpha version.");
+                }
+            }
+        } else {
+            sk = new SigningKeyImpl(key, ((BitcoinCrypto) crypto).getParams());
+            anonAddress = new AddressImpl(anon);
+            if (change == null) {
+                changeAddress = null;
+            } else {
+                changeAddress = new AddressImpl(change);
+            }
+        }
+
+        VerificationKey vk = sk.VerificationKey();
+        if (keys.contains(vk)) {
+            throw new IllegalArgumentException("Duplicate key.");
+        }
+
+        keys.add(vk);
+        peers.put(vk, new Either<>(null, id));
+
+        Channel<VerificationKey, Signed<Packet<VerificationKey, Payload>>> channel =
+              new MappedChannel<>(
+                    new Multiplexer<>(
+                          new MarshallChannel<>(
+                                new TcpChannel(
+                                      new InetSocketAddress(InetAddress.getLocalHost(), (int) port)),
+                                m.signedMarshaller()),
+                          mock.node(id)),
+                    peers);
+
+        return new Player(
+              sk, session, anonAddress,
+              changeAddress, keys, time,
+              amount, fee, coin, crypto, channel, m, System.out, utxos, netParams);
+    }
+
+    public Collection<Player.Report> cycle()
+          throws IOException, InterruptedException, ExecutionException,
+          CoinNetworkException, AddressFormatException, ProtocolFailure {
+
+        List<Player.Running> running = new LinkedList<>();
+
+        for (Player p : local) {
+            running.add(p.start());
+        }
+
+        // If there's just one player, we don't need to run in a separate thread.
+        if (running.size() == 1) {
+            for (Player.Running p : running) {
+                Collection<Player.Report> reports = new HashSet<>();
+                reports.add(p.play());
+                return reports; // Only one here, so we can return immediately.
+            }
+        }
+
+        // Construct the future which represents all players' results.
+        SummableFuture<Map<VerificationKey, Player.Report>> future
+              = new SummableFutureZero<>(
+              new SummableMaps<VerificationKey, Player.Report>());
+
+        // Start the connection (this must be done after all Channel objects have been created
+        // because everyone must be connected to the internet at the time they attempt to start
+        // connecting to one another.
+        for (Player.Running p : running) {
+            future = future.plus(new NaturalSummableFuture<>(p.playConcurrent()));
+        }
+
+        Map<VerificationKey, Player.Report> reportMap = future.get();
+        if (reportMap == null) {
+            throw new ProtocolFailure();
+        }
+
+        return reportMap.values();
+    }
+
+    public void close() {
+        executor.shutdownNow();
+    }
+
+    public static class ProtocolFailure extends Exception {
+
     }
 }
