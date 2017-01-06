@@ -74,6 +74,23 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
         }
     }
 	
+	private class MappedAliceSend implements Send<Bytestring> {
+		
+		private MappedAliceSend() {
+			
+		}
+		
+		@Override
+		public boolean send(Bytestring message) {
+			return false;
+		}
+		
+		@Override
+		public void close() {
+			
+		}
+	}
+	
 	private class MappedBobSend implements Send<Bytestring> {
 		private final Listener<Identity, Bytestring> l;
 		private final Session<Object, Bytestring> s;

@@ -290,7 +290,7 @@ public class TestConnect {
         int seed = 245;
         int msgNo = 100;
         for (TestCase tc: cases) {
-            for (int i = 2; i <= tc.rounds(); i++) {
+            for (int i = 3; i <= tc.rounds(); i++) {
                 System.out.println("Trial " + i + ": ");
                 Map<Integer, Collector<Integer, Bytestring>> nets = simulation(i, seed + i, tc.network(i));
                 Assert.assertTrue(nets != null);
