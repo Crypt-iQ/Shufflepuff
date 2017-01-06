@@ -91,43 +91,43 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
         }
     }
 
-	private class MappedBobSend implements Send<Bytestring> {
-		private final Listener<Identity, Bytestring> l;
-		private final Session<Object, Bytestring> s;
-		private boolean initialized = false;
-		private Send<Bytestring> z;
+    private class MappedBobSend implements Send<Bytestring> {
+        private final Listener<Identity, Bytestring> l;
+        private final Session<Object, Bytestring> s;
+        private boolean initialized = false;
+        private Send<Bytestring> z;
 
-		private MappedBobSend(Listener<Identity, Bytestring> l, Session<Object, Bytestring> s) {
-			this.l = l;
-			this.s = s;
-		}
+        private MappedBobSend(Listener<Identity, Bytestring> l, Session<Object, Bytestring> s) {
+            this.l = l;
+            this.s = s;
+        }
 
-		@Override
-		public boolean send(Bytestring message) throws InterruptedException, IOException {
-			if (!initialized) {
-				Identity you = null;
-				String msg = new String(message.bytes);
-				System.out.println("+++ Received " + msg + " ; " + inverse);
-				for (Map.Entry<Object, Identity> e : inverse.entrySet()) {
-					if (e.getValue().toString().equals(msg)) {
-						you = e.getValue();
-						break;
-					}
-				}
-				if (you == null) throw new NullPointerException();
-				this.z = l.newSession(new MappedSession(s, you));
-				initialized = true;
-				return true;
-			}
+        @Override
+        public boolean send(Bytestring message) throws InterruptedException, IOException {
+            if (!initialized) {
+                Identity you = null;
+                String msg = new String(message.bytes);
+                System.out.println("+++ Received " + msg + " ; " + inverse);
+                for (Map.Entry<Object, Identity> e : inverse.entrySet()) {
+                    if (e.getValue().toString().equals(msg)) {
+                        you = e.getValue();
+                        break;
+                    }
+                }
+                if (you == null) throw new NullPointerException();
+                this.z = l.newSession(new MappedSession(s, you));
+                initialized = true;
+                return true;
+            }
 
-			return this.z.send(message);
-		}
+            return this.z.send(message);
+        }
 
-		@Override
-		public void close() {
-			s.close();
-		}
-	}
+        @Override
+        public void close() {
+            s.close();
+        }
+    }
 
     private class MappedPeer implements Peer<Identity,Bytestring> {
         private final Peer<Object, Bytestring> inner;
