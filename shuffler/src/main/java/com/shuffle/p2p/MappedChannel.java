@@ -1,10 +1,15 @@
 package com.shuffle.p2p;
 
+import com.shuffle.chan.BasicChan;
+import com.shuffle.chan.Chan;
 import com.shuffle.chan.Send;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by Daniel Krawisz on 5/27/16.
@@ -14,6 +19,8 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
     private final Map<Identity, Object> hosts;
     private final Map<Object, Identity> inverse = new HashMap<>();
 	private final Identity me;
+    private final Map<Identity, MappedSession> openSessions = new ConcurrentHashMap<>(); // Concurrent necessary?
+    private final Map<Identity, Session> halfOpenSessions = new ConcurrentHashMap<>(); // Concurrent necessary?
 
     // You can add two or more MappedChannels together like a linked list if you
     // have two different kinds of channels that you want to use at the same time.
@@ -75,19 +82,28 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
     }
     
     private class MappedAliceSend implements Send<Bytestring> {
+        private final Send<Bytestring> z;
+        // private int messageCount = 0;  ??
+        private Send<Boolean> chan;
+        private boolean initialized = false;
 
-        private MappedAliceSend() {
-
+        private MappedAliceSend(Send<Bytestring> z, Send<Boolean> chan) {
+            this.z = z;
+            this.chan = chan;
         }
 
         @Override
         public boolean send(Bytestring message) {
+            if (!initialized) {
+                
+            }
             return false;
         }
 
         @Override
         public void close() {
-
+            z.close();
+            chan.close();
         }
     }
 
@@ -148,10 +164,18 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
         @Override
         public Session<Identity, Bytestring> openSession(Send<Bytestring> send) throws InterruptedException, IOException {
             if (send == null) return null;
-			Session<Object, Bytestring> session = inner.openSession(send);
+            Chan<Boolean> chan = new BasicChan<>(1);
+            
+            MappedAliceSend alice = new MappedAliceSend(send, chan);
+			Session<Object, Bytestring> session = inner.openSession(alice);
 			if (session == null) return null;
 			
+            halfOpenSessions.put(identity, session); // put this BEFORE inner.openSession(send) ?
+            
 			MappedSession s = new MappedSession(session, identity);
+            
+            halfOpenSessions.remove(identity);
+            openSessions.put(identity, s);
 			
 			session.send(new Bytestring(myIdentity().toString().getBytes()));
 			
