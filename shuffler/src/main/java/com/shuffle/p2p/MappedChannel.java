@@ -73,35 +73,35 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
             return "MappedSession[" + inner + "]";
         }
     }
-	
-	private class MappedAliceSend implements Send<Bytestring> {
-		
-		private MappedAliceSend() {
-			
-		}
-		
-		@Override
-		public boolean send(Bytestring message) {
-			return false;
-		}
-		
-		@Override
-		public void close() {
-			
-		}
-	}
-	
+    
+    private class MappedAliceSend implements Send<Bytestring> {
+
+        private MappedAliceSend() {
+
+        }
+
+        @Override
+        public boolean send(Bytestring message) {
+            return false;
+        }
+
+        @Override
+        public void close() {
+
+        }
+    }
+
 	private class MappedBobSend implements Send<Bytestring> {
 		private final Listener<Identity, Bytestring> l;
 		private final Session<Object, Bytestring> s;
 		private boolean initialized = false;
 		private Send<Bytestring> z;
-		
+
 		private MappedBobSend(Listener<Identity, Bytestring> l, Session<Object, Bytestring> s) {
 			this.l = l;
 			this.s = s;
 		}
-		
+
 		@Override
 		public boolean send(Bytestring message) throws InterruptedException, IOException {
 			if (!initialized) {
@@ -119,10 +119,10 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 				initialized = true;
 				return true;
 			}
-			
+
 			return this.z.send(message);
 		}
-		
+
 		@Override
 		public void close() {
 			s.close();
