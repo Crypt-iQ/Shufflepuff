@@ -68,8 +68,8 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
             inner.close();
         }
 
-        @Override
-        public String toString() {
+        @Override 
+		public String toString() {
             return "MappedSession[" + inner + "]";
         }
     }
@@ -106,8 +106,8 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 		public boolean send(Bytestring message) throws InterruptedException, IOException {
 			if (!initialized) {
 				Identity you = null;
-                String msg = new String(message.bytes);
-                System.out.println("+++ Received " + msg + " ; " + inverse);
+				String msg = new String(message.bytes);
+				System.out.println("+++ Received " + msg + " ; " + inverse);
 				for (Map.Entry<Object, Identity> e : inverse.entrySet()) {
 					if (e.getValue().toString().equals(msg)) {
 						you = e.getValue();
@@ -116,10 +116,10 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 				}
 				if (you == null) throw new NullPointerException();
 				this.z = l.newSession(new MappedSession(s, you));
-                initialized = true;
+				initialized = true;
 				return true;
 			}
-
+			
 			return this.z.send(message);
 		}
 		
