@@ -6,9 +6,7 @@ import com.shuffle.chan.Send;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -19,8 +17,8 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
     private final Map<Identity, Object> hosts;
     private final Map<Object, Identity> inverse = new HashMap<>();
 	private final Identity me;
-    private final Map<Identity, MappedSession> openSessions = new ConcurrentHashMap<>(); // Concurrent necessary?
     private final Map<Identity, Session> halfOpenSessions = new ConcurrentHashMap<>(); // Concurrent necessary?
+    private final Map<Identity, MappedSession> openSessions = new ConcurrentHashMap<>(); // Concurrent necessary?
 
     // You can add two or more MappedChannels together like a linked list if you
     // have two different kinds of channels that you want to use at the same time.
@@ -83,7 +81,6 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
     
     private class MappedAliceSend implements Send<Bytestring> {
         private final Send<Bytestring> z;
-        // private int messageCount = 0;  ??
         private Send<Boolean> chan;
         private boolean initialized = false;
 
@@ -93,11 +90,15 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
         }
 
         @Override
-        public boolean send(Bytestring message) {
+        public boolean send(Bytestring message) throws InterruptedException, IOException {
             if (!initialized) {
-                
+                // Can we even receive messages here though...?
+                // chan.send(true);
+                // initialized = true;
+                // return true;
             }
-            return false;
+            
+            return this.z.send(message);
         }
 
         @Override
@@ -169,15 +170,33 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
             MappedAliceSend alice = new MappedAliceSend(send, chan);
 			Session<Object, Bytestring> session = inner.openSession(alice);
 			if (session == null) return null;
-			
-            halfOpenSessions.put(identity, session); // put this BEFORE inner.openSession(send) ?
+            
+            // what if there are TWO halfOpenSessions (i.e. in our error case)
+            halfOpenSessions.put(identity, session);
             
 			MappedSession s = new MappedSession(session, identity);
-            
-            halfOpenSessions.remove(identity);
-            openSessions.put(identity, s);
 			
+            // MappedChannel initialization string - sends my identity
 			session.send(new Bytestring(myIdentity().toString().getBytes()));
+            
+            Boolean result = chan.receive();
+            if (!result) {
+                // retry?
+                chan.close();
+                session.close();
+                halfOpenSessions.remove(identity);
+                openSessions.remove(identity);
+                // after n retries, return null
+                return null;
+            }
+            
+            // remove from halfOpenSessions, put in openSessions
+            halfOpenSessions.remove(identity);
+            
+            // collision
+            if (openSessions.containsKey(identity)) return null;
+            
+            openSessions.put(identity, s);
 			
 			return s;
         }
@@ -243,6 +262,9 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 
         @Override
         public Send<Bytestring> newSession(Session<Object, Bytestring> session) throws InterruptedException {
+            // the Identity type that we receive from session.peer().identity() should be the peer's identity.
+            if (halfOpenSessions.containsKey((Identity) session.peer().identity())) return null;
+            halfOpenSessions.put((Identity) session.peer().identity(), session);
             return new MappedBobSend(inner, session);
         }
     }
