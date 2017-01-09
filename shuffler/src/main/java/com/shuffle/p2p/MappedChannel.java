@@ -30,7 +30,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 
         this.inner = inner;
         this.hosts = hosts;
-		this.me = me;
+        this.me = me;
         this.next = null;
     }
 
@@ -75,7 +75,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
         }
 
         @Override 
-		public String toString() {
+        public String toString() {
             return "MappedSession[" + inner + "]";
         }
     }
@@ -182,8 +182,8 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
             Chan<Boolean> chan = new BasicChan<>(1);
 
             MappedAliceSend alice = new MappedAliceSend(send, chan);
-			Session<Object, Bytestring> session = inner.openSession(alice);
-			if (session == null) return null;
+            Session<Object, Bytestring> session = inner.openSession(alice);
+            if (session == null) return null;
 
             // remove identity?
             if (halfOpenSessions.containsKey(identity)) return null;
@@ -191,7 +191,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
             halfOpenSessions.put(identity, session);
 
             // MappedChannel initialization string - sends my identity
-			session.send(new Bytestring(myIdentity().toString().getBytes()));
+            session.send(new Bytestring(myIdentity().toString().getBytes()));
 
             // TODO
             // If result is false, we retry and repeat process above N times until success?
@@ -205,8 +205,8 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 
             // success, remove from halfOpenSessions
             halfOpenSessions.remove(identity);
-
-			return new MappedSession(session, identity);
+            
+            return new MappedSession(session, identity);
         }
 
         @Override
