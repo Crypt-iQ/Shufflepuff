@@ -3,10 +3,12 @@ package com.shuffle.p2p;
 import com.shuffle.chan.BasicChan;
 import com.shuffle.chan.Chan;
 import com.shuffle.chan.Send;
+import com.shuffle.mock.MockCrypto;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -17,8 +19,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
     private final Map<Identity, Object> hosts;
     private final Map<Object, Identity> inverse = new HashMap<>();
 	private final Identity me;
-    private final Map<Identity, Session> halfOpenSessions = new ConcurrentHashMap<>(); // Concurrent necessary?
-    private final Map<Identity, MappedSession> openSessions = new ConcurrentHashMap<>(); // Concurrent necessary?
+    private final Map<Identity, Session> halfOpenSessions = new ConcurrentHashMap<>();
 
     // You can add two or more MappedChannels together like a linked list if you
     // have two different kinds of channels that you want to use at the same time.
@@ -78,7 +79,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
             return "MappedSession[" + inner + "]";
         }
     }
-    
+
     private class MappedAliceSend implements Send<Bytestring> {
         private final Send<Bytestring> z;
         private Send<Boolean> chan;
@@ -92,12 +93,14 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
         @Override
         public boolean send(Bytestring message) throws InterruptedException, IOException {
             if (!initialized) {
-                // Can we even receive messages here though...?
-                // chan.send(true);
-                // initialized = true;
-                // return true;
+                String msg = new String(message.bytes);
+                if (msg.equals("received")) {
+                    chan.send(true);
+                    initialized = true;
+                    return true;
+                }
             }
-            
+
             return this.z.send(message);
         }
 
@@ -123,16 +126,27 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
         public boolean send(Bytestring message) throws InterruptedException, IOException {
             if (!initialized) {
                 Identity you = null;
+
                 String msg = new String(message.bytes);
                 System.out.println("+++ Received " + msg + " ; " + inverse);
+
                 for (Map.Entry<Object, Identity> e : inverse.entrySet()) {
                     if (e.getValue().toString().equals(msg)) {
                         you = e.getValue();
                         break;
                     }
                 }
+
                 if (you == null) throw new NullPointerException();
-                this.z = l.newSession(new MappedSession(s, you));
+
+                MappedSession m = new MappedSession(s, you);
+                if (!m.send(new Bytestring("received".getBytes()))) {
+                    // TODO
+                    // Failed, Bob chose the wrong session
+                    // Now what?
+                }
+                this.z = l.newSession(m);
+
                 initialized = true;
                 return true;
             }
@@ -166,39 +180,33 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
         public Session<Identity, Bytestring> openSession(Send<Bytestring> send) throws InterruptedException, IOException {
             if (send == null) return null;
             Chan<Boolean> chan = new BasicChan<>(1);
-            
+
             MappedAliceSend alice = new MappedAliceSend(send, chan);
 			Session<Object, Bytestring> session = inner.openSession(alice);
 			if (session == null) return null;
-            
-            // what if there are TWO halfOpenSessions (i.e. in our error case)
+
+            // remove identity?
+            if (halfOpenSessions.containsKey(identity)) return null;
+
             halfOpenSessions.put(identity, session);
-            
-			MappedSession s = new MappedSession(session, identity);
-			
+
             // MappedChannel initialization string - sends my identity
 			session.send(new Bytestring(myIdentity().toString().getBytes()));
-            
+
+            // TODO
+            // If result is false, we retry and repeat process above N times until success?
             Boolean result = chan.receive();
             if (!result) {
-                // retry?
                 chan.close();
                 session.close();
                 halfOpenSessions.remove(identity);
-                openSessions.remove(identity);
-                // after n retries, return null
                 return null;
             }
-            
-            // remove from halfOpenSessions, put in openSessions
+
+            // success, remove from halfOpenSessions
             halfOpenSessions.remove(identity);
-            
-            // collision
-            if (openSessions.containsKey(identity)) return null;
-            
-            openSessions.put(identity, s);
-			
-			return s;
+
+			return new MappedSession(session, identity);
         }
 
         @Override
@@ -262,10 +270,20 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 
         @Override
         public Send<Bytestring> newSession(Session<Object, Bytestring> session) throws InterruptedException {
-            // the Identity type that we receive from session.peer().identity() should be the peer's identity.
-            if (halfOpenSessions.containsKey((Identity) session.peer().identity())) return null;
-            halfOpenSessions.put((Identity) session.peer().identity(), session);
-            return new MappedBobSend(inner, session);
+            Session<Object, Bytestring> currentSession = session;
+            Identity peerIdentity = (Identity) session.peer().identity();
+
+            if (halfOpenSessions.containsKey(peerIdentity)) {
+                // flip coin
+                Random rand = new Random();
+                if (rand.nextBoolean()) {
+                    currentSession = halfOpenSessions.get(peerIdentity);
+                }
+            } else {
+                halfOpenSessions.put(peerIdentity, currentSession);
+            }
+
+            return new MappedBobSend(inner, currentSession);
         }
     }
 
