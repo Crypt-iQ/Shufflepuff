@@ -206,8 +206,8 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
             
             synchronized (lock) {
                 if (!result) {
-                    chan.close();
                     session.close();
+                    halfOpenSessions.remove(identity);
                     return null;
                 }
 
