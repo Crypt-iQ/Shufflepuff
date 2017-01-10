@@ -52,7 +52,7 @@ public class BasicChan<X> implements Chan<X> {
         q = new LinkedBlockingQueue<>(1);
     }
 
-    private X receiveMessage(Message m) {
+    private synchronized X receiveMessage(Message m) {
         if (closed && !closeSent) {
             // There is definitely room in the queue because we just removed
             // one element and no more were allowed to be put in.

@@ -245,29 +245,29 @@ public class MockNetwork<Q, X extends Serializable> {
         public Send<X> connect(Q you, Send<X> send) throws InterruptedException {
             synchronized (lock) {
                 if (closed) return null;
+
+                if (you == null || send == null) throw new NullPointerException();
+
+                if (listener == null) return null;
+
+                // Do we know this remote peer?
+                MockPeer peer = (MockPeer) getPeer(you);
+                if (peer == null) return null;
+
+                // An open session already exists.
+                if (peer.open()) return null;
+
+                Session<Q, X> s = peer.new MockSession(send);
+                peer.setSession(s);
+
+                Send<X> l = listener.newSession(peer.getSession());
+                if (l == null) {
+                    s.close();
+                    return null;
+                }
+
+                return l;
             }
-
-            if (you == null || send == null) throw new NullPointerException();
-
-            if (listener == null) return null;
-
-            // Do we know this remote peer?
-            MockPeer peer = (MockPeer) getPeer(you);
-            if (peer == null) return null;
-
-            // An open session already exists.
-            if (peer.open()) return null;
-
-            Session<Q, X> s = peer.new MockSession(send);
-            peer.setSession(s);
-
-            Send<X> l = listener.newSession(peer.getSession());
-            if (l == null) {
-                s.close();
-                return null;
-            }
-
-            return l;
         }
 
     }

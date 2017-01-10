@@ -94,6 +94,8 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 
         @Override
         public boolean send(Bytestring message) throws InterruptedException, IOException {
+            if (closed) return false;
+
             if (!initialized) {
                 String msg = new String(message.bytes);
                 if (msg.equals("received")) {
@@ -133,7 +135,6 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 
         @Override
         public boolean send(Bytestring message) throws InterruptedException, IOException {
-            System.out.println("  mapped.BobSend.send " + new String(message.bytes));
             if (closed) return false;
 
             if (!initialized) {
@@ -152,7 +153,6 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
                     close();
                     return false;
                 }
-                System.out.println("  mapped.BobSend.send identity is " + you);
                 
                 synchronized (lock) {
                     if (halfOpenSessions.containsKey(you)) {
@@ -161,14 +161,12 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
                         if (rand.nextBoolean()) {
                             // Close this session.
                             close();
-                            System.out.println("  mapped.BobSend.send from " + you + " coin flip A.");
                             return false;
                         } else {
                             // Close the half-open session.
                             Session<Object, Bytestring> halfOpen = halfOpenSessions.get(you);
                             halfOpen.close();
                             halfOpenSessions.remove(you);
-                            System.out.println("  mapped.BobSend.send from " + you + " coin flip B. ");
                         }
                     }
 
@@ -212,8 +210,6 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 
         @Override
         public Session<Identity, Bytestring> openSession(Send<Bytestring> send) throws InterruptedException, IOException {
-            System.out.println("  mapped: openSession to " + identity);
-
             Chan<Boolean> chan;
             Session<Object, Bytestring> session;
             
@@ -236,8 +232,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 
                 halfOpenSessions.put(identity, session);
             }
-            System.out.println("  mapped: openSession to " + identity + "; waiting for return msg.");
-            
+
             Boolean result = chan.receive();
             
             synchronized (lock) {
@@ -313,7 +308,6 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 
         @Override
         public Send<Bytestring> newSession(Session<Object, Bytestring> session) throws InterruptedException {
-            System.out.println("  mapped: newSession from " + session.peer().identity());
             return new MappedBobSend(inner, session);
         }
     }

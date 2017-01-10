@@ -267,6 +267,8 @@ public class TestConnect {
                 };
             }
         }, new TestCase() {
+            int port = 5000;
+
             @Override
             public int rounds() {
                 return 5;
@@ -276,7 +278,6 @@ public class TestConnect {
             public Network network() {
                 return new Network() {
 
-                    int port = 5000;
                     final Map<Integer, InetSocketAddress> hosts = new HashMap<>();
 
                     @Override
