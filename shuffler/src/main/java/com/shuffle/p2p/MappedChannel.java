@@ -19,6 +19,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
     private final Map<Object, Identity> inverse = new HashMap<>();
     private final Identity me;
     private final Map<Identity, Session> halfOpenSessions = new ConcurrentHashMap<>();
+    private final Object lock = new Object();
 
     // You can add two or more MappedChannels together like a linked list if you
     // have two different kinds of channels that you want to use at the same time.
@@ -87,7 +88,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
         private MappedAliceSend(Send<Bytestring> z, Send<Boolean> chan) throws InterruptedException, IOException {
             this.z = z;
             this.chan = chan;
-            
+
             // initialization string - sends Alice's identity to Bob
             this.z.send(new Bytestring(myIdentity().toString().getBytes()));
         }
@@ -100,6 +101,10 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
                     chan.send(true);
                     initialized = true;
                     return true;
+                } else {
+                    chan.send(false);
+                    this.close();
+                    return false;
                 }
             }
 
@@ -143,9 +148,8 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 
                 MappedSession m = new MappedSession(s, you);
                 if (!m.send(new Bytestring("received".getBytes()))) {
-                    // TODO
-                    // Failed, Bob chose the wrong session
-                    // Now what?
+                    this.close();
+                    return false;
                 }
                 this.z = l.newSession(m);
 
@@ -183,7 +187,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
             Chan<Boolean> chan;
             Session<Object, Bytestring> session;
             
-            synchronized (this) {
+            synchronized (lock) {
                 if (send == null) return null;
                 chan = new BasicChan<>(1);
 
@@ -200,7 +204,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
             
             Boolean result = chan.receive();
             
-            synchronized (this) {
+            synchronized (lock) {
                 if (!result) {
                     chan.close();
                     session.close();
@@ -279,7 +283,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
             Session<Object, Bytestring> currentSession = session;
             Identity peerIdentity = (Identity) session.peer().identity();
 
-            synchronized (this) {
+            synchronized (lock) {
                 if (halfOpenSessions.containsKey(peerIdentity)) {
                     // flip coin
                     Random rand = new Random();
