@@ -1,5 +1,6 @@
 package com.shuffle.p2p;
 
+import com.shuffle.bitcoin.CoinNetworkException;
 import com.shuffle.chan.BasicChan;
 import com.shuffle.chan.Chan;
 import com.shuffle.chan.Send;
@@ -85,9 +86,12 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
         private Send<Boolean> chan;
         private boolean initialized = false;
 
-        private MappedAliceSend(Send<Bytestring> z, Send<Boolean> chan) {
+        private MappedAliceSend(Send<Bytestring> z, Send<Boolean> chan) throws InterruptedException, IOException {
             this.z = z;
             this.chan = chan;
+            
+            // initialization string - sends Alice's identity to Bob
+            this.z.send(new Bytestring(myIdentity().toString().getBytes()));
         }
 
         @Override
@@ -178,33 +182,37 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 
         @Override
         public Session<Identity, Bytestring> openSession(Send<Bytestring> send) throws InterruptedException, IOException {
-            if (send == null) return null;
-            Chan<Boolean> chan = new BasicChan<>(1);
+            Chan<Boolean> chan;
+            Session<Object, Bytestring> session;
+            
+            synchronized (this) {
+                if (send == null) return null;
+                chan = new BasicChan<>(1);
 
-            MappedAliceSend alice = new MappedAliceSend(send, chan);
-            Session<Object, Bytestring> session = inner.openSession(alice);
-            if (session == null) return null;
+                // remove identity?
+                if (halfOpenSessions.containsKey(identity)) return null;
 
-            // remove identity?
-            if (halfOpenSessions.containsKey(identity)) return null;
+                MappedAliceSend alice = new MappedAliceSend(send, chan);
 
-            halfOpenSessions.put(identity, session);
+                session = inner.openSession(alice);
+                if (session == null) return null;
 
-            // MappedChannel initialization string - sends my identity
-            session.send(new Bytestring(myIdentity().toString().getBytes()));
-
-            // TODO
-            // If result is false, we retry and repeat process above N times until success?
-            Boolean result = chan.receive();
-            if (!result) {
-                chan.close();
-                session.close();
-                halfOpenSessions.remove(identity);
-                return null;
+                halfOpenSessions.put(identity, session);
             }
+            
+            Boolean result = chan.receive();
+            
+            synchronized (this) {
+                if (!result) {
+                    chan.close();
+                    session.close();
+                    halfOpenSessions.remove(identity);
+                    return null;
+                }
 
-            // success, remove from halfOpenSessions
-            halfOpenSessions.remove(identity);
+                // success, remove from halfOpenSessions
+                halfOpenSessions.remove(identity);
+            }
             
             return new MappedSession(session, identity);
         }
@@ -273,14 +281,16 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
             Session<Object, Bytestring> currentSession = session;
             Identity peerIdentity = (Identity) session.peer().identity();
 
-            if (halfOpenSessions.containsKey(peerIdentity)) {
-                // flip coin
-                Random rand = new Random();
-                if (rand.nextBoolean()) {
-                    currentSession = halfOpenSessions.get(peerIdentity);
+            synchronized (this) {
+                if (halfOpenSessions.containsKey(peerIdentity)) {
+                    // flip coin
+                    Random rand = new Random();
+                    if (rand.nextBoolean()) {
+                        currentSession = halfOpenSessions.get(peerIdentity);
+                    }
+                } else {
+                    halfOpenSessions.put(peerIdentity, currentSession);
                 }
-            } else {
-                halfOpenSessions.put(peerIdentity, currentSession);
             }
 
             return new MappedBobSend(inner, currentSession);
