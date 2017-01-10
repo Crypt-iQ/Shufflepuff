@@ -120,7 +120,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 
     private class MappedBobSend implements Send<Bytestring> {
         private final Listener<Identity, Bytestring> l;
-        private final Session<Object, Bytestring> s;
+        private Session<Object, Bytestring> s;
         private boolean initialized = false;
         private Send<Bytestring> z;
 
@@ -145,13 +145,25 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
                 }
 
                 if (you == null) throw new NullPointerException();
+                
+                synchronized (lock) {
+                    if (halfOpenSessions.containsKey(you)) {
+                        // flip coin
+                        Random rand = new Random();
+                        if (rand.nextBoolean()) {
+                            this.s = halfOpenSessions.get(you);
+                        }
+                    } else {
+                        halfOpenSessions.put(you, this.s);
+                    }
 
-                MappedSession m = new MappedSession(s, you);
-                if (!m.send(new Bytestring("received".getBytes()))) {
-                    this.close();
-                    return false;
+                    MappedSession m = new MappedSession(s, you);
+                    if (!m.send(new Bytestring("received".getBytes()))) {
+                        this.s.close();
+                        return false;
+                    }
+                    this.z = l.newSession(m);
                 }
-                this.z = l.newSession(m);
 
                 initialized = true;
                 return true;
