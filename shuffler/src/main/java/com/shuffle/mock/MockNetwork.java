@@ -109,6 +109,7 @@ public class MockNetwork<Q, X extends Serializable> {
             }
 
             void setSession(Session<Q, X> session) {
+                if (session == null) throw new NullPointerException();
                 currentSession = session;
             }
 

@@ -219,6 +219,7 @@ public class Connect<Identity, P extends Serializable> implements Connection<Ide
 
             if (peer == null) {
                 // TODO clean up properly and fail more gracefully.
+                // This shouldn't actually happen either.
                 throw new NullPointerException();
             }
 
