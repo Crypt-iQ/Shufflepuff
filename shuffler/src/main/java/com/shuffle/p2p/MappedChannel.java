@@ -1,10 +1,8 @@
 package com.shuffle.p2p;
 
-import com.shuffle.bitcoin.CoinNetworkException;
 import com.shuffle.chan.BasicChan;
 import com.shuffle.chan.Chan;
 import com.shuffle.chan.Send;
-import com.shuffle.mock.MockCrypto;
 
 import java.io.IOException;
 import java.util.HashMap;
