@@ -315,10 +315,10 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 
         return new MappedConnection(c);
     }
-	
-	Identity myIdentity() {
+    
+    Identity myIdentity() {
         return me;
-	}
+    }
 
     @Override
     public String toString() {
