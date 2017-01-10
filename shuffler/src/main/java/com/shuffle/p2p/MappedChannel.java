@@ -17,7 +17,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
     private final Channel<Object, Bytestring> inner;
     private final Map<Identity, Object> hosts;
     private final Map<Object, Identity> inverse = new HashMap<>();
-	private final Identity me;
+    private final Identity me;
     private final Map<Identity, Session> halfOpenSessions = new ConcurrentHashMap<>();
 
     // You can add two or more MappedChannels together like a linked list if you
@@ -243,7 +243,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 
         MappedConnection(Connection<Object> connection) {
             this.connection = connection;
-            next = null;
+            this.next = null;
         }
 
         MappedConnection(Connection<Object> connection, Connection next) {
@@ -317,7 +317,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
     }
 	
 	Identity myIdentity() {
-		return me;
+        return me;
 	}
 
     @Override
