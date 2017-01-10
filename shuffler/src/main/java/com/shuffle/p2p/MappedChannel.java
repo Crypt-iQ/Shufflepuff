@@ -208,7 +208,6 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
                 if (!result) {
                     chan.close();
                     session.close();
-                    halfOpenSessions.remove(identity);
                     return null;
                 }
 
@@ -281,20 +280,6 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
         @Override
         public Send<Bytestring> newSession(Session<Object, Bytestring> session) throws InterruptedException {
             Session<Object, Bytestring> currentSession = session;
-            Identity peerIdentity = (Identity) session.peer().identity();
-
-            synchronized (lock) {
-                if (halfOpenSessions.containsKey(peerIdentity)) {
-                    // flip coin
-                    Random rand = new Random();
-                    if (rand.nextBoolean()) {
-                        currentSession = halfOpenSessions.get(peerIdentity);
-                    }
-                } else {
-                    halfOpenSessions.put(peerIdentity, currentSession);
-                }
-            }
-
             return new MappedBobSend(inner, currentSession);
         }
     }
