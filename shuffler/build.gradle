@@ -7,10 +7,10 @@ test.ignoreFailures=true
 
 dependencies {
     testCompile 'junit:junit:4.12'
-    compile 'org.bitcoinj:bitcoinj-core:0.13.4'
+    compile 'org.bitcoinj:bitcoinj-core:0.13.6'
     compile 'com.madgag.spongycastle:core:1.54.0.0'
     compile 'com.madgag.spongycastle:prov:1.54.0.0'
-    compile 'org.bouncycastle:bcprov-jdk15on:1.54'
+    compile 'org.bouncycastle:bcprov-jdk15on:1.55'
     compile 'org.apache.logging.log4j:log4j-api:2.5'
     compile 'org.apache.logging.log4j:log4j-core:2.5'
     compile 'org.json:json:20160212'
@@ -27,6 +27,7 @@ dependencies {
     compile 'com.google.protobuf:protobuf-java:3.0.0-beta-3'
     compile group: 'org.jitsi', name: 'org.otr4j', version: '0.22'
     compile 'org.slf4j:slf4j-simple:1.7.21'
+    compile files('libs/btcd-cli4j-core-0.5.8.jar')
 }
 
 project.pmd.ignoreFailures = true
