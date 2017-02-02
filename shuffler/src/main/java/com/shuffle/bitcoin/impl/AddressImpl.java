@@ -45,6 +45,5 @@ public class AddressImpl implements Address {
    @Override
    public boolean equals(Object obj) {
       return obj instanceof AddressImpl && address.equals(((AddressImpl) obj).address);
-
    }
 }

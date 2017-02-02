@@ -9,11 +9,15 @@
 package com.shuffle.bitcoin.blockchain;
 
 
+import com.neemre.btcdcli4j.core.BitcoindException;
+import com.neemre.btcdcli4j.core.CommunicationException;
 import com.shuffle.bitcoin.Address;
 import com.shuffle.bitcoin.Coin;
 import com.shuffle.bitcoin.CoinNetworkException;
+import com.shuffle.bitcoin.Signatures;
 import com.shuffle.bitcoin.SigningKey;
 import com.shuffle.bitcoin.VerificationKey;
+import com.shuffle.bitcoin.impl.AddressUtxoImpl;
 import com.shuffle.bitcoin.impl.SigningKeyImpl;
 import com.shuffle.p2p.Bytestring;
 import com.shuffle.protocol.FormatException;
@@ -25,6 +29,7 @@ import org.bitcoinj.core.NetworkParameters;
 import org.bitcoinj.core.PeerGroup;
 import org.bitcoinj.core.Sha256Hash;
 import org.bitcoinj.core.TransactionInput;
+import org.bitcoinj.core.TransactionOutPoint;
 import org.bitcoinj.core.TransactionOutput;
 import org.bitcoinj.core.VerificationException;
 import org.bitcoinj.crypto.TransactionSignature;
@@ -35,14 +40,17 @@ import org.bitcoinj.store.BlockStoreException;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 public abstract class Bitcoin implements Coin {
-    static long cach_expire = 10000; // Ten seconds.
+    static long cache_expire = 10000; // Ten seconds.
 
     final NetworkParameters netParams;
     final PeerGroup peerGroup;
@@ -134,7 +142,7 @@ public abstract class Bitcoin implements Coin {
         }
 
         @Override
-        public Bytestring sign(SigningKey sk) {
+        public Signatures sign(SigningKey sk) {
             if (!(sk instanceof SigningKeyImpl)) {
                 return null;
             }
@@ -145,10 +153,7 @@ public abstract class Bitcoin implements Coin {
         public boolean addInputScript(Bytestring b) throws FormatException {
             List<Bytestring> programSignatures = new LinkedList<>();
             programSignatures.add(b);
-            if (Bitcoin.this.signTransaction(this.bitcoinj, programSignatures) == null) {
-                return false;
-            }
-            return true;
+            return Bitcoin.this.signTransaction(this.bitcoinj, programSignatures) != null;
         }
 
         @Override
@@ -183,18 +188,18 @@ public abstract class Bitcoin implements Coin {
     }
 
     protected class Cached {
-        public final String address;
+        public final Address a;
         public final List<Bitcoin.Transaction> txList;
         public final long last;
 
-        private Cached(String address, List<Bitcoin.Transaction> txList, long last) {
-            this.address = address;
+        private Cached(Address a, List<Bitcoin.Transaction> txList, long last) {
+            this.a = a;
             this.txList = txList;
             this.last = last;
         }
     }
 
-    protected Map<String, Cached> cache = new HashMap<>();
+    protected Map<AddressUtxoImpl, Cached> cache = new HashMap<>();
 
     public NetworkParameters getNetParams(){
         return netParams;
@@ -208,214 +213,138 @@ public abstract class Bitcoin implements Coin {
      * Transaction member also sends change from the addresses listed in the "from" variable to
      * addresses listed in the "changeAddresses" variable, in their respective order.
      *
-     * To calculate the amount in change to send to the "changeAddresses", we first lookup the
-     * transaction associated with an address. We only allow one transaction per address that wants
-     * to shuffle their coins.  We then find the transaction output associated with our address,
-     * and see how much value was sent to our address.  We then subtract the "amount" from this
-     * value and this is the amount to send to the changeAddress.
-     *
-     * Note: We allow no past transactions to addresses in the "to" variable.
-     *
+     * To calculate the amount in change to send to the "changeAddresses", we get the summed balance of
+     * UTXOs contained in each provided Address.  We then subtract the "amount" and "fee" (retrieved from
+     * the playerFees Map) from this value - this amount is then sent to the changeAddress.
      */
 
     @Override
     public Bitcoin.Transaction shuffleTransaction(long amount,
-                                                  long fee,
-                                                  Map<VerificationKey, Address> from,
+                                                  Map<VerificationKey, Long> playerFees,
+                                                  Map<VerificationKey, Address> peers,
                                                   Queue<Address> to,
                                                   Map<VerificationKey, Address> changeAddresses)
             throws CoinNetworkException, AddressFormatException {
 
-        // this section adds inputs to the transaction and adds outputs to the change addresses.
+        // this section adds inputs and outputs to the transaction being constructed.
         org.bitcoinj.core.Transaction tx = new org.bitcoinj.core.Transaction(netParams);
-        for (VerificationKey key : from.keySet()) {
-            try {
-                String address = key.address().toString();
-                List<Bitcoin.Transaction> transactions = getAddressTransactions(address);
-                if (transactions.size() > 1) return null;
-                org.bitcoinj.core.Transaction tx2 = getTransaction(transactions.get(0).hash);
-                for (TransactionOutput output : tx2.getOutputs()) {
-                    String addressP2pkh = output.getAddressFromP2PKHScript(netParams).toString();
-                    if (address.equals(addressP2pkh)) {
-                        tx.addInput(output);
-                        if (!changeAddresses.containsKey(key) | changeAddresses.get(key) != null) {
-                            try {
-                                tx.addOutput(output.getValue().subtract(
-                                        org.bitcoinj.core.Coin.SATOSHI.multiply(amount + fee)),
-                                        new org.bitcoinj.core.Address(
-                                                netParams, changeAddresses.get(key).toString()));
-                            } catch (AddressFormatException e) {
-                                e.printStackTrace();
+        HashMap<org.bitcoinj.core.Address, org.bitcoinj.core.Coin> map = new HashMap<>();
+
+        for (Map.Entry<VerificationKey, Address> entry : peers.entrySet()) {
+
+            VerificationKey key = entry.getKey();
+            AddressUtxoImpl a = (AddressUtxoImpl) entry.getValue();
+            long keyAmount = valueHeld(a);
+            if (keyAmount >= amount + playerFees.get(key).intValue()) {
+                try {
+                    List<Bitcoin.Transaction> transactions = getTransactionsFromUtxos(a);
+
+                    // sanitize transaction list to remove unconfirmed tx's
+                    for (Iterator<Bitcoin.Transaction> it = transactions.iterator(); it.hasNext(); ) {
+                        Bitcoin.Transaction tr = it.next();
+                        if (!tr.confirmed) it.remove();
+                    }
+
+                    for (Bitcoin.Transaction t : transactions) {
+                        for (TransactionOutput output : t.bitcoinj().getOutputs()) {
+                            if (a.getUtxos().contains(output.getOutPointFor())) {
+                                tx.addInput(output);
                             }
                         }
                     }
-                }
 
-            } catch (IOException e) {
-                throw new CoinNetworkException("Could not generate shuffle tx: " + e.getMessage());
+                    if (changeAddresses.get(key) != null) {
+                        Address current = changeAddresses.get(key);
+                        try {
+                            // change amount is amount of ((all utxos of key) - (amount + playerFee)), in satoshis
+                            org.bitcoinj.core.Coin coin = org.bitcoinj.core.Coin.valueOf(keyAmount).subtract(org.bitcoinj.core.Coin.SATOSHI.multiply(amount + playerFees.get(key)));
+                            org.bitcoinj.core.Address addr = new org.bitcoinj.core.Address(netParams, current.toString());
+                            // this map ensures we don't have duplicate change addresses if a player enters multiple utxos
+                            if (map.containsKey(addr)) {
+                                org.bitcoinj.core.Coin c = map.get(addr);
+                                map.put(addr, coin.add(c));
+                            } else {
+                                map.put(addr, coin);
+                            }
+                        } catch (AddressFormatException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+
+                } catch (IOException | BlockStoreException e) {
+                    throw new CoinNetworkException("Could not generate shuffle tx: " + e.getMessage());
+                }
+            } else {
+                throw new RuntimeException("UTXOs do not satisfy amount + fee");
             }
+
         }
 
         for (Address sendto : to) {
             String address = sendto.toString();
             try {
-                List<Bitcoin.Transaction> transactions = getAddressTransactions(address);
-                if (transactions.size() > 0) return null;
-            } catch (IOException e) {
-                throw new CoinNetworkException("Could not generate shuffle tx: " + e.getMessage());
-            }
-            try {
                 tx.addOutput(org.bitcoinj.core.Coin.SATOSHI.multiply(amount),
                         new org.bitcoinj.core.Address(netParams, address));
             } catch (AddressFormatException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
 
+        for (org.bitcoinj.core.Address addr : map.keySet()) {
+            tx.addOutput(map.get(addr), addr);
+        }
+
+        // TODO
+        // getHashAsString()
         return new Transaction(tx.getHashAsString(), tx, true);
     }
 
     /**
-     *
      * The valueHeld method takes in an Address variable and returns the balance held using
      * satoshis as the unit.
-     *
      */
 
     @Override
-    public long valueHeld(Address addr) throws CoinNetworkException, AddressFormatException {
-        try {
-            return getAddressBalance(addr.toString());
-        } catch (IOException e) {
-            throw new CoinNetworkException("Could not look up balance: " + e.getMessage());
-        }
-    }
-
-    /**
-     *
-     * The sumUnspentTxOutputs takes in a list of transactions, sums the UTXOs pertaining to address,
-     * and returns a long value.  This long value represents the balance of a Bitcoin address in Satoshis.
-     *
-     */
-
-    protected synchronized long getAddressBalance(String address) throws IOException, CoinNetworkException, AddressFormatException {
-
-        List<Bitcoin.Transaction> txList = getAddressTransactions(address);
+    public long valueHeld(Address a) throws CoinNetworkException, AddressFormatException {
 
         long sum = 0;
-        for (Bitcoin.Transaction tx : txList) {
-            org.bitcoinj.core.Transaction tx2 = tx.bitcoinj;
-            String txhash = tx.hash;
-            boolean usedInput = false;
 
-            // check that txhash hasn't been used as input in any transactions, if it has, we discard.
-            outerloop:
-            for (Bitcoin.Transaction checkTx : txList) {
-                org.bitcoinj.core.Transaction tempTx = checkTx.bitcoinj;
-                for (TransactionInput input : tempTx.getInputs()) {
-                    if (input.getOutpoint().getHash().toString().equals(txhash)) {
-                        usedInput = true;
-                        break outerloop;
-                    }
-                }
+        for (TransactionOutPoint t : ((AddressUtxoImpl) a).getUtxos()) {
+            try {
+                sum += getUtxoBalance(t);
+            } catch (IOException | BitcoindException | CommunicationException e) {
+                throw new CoinNetworkException("Could not look up balance: " + e.getMessage());
             }
-
-            // else, we find the specific output in the transaction pertaining to our address, and add the value to sum.
-
-            if (!usedInput) {
-                for (TransactionOutput output : tx2.getOutputs()) {
-                    String addressP2pkh = output.getAddressFromP2PKHScript(netParams).toString();
-                    if (address.equals(addressP2pkh)) {
-                        sum += output.getValue().getValue();
-                        break;
-                    }
-                }
-            }
-
         }
 
         return sum;
     }
 
-    @Override
-    public final boolean sufficientFunds(Address addr, long amount) throws CoinNetworkException, AddressFormatException, IOException {
-        String address = addr.toString();
+    /**
+     * The getUtxoBalance method takes one UTXO and returns the amount of spendable Bitcoin that it holds.
+     * This amount is a long value represented as the number of satoshis.
+     */
 
-        List<Bitcoin.Transaction> transactions = getAddressTransactions(address);
+    protected synchronized long getUtxoBalance(TransactionOutPoint t) throws IOException, CoinNetworkException, AddressFormatException, BitcoindException, CommunicationException {
 
-        if (transactions.size() == 1) {
-            Bitcoin.Transaction tx = transactions.get(0);
-            if (!tx.confirmed) {
-                return false;
-            }
-            long txAmount = 0;
-
-            if (tx.bitcoinj == null) {
-                try {
-                    tx.bitcoinj = getTransaction(tx.hash);
-                } catch (IOException e) {
-                    return false;
-                }
-            }
-
-            for (TransactionOutput output : tx.bitcoinj.getOutputs()) {
-
-                /**
-                 * Every address in the outputs should be of type pay to public key hash, not pay to script hash
-                 */
-
-                String addressP2pkh = output.getAddressFromP2PKHScript(netParams).toString();
-                if (address.equals(addressP2pkh)) {
-                    txAmount += output.getValue().value;
-                }
-            }
-            return txAmount >= amount;
+        if (isUtxo(t.getHash().toString(), (int) t.getIndex())) {
+            TransactionOutput tx = getTransaction(t.getHash().toString()).getOutput(t.getIndex());
+            return tx.getValue().getValue();
         } else {
-            return false;
+            return 0;
         }
+
     }
 
     @Override
-    public synchronized com.shuffle.bitcoin.Transaction getConflictingTransaction(
-            com.shuffle.bitcoin.Transaction t, Address addr, long amount) throws CoinNetworkException, AddressFormatException {
+    public final boolean sufficientFunds(Address a, long amount) throws CoinNetworkException, AddressFormatException {
+        return valueHeld(a) >= amount;
+    }
 
-        if (!(t instanceof Transaction)) throw new IllegalArgumentException();
-        Transaction transaction = (Transaction)t;
-
-        String address = addr.toString();
-
-        List<Bitcoin.Transaction> transactions = null;
-        try {
-            transactions = getAddressTransactions(address);
-        } catch (IOException e) {
-            // Can we return null here?
-            return null;
-        }
-
-        // Ensures that all transactions have the bitcoinj field set
-        for (Bitcoin.Transaction tx : transactions) {
-            if (tx.bitcoinj == null) {
-                try {
-                    tx.bitcoinj = getTransaction(tx.hash);
-                } catch (IOException e) {
-                    // We should not have an IOException
-                    return null;
-                }
-            }
-        }
-
-        for (Bitcoin.Transaction tx : transactions) {
-            for (TransactionInput input : tx.bitcoinj.getInputs()) {
-                // Can be multiple inputs for transaction parameter.
-                for (TransactionInput txInput : transaction.bitcoinj.getInputs()) {
-                    if (input.equals(txInput)) {
-                        return tx;
-                    }
-                }
-            }
-        }
-
-        return null;
+    @Override
+    public synchronized com.shuffle.bitcoin.Transaction getConflictingTransaction(com.shuffle.bitcoin.Transaction transaction, Address a, long amount) 
+            throws CoinNetworkException, AddressFormatException, BlockStoreException, BitcoindException, CommunicationException, IOException {
+        return getConflictingTransactionInner(transaction, a, amount);
     }
 
     public org.bitcoinj.core.Transaction signTransaction(org.bitcoinj.core.Transaction signTx, List<Bytestring> programSignatures) {
@@ -452,9 +381,11 @@ public abstract class Bitcoin implements Coin {
      * Takes in a transaction and a private key and returns a signature (if possible)
      * as a Bytestring object.
      */
-    public Bytestring getSignature(org.bitcoinj.core.Transaction signTx, ECKey privKey) {
+    public Signatures getSignature(org.bitcoinj.core.Transaction signTx, ECKey privKey) {
 
         org.bitcoinj.core.Transaction copyTx = signTx;
+
+        HashSet<Bytestring> sigs = new HashSet<>();
 
         for (int i = 0; i < copyTx.getInputs().size(); i++) {
             TransactionInput input = copyTx.getInput(i);
@@ -467,13 +398,22 @@ public abstract class Bitcoin implements Coin {
             input.setScriptSig(inputScript);
             try {
                 input.verify(connectedOutput);
-                return new Bytestring(inputScript.getProgram());
+                sigs.add(new Bytestring(inputScript.getProgram()));
             } catch (VerificationException e) {
                 input.setScriptSig(this.bytestringToInputScript(new Bytestring(originalScript)));
             }
         }
 
-        return null;
+        Bytestring[] arr = new Bytestring[sigs.size()];
+
+        int i = 0;
+        for (Bytestring b : sigs) {
+            arr[i] = b;
+            i++;
+        }
+
+        return new Signatures(arr);
+
     }
 
     // Converts a Bytestring object to a Script object.
@@ -483,20 +423,20 @@ public abstract class Bitcoin implements Coin {
 
     // Since we rely on 3rd party services to query the blockchain, by
     // default we cache the result.
-    protected synchronized List<Bitcoin.Transaction> getAddressTransactions(String address)
+    protected synchronized List<Bitcoin.Transaction> getTransactionsFromUtxos(AddressUtxoImpl a)
             throws IOException, CoinNetworkException, AddressFormatException {
 
         long now = System.currentTimeMillis();
-        Cached cached = cache.get(address);
+        Cached cached = cache.get(a);
         if (cached != null) {
-            if (now - cached.last < cach_expire) {
+            if (now - cached.last < cache_expire) {
                 return cached.txList;
             }
         }
 
-        List<Bitcoin.Transaction> txList = getAddressTransactionsInner(address);
+        List<Bitcoin.Transaction> txList = getTransactionsFromUtxosInner(a);
 
-        cache.put(address, new Cached(address, txList, System.currentTimeMillis()));
+        cache.put(a, new Cached(a, txList, System.currentTimeMillis()));
 
         return txList;
     }
@@ -510,16 +450,71 @@ public abstract class Bitcoin implements Coin {
         if (peerGroup == null) {
             return false;
         }
+
         peerGroup.broadcastTransaction(t.bitcoinj).future().get();
         t.sent = true;
         return true;
     }
 
-    // Should NOT be synchronized.
-    abstract protected List<Bitcoin.Transaction> getAddressTransactionsInner(String address)
+    public static Map<VerificationKey, Long> getPlayersP2PKHFees(Map<VerificationKey, HashSet<TransactionOutPoint>> utxos, long satPerByte) {
+
+        // TODO
+        // compressed keys?
+
+        Map<VerificationKey, Long> playerFees = new HashMap<>();
+        Set<TransactionOutPoint> allUtxos = new HashSet<>();
+
+        for (Set<TransactionOutPoint> t : utxos.values()) {
+            allUtxos.addAll(t);
+        }
+
+        long totalBytes = 0;
+        long totalFee;
+
+        // version (4 bytes)
+        totalBytes += 4;
+
+        // txin count (# of UTXOs)
+        totalBytes += 1;
+
+        // txin
+        // we are only spending from P2PKH addresses, so each input is 146 bytes in size
+        totalBytes += allUtxos.size() * 146;
+
+        // txout count (# of outputs)
+        totalBytes += 1;
+
+        // txout
+        /*
+         * we are only paying to P2PKH addresses, so the upper bound is 33 bytes
+         * the size of 'utxos' is the number of players, we multiply by 2 because we assume
+         * each player has a change address
+         */
+        totalBytes += utxos.size() * 2 * 33;
+
+        // locktime (4 bytes)
+        totalBytes += 4;
+
+        totalFee = totalBytes * satPerByte;
+
+        for (VerificationKey vk : utxos.keySet()) {
+            // rough estimate (long / int)
+            double ratio = ((double) utxos.get(vk).size()) / ((double) allUtxos.size());
+            playerFees.put(vk, (long) (totalFee * ratio));
+        }
+
+        return playerFees;
+    }
+
+    // If there is a conflicting transaction in the mempool or blockchain, this function returns that transaction.
+    abstract com.shuffle.bitcoin.Transaction getConflictingTransactionInner(com.shuffle.bitcoin.Transaction t, Address a, long amount) throws CoinNetworkException, AddressFormatException, BlockStoreException, BitcoindException, CommunicationException, IOException;
+
+    abstract boolean isUtxo(String transactionHash, int vout) throws IOException, BitcoindException, CommunicationException;
+
+    abstract protected List<Bitcoin.Transaction> getTransactionsFromUtxosInner(AddressUtxoImpl a)
             throws IOException, CoinNetworkException, AddressFormatException;
 
-    // Should be synchronized.
+    // includes mempool transactions
     abstract org.bitcoinj.core.Transaction getTransaction(String transactionHash)
             throws IOException;
 }
