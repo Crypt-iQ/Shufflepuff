@@ -6,13 +6,13 @@ package com.shuffle.player.proto;
 public final class Proto {
   private Proto() {}
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
+          com.google.protobuf.ExtensionRegistry registry) {
   }
   /**
    * Protobuf enum {@code Phase}
    */
   public enum Phase
-      implements com.google.protobuf.ProtocolMessageEnum {
+          implements com.google.protobuf.ProtocolMessageEnum {
     /**
      * <code>NONE = 0;</code>
      */
@@ -85,7 +85,7 @@ public final class Proto {
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
         throw new java.lang.IllegalArgumentException(
-            "Can't get the number of an unknown enum value.");
+                "Can't get the number of an unknown enum value.");
       }
       return value;
     }
@@ -113,37 +113,37 @@ public final class Proto {
     }
 
     public static com.google.protobuf.Internal.EnumLiteMap<Phase>
-        internalGetValueMap() {
+    internalGetValueMap() {
       return internalValueMap;
     }
     private static final com.google.protobuf.Internal.EnumLiteMap<
-        Phase> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<Phase>() {
-            public Phase findValueByNumber(int number) {
-              return Phase.forNumber(number);
-            }
-          };
+            Phase> internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Phase>() {
+              public Phase findValueByNumber(int number) {
+                return Phase.forNumber(number);
+              }
+            };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
+    getValueDescriptor() {
       return getDescriptor().getValues().get(ordinal());
     }
     public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
+    getDescriptorForType() {
       return getDescriptor();
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.shuffle.player.proto.Proto.getDescriptor().getEnumTypes().get(0);
     }
 
     private static final Phase[] VALUES = values();
 
     public static Phase valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+            com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
+                "EnumValueDescriptor is not for this type.");
       }
       if (desc.getIndex() == -1) {
         return UNRECOGNIZED;
@@ -164,7 +164,7 @@ public final class Proto {
    * Protobuf enum {@code Reason}
    */
   public enum Reason
-      implements com.google.protobuf.ProtocolMessageEnum {
+          implements com.google.protobuf.ProtocolMessageEnum {
     /**
      * <code>INSUFFICIENTFUNDS = 0;</code>
      */
@@ -245,7 +245,7 @@ public final class Proto {
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
         throw new java.lang.IllegalArgumentException(
-            "Can't get the number of an unknown enum value.");
+                "Can't get the number of an unknown enum value.");
       }
       return value;
     }
@@ -274,37 +274,37 @@ public final class Proto {
     }
 
     public static com.google.protobuf.Internal.EnumLiteMap<Reason>
-        internalGetValueMap() {
+    internalGetValueMap() {
       return internalValueMap;
     }
     private static final com.google.protobuf.Internal.EnumLiteMap<
-        Reason> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<Reason>() {
-            public Reason findValueByNumber(int number) {
-              return Reason.forNumber(number);
-            }
-          };
+            Reason> internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Reason>() {
+              public Reason findValueByNumber(int number) {
+                return Reason.forNumber(number);
+              }
+            };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
+    getValueDescriptor() {
       return getDescriptor().getValues().get(ordinal());
     }
     public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
+    getDescriptorForType() {
       return getDescriptor();
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.shuffle.player.proto.Proto.getDescriptor().getEnumTypes().get(1);
     }
 
     private static final Reason[] VALUES = values();
 
     public static Reason valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+            com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
+                "EnumValueDescriptor is not for this type.");
       }
       if (desc.getIndex() == -1) {
         return UNRECOGNIZED;
@@ -322,8 +322,8 @@ public final class Proto {
   }
 
   public interface SignedOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Signed)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:Signed)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>optional .Packet packet = 1;</code>
@@ -355,9 +355,9 @@ public final class Proto {
    * Protobuf type {@code Signed}
    */
   public  static final class Signed extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:Signed)
-      SignedOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:Signed)
+          SignedOrBuilder {
     // Use Signed.newBuilder() to construct.
     private Signed(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -371,9 +371,9 @@ public final class Proto {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private Signed(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -422,21 +422,21 @@ public final class Proto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.shuffle.player.proto.Proto.internal_static_Signed_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.shuffle.player.proto.Proto.internal_static_Signed_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.shuffle.player.proto.Proto.Signed.class, com.shuffle.player.proto.Proto.Signed.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      com.shuffle.player.proto.Proto.Signed.class, com.shuffle.player.proto.Proto.Signed.Builder.class);
     }
 
     public static final int PACKET_FIELD_NUMBER = 1;
@@ -492,7 +492,7 @@ public final class Proto {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (packet_ != null) {
         output.writeMessage(1, getPacket());
       }
@@ -508,11 +508,11 @@ public final class Proto {
       size = 0;
       if (packet_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getPacket());
+                .computeMessageSize(1, getPacket());
       }
       if (signature_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getSignature());
+                .computeMessageSize(2, getSignature());
       }
       memoizedSize = size;
       return size;
@@ -520,62 +520,62 @@ public final class Proto {
 
     private static final long serialVersionUID = 0L;
     public static com.shuffle.player.proto.Proto.Signed parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Signed parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Signed parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Signed parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Signed parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Signed parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Signed parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Signed parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Signed parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Signed parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -587,12 +587,12 @@ public final class Proto {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -600,19 +600,19 @@ public final class Proto {
      * Protobuf type {@code Signed}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Signed)
-        com.shuffle.player.proto.Proto.SignedOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:Signed)
+            com.shuffle.player.proto.Proto.SignedOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return com.shuffle.player.proto.Proto.internal_static_Signed_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return com.shuffle.player.proto.Proto.internal_static_Signed_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.shuffle.player.proto.Proto.Signed.class, com.shuffle.player.proto.Proto.Signed.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        com.shuffle.player.proto.Proto.Signed.class, com.shuffle.player.proto.Proto.Signed.Builder.class);
       }
 
       // Construct using com.shuffle.player.proto.Proto.Signed.newBuilder()
@@ -621,7 +621,7 @@ public final class Proto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -647,7 +647,7 @@ public final class Proto {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.shuffle.player.proto.Proto.internal_static_Signed_descriptor;
       }
 
@@ -705,9 +705,9 @@ public final class Proto {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         com.shuffle.player.proto.Proto.Signed parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -724,7 +724,7 @@ public final class Proto {
 
       private com.shuffle.player.proto.Proto.Packet packet_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Packet, com.shuffle.player.proto.Proto.Packet.Builder, com.shuffle.player.proto.Proto.PacketOrBuilder> packetBuilder_;
+              com.shuffle.player.proto.Proto.Packet, com.shuffle.player.proto.Proto.Packet.Builder, com.shuffle.player.proto.Proto.PacketOrBuilder> packetBuilder_;
       /**
        * <code>optional .Packet packet = 1;</code>
        */
@@ -761,7 +761,7 @@ public final class Proto {
        * <code>optional .Packet packet = 1;</code>
        */
       public Builder setPacket(
-          com.shuffle.player.proto.Proto.Packet.Builder builderForValue) {
+              com.shuffle.player.proto.Proto.Packet.Builder builderForValue) {
         if (packetBuilder_ == null) {
           packet_ = builderForValue.build();
           onChanged();
@@ -778,7 +778,7 @@ public final class Proto {
         if (packetBuilder_ == null) {
           if (packet_ != null) {
             packet_ =
-              com.shuffle.player.proto.Proto.Packet.newBuilder(packet_).mergeFrom(value).buildPartial();
+                    com.shuffle.player.proto.Proto.Packet.newBuilder(packet_).mergeFrom(value).buildPartial();
           } else {
             packet_ = value;
           }
@@ -807,7 +807,7 @@ public final class Proto {
        * <code>optional .Packet packet = 1;</code>
        */
       public com.shuffle.player.proto.Proto.Packet.Builder getPacketBuilder() {
-        
+
         onChanged();
         return getPacketFieldBuilder().getBuilder();
       }
@@ -819,18 +819,18 @@ public final class Proto {
           return packetBuilder_.getMessageOrBuilder();
         } else {
           return packet_ == null ?
-              com.shuffle.player.proto.Proto.Packet.getDefaultInstance() : packet_;
+                  com.shuffle.player.proto.Proto.Packet.getDefaultInstance() : packet_;
         }
       }
       /**
        * <code>optional .Packet packet = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Packet, com.shuffle.player.proto.Proto.Packet.Builder, com.shuffle.player.proto.Proto.PacketOrBuilder> 
-          getPacketFieldBuilder() {
+              com.shuffle.player.proto.Proto.Packet, com.shuffle.player.proto.Proto.Packet.Builder, com.shuffle.player.proto.Proto.PacketOrBuilder>
+      getPacketFieldBuilder() {
         if (packetBuilder_ == null) {
           packetBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.shuffle.player.proto.Proto.Packet, com.shuffle.player.proto.Proto.Packet.Builder, com.shuffle.player.proto.Proto.PacketOrBuilder>(
+                  com.shuffle.player.proto.Proto.Packet, com.shuffle.player.proto.Proto.Packet.Builder, com.shuffle.player.proto.Proto.PacketOrBuilder>(
                   getPacket(),
                   getParentForChildren(),
                   isClean());
@@ -841,7 +841,7 @@ public final class Proto {
 
       private com.shuffle.player.proto.Proto.Signature signature_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Signature, com.shuffle.player.proto.Proto.Signature.Builder, com.shuffle.player.proto.Proto.SignatureOrBuilder> signatureBuilder_;
+              com.shuffle.player.proto.Proto.Signature, com.shuffle.player.proto.Proto.Signature.Builder, com.shuffle.player.proto.Proto.SignatureOrBuilder> signatureBuilder_;
       /**
        * <code>optional .Signature signature = 2;</code>
        */
@@ -878,7 +878,7 @@ public final class Proto {
        * <code>optional .Signature signature = 2;</code>
        */
       public Builder setSignature(
-          com.shuffle.player.proto.Proto.Signature.Builder builderForValue) {
+              com.shuffle.player.proto.Proto.Signature.Builder builderForValue) {
         if (signatureBuilder_ == null) {
           signature_ = builderForValue.build();
           onChanged();
@@ -895,7 +895,7 @@ public final class Proto {
         if (signatureBuilder_ == null) {
           if (signature_ != null) {
             signature_ =
-              com.shuffle.player.proto.Proto.Signature.newBuilder(signature_).mergeFrom(value).buildPartial();
+                    com.shuffle.player.proto.Proto.Signature.newBuilder(signature_).mergeFrom(value).buildPartial();
           } else {
             signature_ = value;
           }
@@ -924,7 +924,7 @@ public final class Proto {
        * <code>optional .Signature signature = 2;</code>
        */
       public com.shuffle.player.proto.Proto.Signature.Builder getSignatureBuilder() {
-        
+
         onChanged();
         return getSignatureFieldBuilder().getBuilder();
       }
@@ -936,18 +936,18 @@ public final class Proto {
           return signatureBuilder_.getMessageOrBuilder();
         } else {
           return signature_ == null ?
-              com.shuffle.player.proto.Proto.Signature.getDefaultInstance() : signature_;
+                  com.shuffle.player.proto.Proto.Signature.getDefaultInstance() : signature_;
         }
       }
       /**
        * <code>optional .Signature signature = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Signature, com.shuffle.player.proto.Proto.Signature.Builder, com.shuffle.player.proto.Proto.SignatureOrBuilder> 
-          getSignatureFieldBuilder() {
+              com.shuffle.player.proto.Proto.Signature, com.shuffle.player.proto.Proto.Signature.Builder, com.shuffle.player.proto.Proto.SignatureOrBuilder>
+      getSignatureFieldBuilder() {
         if (signatureBuilder_ == null) {
           signatureBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.shuffle.player.proto.Proto.Signature, com.shuffle.player.proto.Proto.Signature.Builder, com.shuffle.player.proto.Proto.SignatureOrBuilder>(
+                  com.shuffle.player.proto.Proto.Signature, com.shuffle.player.proto.Proto.Signature.Builder, com.shuffle.player.proto.Proto.SignatureOrBuilder>(
                   getSignature(),
                   getParentForChildren(),
                   isClean());
@@ -956,12 +956,12 @@ public final class Proto {
         return signatureBuilder_;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
@@ -980,12 +980,12 @@ public final class Proto {
     }
 
     private static final com.google.protobuf.Parser<Signed>
-        PARSER = new com.google.protobuf.AbstractParser<Signed>() {
+            PARSER = new com.google.protobuf.AbstractParser<Signed>() {
       public Signed parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Signed(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Signed(input, extensionRegistry);
       }
     };
 
@@ -1005,8 +1005,8 @@ public final class Proto {
   }
 
   public interface PacketOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Packet)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:Packet)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>optional bytes session = 1;</code>
@@ -1069,10 +1069,10 @@ public final class Proto {
   /**
    * Protobuf type {@code Packet}
    */
-  public static final class Packet extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:Packet)
-      PacketOrBuilder {
+  public  static final class Packet extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:Packet)
+          PacketOrBuilder {
     // Use Packet.newBuilder() to construct.
     private Packet(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1089,9 +1089,9 @@ public final class Proto {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private Packet(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -1169,21 +1169,21 @@ public final class Proto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.shuffle.player.proto.Proto.internal_static_Packet_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.shuffle.player.proto.Proto.internal_static_Packet_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.shuffle.player.proto.Proto.Packet.class, com.shuffle.player.proto.Proto.Packet.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      com.shuffle.player.proto.Proto.Packet.class, com.shuffle.player.proto.Proto.Packet.Builder.class);
     }
 
     public static final int SESSION_FIELD_NUMBER = 1;
@@ -1294,7 +1294,7 @@ public final class Proto {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (!session_.isEmpty()) {
         output.writeBytes(1, session_);
       }
@@ -1322,27 +1322,27 @@ public final class Proto {
       size = 0;
       if (!session_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, session_);
+                .computeBytesSize(1, session_);
       }
       if (number_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, number_);
+                .computeUInt32Size(2, number_);
       }
       if (from_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getFrom());
+                .computeMessageSize(3, getFrom());
       }
       if (to_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getTo());
+                .computeMessageSize(4, getTo());
       }
       if (phase_ != com.shuffle.player.proto.Proto.Phase.NONE.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(5, phase_);
+                .computeEnumSize(5, phase_);
       }
       if (message_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, getMessage());
+                .computeMessageSize(6, getMessage());
       }
       memoizedSize = size;
       return size;
@@ -1350,62 +1350,62 @@ public final class Proto {
 
     private static final long serialVersionUID = 0L;
     public static com.shuffle.player.proto.Proto.Packet parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Packet parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Packet parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Packet parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Packet parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Packet parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Packet parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Packet parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Packet parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Packet parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -1417,12 +1417,12 @@ public final class Proto {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1430,19 +1430,19 @@ public final class Proto {
      * Protobuf type {@code Packet}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Packet)
-        com.shuffle.player.proto.Proto.PacketOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:Packet)
+            com.shuffle.player.proto.Proto.PacketOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return com.shuffle.player.proto.Proto.internal_static_Packet_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return com.shuffle.player.proto.Proto.internal_static_Packet_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.shuffle.player.proto.Proto.Packet.class, com.shuffle.player.proto.Proto.Packet.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        com.shuffle.player.proto.Proto.Packet.class, com.shuffle.player.proto.Proto.Packet.Builder.class);
       }
 
       // Construct using com.shuffle.player.proto.Proto.Packet.newBuilder()
@@ -1451,7 +1451,7 @@ public final class Proto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1489,7 +1489,7 @@ public final class Proto {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.shuffle.player.proto.Proto.internal_static_Packet_descriptor;
       }
 
@@ -1567,9 +1567,9 @@ public final class Proto {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         com.shuffle.player.proto.Proto.Packet parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -1596,9 +1596,9 @@ public final class Proto {
        */
       public Builder setSession(com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          throw new NullPointerException();
+        }
+
         session_ = value;
         onChanged();
         return this;
@@ -1607,7 +1607,7 @@ public final class Proto {
        * <code>optional bytes session = 1;</code>
        */
       public Builder clearSession() {
-        
+
         session_ = getDefaultInstance().getSession();
         onChanged();
         return this;
@@ -1624,7 +1624,7 @@ public final class Proto {
        * <code>optional uint32 number = 2;</code>
        */
       public Builder setNumber(int value) {
-        
+
         number_ = value;
         onChanged();
         return this;
@@ -1633,7 +1633,7 @@ public final class Proto {
        * <code>optional uint32 number = 2;</code>
        */
       public Builder clearNumber() {
-        
+
         number_ = 0;
         onChanged();
         return this;
@@ -1641,7 +1641,7 @@ public final class Proto {
 
       private com.shuffle.player.proto.Proto.VerificationKey from_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder> fromBuilder_;
+              com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder> fromBuilder_;
       /**
        * <code>optional .VerificationKey from = 3;</code>
        */
@@ -1678,7 +1678,7 @@ public final class Proto {
        * <code>optional .VerificationKey from = 3;</code>
        */
       public Builder setFrom(
-          com.shuffle.player.proto.Proto.VerificationKey.Builder builderForValue) {
+              com.shuffle.player.proto.Proto.VerificationKey.Builder builderForValue) {
         if (fromBuilder_ == null) {
           from_ = builderForValue.build();
           onChanged();
@@ -1695,7 +1695,7 @@ public final class Proto {
         if (fromBuilder_ == null) {
           if (from_ != null) {
             from_ =
-              com.shuffle.player.proto.Proto.VerificationKey.newBuilder(from_).mergeFrom(value).buildPartial();
+                    com.shuffle.player.proto.Proto.VerificationKey.newBuilder(from_).mergeFrom(value).buildPartial();
           } else {
             from_ = value;
           }
@@ -1724,7 +1724,7 @@ public final class Proto {
        * <code>optional .VerificationKey from = 3;</code>
        */
       public com.shuffle.player.proto.Proto.VerificationKey.Builder getFromBuilder() {
-        
+
         onChanged();
         return getFromFieldBuilder().getBuilder();
       }
@@ -1736,18 +1736,18 @@ public final class Proto {
           return fromBuilder_.getMessageOrBuilder();
         } else {
           return from_ == null ?
-              com.shuffle.player.proto.Proto.VerificationKey.getDefaultInstance() : from_;
+                  com.shuffle.player.proto.Proto.VerificationKey.getDefaultInstance() : from_;
         }
       }
       /**
        * <code>optional .VerificationKey from = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder> 
-          getFromFieldBuilder() {
+              com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder>
+      getFromFieldBuilder() {
         if (fromBuilder_ == null) {
           fromBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder>(
+                  com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder>(
                   getFrom(),
                   getParentForChildren(),
                   isClean());
@@ -1758,7 +1758,7 @@ public final class Proto {
 
       private com.shuffle.player.proto.Proto.VerificationKey to_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder> toBuilder_;
+              com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder> toBuilder_;
       /**
        * <code>optional .VerificationKey to = 4;</code>
        */
@@ -1795,7 +1795,7 @@ public final class Proto {
        * <code>optional .VerificationKey to = 4;</code>
        */
       public Builder setTo(
-          com.shuffle.player.proto.Proto.VerificationKey.Builder builderForValue) {
+              com.shuffle.player.proto.Proto.VerificationKey.Builder builderForValue) {
         if (toBuilder_ == null) {
           to_ = builderForValue.build();
           onChanged();
@@ -1812,7 +1812,7 @@ public final class Proto {
         if (toBuilder_ == null) {
           if (to_ != null) {
             to_ =
-              com.shuffle.player.proto.Proto.VerificationKey.newBuilder(to_).mergeFrom(value).buildPartial();
+                    com.shuffle.player.proto.Proto.VerificationKey.newBuilder(to_).mergeFrom(value).buildPartial();
           } else {
             to_ = value;
           }
@@ -1841,7 +1841,7 @@ public final class Proto {
        * <code>optional .VerificationKey to = 4;</code>
        */
       public com.shuffle.player.proto.Proto.VerificationKey.Builder getToBuilder() {
-        
+
         onChanged();
         return getToFieldBuilder().getBuilder();
       }
@@ -1853,18 +1853,18 @@ public final class Proto {
           return toBuilder_.getMessageOrBuilder();
         } else {
           return to_ == null ?
-              com.shuffle.player.proto.Proto.VerificationKey.getDefaultInstance() : to_;
+                  com.shuffle.player.proto.Proto.VerificationKey.getDefaultInstance() : to_;
         }
       }
       /**
        * <code>optional .VerificationKey to = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder> 
-          getToFieldBuilder() {
+              com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder>
+      getToFieldBuilder() {
         if (toBuilder_ == null) {
           toBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder>(
+                  com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder>(
                   getTo(),
                   getParentForChildren(),
                   isClean());
@@ -1902,7 +1902,7 @@ public final class Proto {
         if (value == null) {
           throw new NullPointerException();
         }
-        
+
         phase_ = value.getNumber();
         onChanged();
         return this;
@@ -1911,7 +1911,7 @@ public final class Proto {
        * <code>optional .Phase phase = 5;</code>
        */
       public Builder clearPhase() {
-        
+
         phase_ = 0;
         onChanged();
         return this;
@@ -1919,7 +1919,7 @@ public final class Proto {
 
       private com.shuffle.player.proto.Proto.Message message_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Message, com.shuffle.player.proto.Proto.Message.Builder, com.shuffle.player.proto.Proto.MessageOrBuilder> messageBuilder_;
+              com.shuffle.player.proto.Proto.Message, com.shuffle.player.proto.Proto.Message.Builder, com.shuffle.player.proto.Proto.MessageOrBuilder> messageBuilder_;
       /**
        * <code>optional .Message message = 6;</code>
        */
@@ -1956,7 +1956,7 @@ public final class Proto {
        * <code>optional .Message message = 6;</code>
        */
       public Builder setMessage(
-          com.shuffle.player.proto.Proto.Message.Builder builderForValue) {
+              com.shuffle.player.proto.Proto.Message.Builder builderForValue) {
         if (messageBuilder_ == null) {
           message_ = builderForValue.build();
           onChanged();
@@ -1973,7 +1973,7 @@ public final class Proto {
         if (messageBuilder_ == null) {
           if (message_ != null) {
             message_ =
-              com.shuffle.player.proto.Proto.Message.newBuilder(message_).mergeFrom(value).buildPartial();
+                    com.shuffle.player.proto.Proto.Message.newBuilder(message_).mergeFrom(value).buildPartial();
           } else {
             message_ = value;
           }
@@ -2002,7 +2002,7 @@ public final class Proto {
        * <code>optional .Message message = 6;</code>
        */
       public com.shuffle.player.proto.Proto.Message.Builder getMessageBuilder() {
-        
+
         onChanged();
         return getMessageFieldBuilder().getBuilder();
       }
@@ -2014,18 +2014,18 @@ public final class Proto {
           return messageBuilder_.getMessageOrBuilder();
         } else {
           return message_ == null ?
-              com.shuffle.player.proto.Proto.Message.getDefaultInstance() : message_;
+                  com.shuffle.player.proto.Proto.Message.getDefaultInstance() : message_;
         }
       }
       /**
        * <code>optional .Message message = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Message, com.shuffle.player.proto.Proto.Message.Builder, com.shuffle.player.proto.Proto.MessageOrBuilder> 
-          getMessageFieldBuilder() {
+              com.shuffle.player.proto.Proto.Message, com.shuffle.player.proto.Proto.Message.Builder, com.shuffle.player.proto.Proto.MessageOrBuilder>
+      getMessageFieldBuilder() {
         if (messageBuilder_ == null) {
           messageBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.shuffle.player.proto.Proto.Message, com.shuffle.player.proto.Proto.Message.Builder, com.shuffle.player.proto.Proto.MessageOrBuilder>(
+                  com.shuffle.player.proto.Proto.Message, com.shuffle.player.proto.Proto.Message.Builder, com.shuffle.player.proto.Proto.MessageOrBuilder>(
                   getMessage(),
                   getParentForChildren(),
                   isClean());
@@ -2034,12 +2034,12 @@ public final class Proto {
         return messageBuilder_;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
@@ -2058,12 +2058,12 @@ public final class Proto {
     }
 
     private static final com.google.protobuf.Parser<Packet>
-        PARSER = new com.google.protobuf.AbstractParser<Packet>() {
+            PARSER = new com.google.protobuf.AbstractParser<Packet>() {
       public Packet parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Packet(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Packet(input, extensionRegistry);
       }
     };
 
@@ -2083,8 +2083,8 @@ public final class Proto {
   }
 
   public interface MessageOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Message)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:Message)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>optional .Address address = 1;</code>
@@ -2139,38 +2139,51 @@ public final class Proto {
     com.shuffle.player.proto.Proto.SignatureOrBuilder getSignatureOrBuilder();
 
     /**
-     * <code>optional string str = 5;</code>
+     * <code>optional .Signatures signatures = 5;</code>
+     */
+    boolean hasSignatures();
+    /**
+     * <code>optional .Signatures signatures = 5;</code>
+     */
+    com.shuffle.player.proto.Proto.Signatures getSignatures();
+    /**
+     * <code>optional .Signatures signatures = 5;</code>
+     */
+    com.shuffle.player.proto.Proto.SignaturesOrBuilder getSignaturesOrBuilder();
+
+    /**
+     * <code>optional string str = 6;</code>
      */
     java.lang.String getStr();
     /**
-     * <code>optional string str = 5;</code>
+     * <code>optional string str = 6;</code>
      */
     com.google.protobuf.ByteString
-        getStrBytes();
+    getStrBytes();
 
     /**
-     * <code>optional .Blame blame = 6;</code>
+     * <code>optional .Blame blame = 7;</code>
      */
     boolean hasBlame();
     /**
-     * <code>optional .Blame blame = 6;</code>
+     * <code>optional .Blame blame = 7;</code>
      */
     com.shuffle.player.proto.Proto.Blame getBlame();
     /**
-     * <code>optional .Blame blame = 6;</code>
+     * <code>optional .Blame blame = 7;</code>
      */
     com.shuffle.player.proto.Proto.BlameOrBuilder getBlameOrBuilder();
 
     /**
-     * <code>optional .Message next = 7;</code>
+     * <code>optional .Message next = 8;</code>
      */
     boolean hasNext();
     /**
-     * <code>optional .Message next = 7;</code>
+     * <code>optional .Message next = 8;</code>
      */
     com.shuffle.player.proto.Proto.Message getNext();
     /**
-     * <code>optional .Message next = 7;</code>
+     * <code>optional .Message next = 8;</code>
      */
     com.shuffle.player.proto.Proto.MessageOrBuilder getNextOrBuilder();
   }
@@ -2178,9 +2191,9 @@ public final class Proto {
    * Protobuf type {@code Message}
    */
   public  static final class Message extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:Message)
-      MessageOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:Message)
+          MessageOrBuilder {
     // Use Message.newBuilder() to construct.
     private Message(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2195,9 +2208,9 @@ public final class Proto {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private Message(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -2267,12 +2280,25 @@ public final class Proto {
               break;
             }
             case 42: {
+              com.shuffle.player.proto.Proto.Signatures.Builder subBuilder = null;
+              if (signatures_ != null) {
+                subBuilder = signatures_.toBuilder();
+              }
+              signatures_ = input.readMessage(com.shuffle.player.proto.Proto.Signatures.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(signatures_);
+                signatures_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 50: {
               java.lang.String s = input.readStringRequireUtf8();
 
               str_ = s;
               break;
             }
-            case 50: {
+            case 58: {
               com.shuffle.player.proto.Proto.Blame.Builder subBuilder = null;
               if (blame_ != null) {
                 subBuilder = blame_.toBuilder();
@@ -2285,7 +2311,7 @@ public final class Proto {
 
               break;
             }
-            case 58: {
+            case 66: {
               com.shuffle.player.proto.Proto.Message.Builder subBuilder = null;
               if (next_ != null) {
                 subBuilder = next_.toBuilder();
@@ -2304,21 +2330,21 @@ public final class Proto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.shuffle.player.proto.Proto.internal_static_Message_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.shuffle.player.proto.Proto.internal_static_Message_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.shuffle.player.proto.Proto.Message.class, com.shuffle.player.proto.Proto.Message.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      com.shuffle.player.proto.Proto.Message.class, com.shuffle.player.proto.Proto.Message.Builder.class);
     }
 
     public static final int ADDRESS_FIELD_NUMBER = 1;
@@ -2405,33 +2431,54 @@ public final class Proto {
       return getSignature();
     }
 
-    public static final int STR_FIELD_NUMBER = 5;
+    public static final int SIGNATURES_FIELD_NUMBER = 5;
+    private com.shuffle.player.proto.Proto.Signatures signatures_;
+    /**
+     * <code>optional .Signatures signatures = 5;</code>
+     */
+    public boolean hasSignatures() {
+      return signatures_ != null;
+    }
+    /**
+     * <code>optional .Signatures signatures = 5;</code>
+     */
+    public com.shuffle.player.proto.Proto.Signatures getSignatures() {
+      return signatures_ == null ? com.shuffle.player.proto.Proto.Signatures.getDefaultInstance() : signatures_;
+    }
+    /**
+     * <code>optional .Signatures signatures = 5;</code>
+     */
+    public com.shuffle.player.proto.Proto.SignaturesOrBuilder getSignaturesOrBuilder() {
+      return getSignatures();
+    }
+
+    public static final int STR_FIELD_NUMBER = 6;
     private volatile java.lang.Object str_;
     /**
-     * <code>optional string str = 5;</code>
+     * <code>optional string str = 6;</code>
      */
     public java.lang.String getStr() {
       java.lang.Object ref = str_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         str_ = s;
         return s;
       }
     }
     /**
-     * <code>optional string str = 5;</code>
+     * <code>optional string str = 6;</code>
      */
     public com.google.protobuf.ByteString
-        getStrBytes() {
+    getStrBytes() {
       java.lang.Object ref = str_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         str_ = b;
         return b;
       } else {
@@ -2439,43 +2486,43 @@ public final class Proto {
       }
     }
 
-    public static final int BLAME_FIELD_NUMBER = 6;
+    public static final int BLAME_FIELD_NUMBER = 7;
     private com.shuffle.player.proto.Proto.Blame blame_;
     /**
-     * <code>optional .Blame blame = 6;</code>
+     * <code>optional .Blame blame = 7;</code>
      */
     public boolean hasBlame() {
       return blame_ != null;
     }
     /**
-     * <code>optional .Blame blame = 6;</code>
+     * <code>optional .Blame blame = 7;</code>
      */
     public com.shuffle.player.proto.Proto.Blame getBlame() {
       return blame_ == null ? com.shuffle.player.proto.Proto.Blame.getDefaultInstance() : blame_;
     }
     /**
-     * <code>optional .Blame blame = 6;</code>
+     * <code>optional .Blame blame = 7;</code>
      */
     public com.shuffle.player.proto.Proto.BlameOrBuilder getBlameOrBuilder() {
       return getBlame();
     }
 
-    public static final int NEXT_FIELD_NUMBER = 7;
+    public static final int NEXT_FIELD_NUMBER = 8;
     private com.shuffle.player.proto.Proto.Message next_;
     /**
-     * <code>optional .Message next = 7;</code>
+     * <code>optional .Message next = 8;</code>
      */
     public boolean hasNext() {
       return next_ != null;
     }
     /**
-     * <code>optional .Message next = 7;</code>
+     * <code>optional .Message next = 8;</code>
      */
     public com.shuffle.player.proto.Proto.Message getNext() {
       return next_ == null ? com.shuffle.player.proto.Proto.Message.getDefaultInstance() : next_;
     }
     /**
-     * <code>optional .Message next = 7;</code>
+     * <code>optional .Message next = 8;</code>
      */
     public com.shuffle.player.proto.Proto.MessageOrBuilder getNextOrBuilder() {
       return getNext();
@@ -2492,7 +2539,7 @@ public final class Proto {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (address_ != null) {
         output.writeMessage(1, getAddress());
       }
@@ -2505,14 +2552,17 @@ public final class Proto {
       if (signature_ != null) {
         output.writeMessage(4, getSignature());
       }
+      if (signatures_ != null) {
+        output.writeMessage(5, getSignatures());
+      }
       if (!getStrBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 5, str_);
+        com.google.protobuf.GeneratedMessage.writeString(output, 6, str_);
       }
       if (blame_ != null) {
-        output.writeMessage(6, getBlame());
+        output.writeMessage(7, getBlame());
       }
       if (next_ != null) {
-        output.writeMessage(7, getNext());
+        output.writeMessage(8, getNext());
       }
     }
 
@@ -2523,30 +2573,34 @@ public final class Proto {
       size = 0;
       if (address_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getAddress());
+                .computeMessageSize(1, getAddress());
       }
       if (key_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getKey());
+                .computeMessageSize(2, getKey());
       }
       if (hash_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getHash());
+                .computeMessageSize(3, getHash());
       }
       if (signature_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getSignature());
+                .computeMessageSize(4, getSignature());
+      }
+      if (signatures_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(5, getSignatures());
       }
       if (!getStrBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(5, str_);
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(6, str_);
       }
       if (blame_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, getBlame());
+                .computeMessageSize(7, getBlame());
       }
       if (next_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, getNext());
+                .computeMessageSize(8, getNext());
       }
       memoizedSize = size;
       return size;
@@ -2554,62 +2608,62 @@ public final class Proto {
 
     private static final long serialVersionUID = 0L;
     public static com.shuffle.player.proto.Proto.Message parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Message parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Message parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Message parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Message parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Message parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Message parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Message parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Message parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Message parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -2621,12 +2675,12 @@ public final class Proto {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -2634,19 +2688,19 @@ public final class Proto {
      * Protobuf type {@code Message}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Message)
-        com.shuffle.player.proto.Proto.MessageOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:Message)
+            com.shuffle.player.proto.Proto.MessageOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return com.shuffle.player.proto.Proto.internal_static_Message_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return com.shuffle.player.proto.Proto.internal_static_Message_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.shuffle.player.proto.Proto.Message.class, com.shuffle.player.proto.Proto.Message.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        com.shuffle.player.proto.Proto.Message.class, com.shuffle.player.proto.Proto.Message.Builder.class);
       }
 
       // Construct using com.shuffle.player.proto.Proto.Message.newBuilder()
@@ -2655,7 +2709,7 @@ public final class Proto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -2689,6 +2743,12 @@ public final class Proto {
           signature_ = null;
           signatureBuilder_ = null;
         }
+        if (signaturesBuilder_ == null) {
+          signatures_ = null;
+        } else {
+          signatures_ = null;
+          signaturesBuilder_ = null;
+        }
         str_ = "";
 
         if (blameBuilder_ == null) {
@@ -2707,7 +2767,7 @@ public final class Proto {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.shuffle.player.proto.Proto.internal_static_Message_descriptor;
       }
 
@@ -2744,6 +2804,11 @@ public final class Proto {
           result.signature_ = signature_;
         } else {
           result.signature_ = signatureBuilder_.build();
+        }
+        if (signaturesBuilder_ == null) {
+          result.signatures_ = signatures_;
+        } else {
+          result.signatures_ = signaturesBuilder_.build();
         }
         result.str_ = str_;
         if (blameBuilder_ == null) {
@@ -2783,6 +2848,9 @@ public final class Proto {
         if (other.hasSignature()) {
           mergeSignature(other.getSignature());
         }
+        if (other.hasSignatures()) {
+          mergeSignatures(other.getSignatures());
+        }
         if (!other.getStr().isEmpty()) {
           str_ = other.str_;
           onChanged();
@@ -2802,9 +2870,9 @@ public final class Proto {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         com.shuffle.player.proto.Proto.Message parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -2821,7 +2889,7 @@ public final class Proto {
 
       private com.shuffle.player.proto.Proto.Address address_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Address, com.shuffle.player.proto.Proto.Address.Builder, com.shuffle.player.proto.Proto.AddressOrBuilder> addressBuilder_;
+              com.shuffle.player.proto.Proto.Address, com.shuffle.player.proto.Proto.Address.Builder, com.shuffle.player.proto.Proto.AddressOrBuilder> addressBuilder_;
       /**
        * <code>optional .Address address = 1;</code>
        */
@@ -2858,7 +2926,7 @@ public final class Proto {
        * <code>optional .Address address = 1;</code>
        */
       public Builder setAddress(
-          com.shuffle.player.proto.Proto.Address.Builder builderForValue) {
+              com.shuffle.player.proto.Proto.Address.Builder builderForValue) {
         if (addressBuilder_ == null) {
           address_ = builderForValue.build();
           onChanged();
@@ -2875,7 +2943,7 @@ public final class Proto {
         if (addressBuilder_ == null) {
           if (address_ != null) {
             address_ =
-              com.shuffle.player.proto.Proto.Address.newBuilder(address_).mergeFrom(value).buildPartial();
+                    com.shuffle.player.proto.Proto.Address.newBuilder(address_).mergeFrom(value).buildPartial();
           } else {
             address_ = value;
           }
@@ -2904,7 +2972,7 @@ public final class Proto {
        * <code>optional .Address address = 1;</code>
        */
       public com.shuffle.player.proto.Proto.Address.Builder getAddressBuilder() {
-        
+
         onChanged();
         return getAddressFieldBuilder().getBuilder();
       }
@@ -2916,18 +2984,18 @@ public final class Proto {
           return addressBuilder_.getMessageOrBuilder();
         } else {
           return address_ == null ?
-              com.shuffle.player.proto.Proto.Address.getDefaultInstance() : address_;
+                  com.shuffle.player.proto.Proto.Address.getDefaultInstance() : address_;
         }
       }
       /**
        * <code>optional .Address address = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Address, com.shuffle.player.proto.Proto.Address.Builder, com.shuffle.player.proto.Proto.AddressOrBuilder> 
-          getAddressFieldBuilder() {
+              com.shuffle.player.proto.Proto.Address, com.shuffle.player.proto.Proto.Address.Builder, com.shuffle.player.proto.Proto.AddressOrBuilder>
+      getAddressFieldBuilder() {
         if (addressBuilder_ == null) {
           addressBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.shuffle.player.proto.Proto.Address, com.shuffle.player.proto.Proto.Address.Builder, com.shuffle.player.proto.Proto.AddressOrBuilder>(
+                  com.shuffle.player.proto.Proto.Address, com.shuffle.player.proto.Proto.Address.Builder, com.shuffle.player.proto.Proto.AddressOrBuilder>(
                   getAddress(),
                   getParentForChildren(),
                   isClean());
@@ -2938,7 +3006,7 @@ public final class Proto {
 
       private com.shuffle.player.proto.Proto.EncryptionKey key_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.EncryptionKey, com.shuffle.player.proto.Proto.EncryptionKey.Builder, com.shuffle.player.proto.Proto.EncryptionKeyOrBuilder> keyBuilder_;
+              com.shuffle.player.proto.Proto.EncryptionKey, com.shuffle.player.proto.Proto.EncryptionKey.Builder, com.shuffle.player.proto.Proto.EncryptionKeyOrBuilder> keyBuilder_;
       /**
        * <code>optional .EncryptionKey key = 2;</code>
        */
@@ -2975,7 +3043,7 @@ public final class Proto {
        * <code>optional .EncryptionKey key = 2;</code>
        */
       public Builder setKey(
-          com.shuffle.player.proto.Proto.EncryptionKey.Builder builderForValue) {
+              com.shuffle.player.proto.Proto.EncryptionKey.Builder builderForValue) {
         if (keyBuilder_ == null) {
           key_ = builderForValue.build();
           onChanged();
@@ -2992,7 +3060,7 @@ public final class Proto {
         if (keyBuilder_ == null) {
           if (key_ != null) {
             key_ =
-              com.shuffle.player.proto.Proto.EncryptionKey.newBuilder(key_).mergeFrom(value).buildPartial();
+                    com.shuffle.player.proto.Proto.EncryptionKey.newBuilder(key_).mergeFrom(value).buildPartial();
           } else {
             key_ = value;
           }
@@ -3021,7 +3089,7 @@ public final class Proto {
        * <code>optional .EncryptionKey key = 2;</code>
        */
       public com.shuffle.player.proto.Proto.EncryptionKey.Builder getKeyBuilder() {
-        
+
         onChanged();
         return getKeyFieldBuilder().getBuilder();
       }
@@ -3033,18 +3101,18 @@ public final class Proto {
           return keyBuilder_.getMessageOrBuilder();
         } else {
           return key_ == null ?
-              com.shuffle.player.proto.Proto.EncryptionKey.getDefaultInstance() : key_;
+                  com.shuffle.player.proto.Proto.EncryptionKey.getDefaultInstance() : key_;
         }
       }
       /**
        * <code>optional .EncryptionKey key = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.EncryptionKey, com.shuffle.player.proto.Proto.EncryptionKey.Builder, com.shuffle.player.proto.Proto.EncryptionKeyOrBuilder> 
-          getKeyFieldBuilder() {
+              com.shuffle.player.proto.Proto.EncryptionKey, com.shuffle.player.proto.Proto.EncryptionKey.Builder, com.shuffle.player.proto.Proto.EncryptionKeyOrBuilder>
+      getKeyFieldBuilder() {
         if (keyBuilder_ == null) {
           keyBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.shuffle.player.proto.Proto.EncryptionKey, com.shuffle.player.proto.Proto.EncryptionKey.Builder, com.shuffle.player.proto.Proto.EncryptionKeyOrBuilder>(
+                  com.shuffle.player.proto.Proto.EncryptionKey, com.shuffle.player.proto.Proto.EncryptionKey.Builder, com.shuffle.player.proto.Proto.EncryptionKeyOrBuilder>(
                   getKey(),
                   getParentForChildren(),
                   isClean());
@@ -3055,7 +3123,7 @@ public final class Proto {
 
       private com.shuffle.player.proto.Proto.Hash hash_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Hash, com.shuffle.player.proto.Proto.Hash.Builder, com.shuffle.player.proto.Proto.HashOrBuilder> hashBuilder_;
+              com.shuffle.player.proto.Proto.Hash, com.shuffle.player.proto.Proto.Hash.Builder, com.shuffle.player.proto.Proto.HashOrBuilder> hashBuilder_;
       /**
        * <code>optional .Hash hash = 3;</code>
        */
@@ -3092,7 +3160,7 @@ public final class Proto {
        * <code>optional .Hash hash = 3;</code>
        */
       public Builder setHash(
-          com.shuffle.player.proto.Proto.Hash.Builder builderForValue) {
+              com.shuffle.player.proto.Proto.Hash.Builder builderForValue) {
         if (hashBuilder_ == null) {
           hash_ = builderForValue.build();
           onChanged();
@@ -3109,7 +3177,7 @@ public final class Proto {
         if (hashBuilder_ == null) {
           if (hash_ != null) {
             hash_ =
-              com.shuffle.player.proto.Proto.Hash.newBuilder(hash_).mergeFrom(value).buildPartial();
+                    com.shuffle.player.proto.Proto.Hash.newBuilder(hash_).mergeFrom(value).buildPartial();
           } else {
             hash_ = value;
           }
@@ -3138,7 +3206,7 @@ public final class Proto {
        * <code>optional .Hash hash = 3;</code>
        */
       public com.shuffle.player.proto.Proto.Hash.Builder getHashBuilder() {
-        
+
         onChanged();
         return getHashFieldBuilder().getBuilder();
       }
@@ -3150,18 +3218,18 @@ public final class Proto {
           return hashBuilder_.getMessageOrBuilder();
         } else {
           return hash_ == null ?
-              com.shuffle.player.proto.Proto.Hash.getDefaultInstance() : hash_;
+                  com.shuffle.player.proto.Proto.Hash.getDefaultInstance() : hash_;
         }
       }
       /**
        * <code>optional .Hash hash = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Hash, com.shuffle.player.proto.Proto.Hash.Builder, com.shuffle.player.proto.Proto.HashOrBuilder> 
-          getHashFieldBuilder() {
+              com.shuffle.player.proto.Proto.Hash, com.shuffle.player.proto.Proto.Hash.Builder, com.shuffle.player.proto.Proto.HashOrBuilder>
+      getHashFieldBuilder() {
         if (hashBuilder_ == null) {
           hashBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.shuffle.player.proto.Proto.Hash, com.shuffle.player.proto.Proto.Hash.Builder, com.shuffle.player.proto.Proto.HashOrBuilder>(
+                  com.shuffle.player.proto.Proto.Hash, com.shuffle.player.proto.Proto.Hash.Builder, com.shuffle.player.proto.Proto.HashOrBuilder>(
                   getHash(),
                   getParentForChildren(),
                   isClean());
@@ -3172,7 +3240,7 @@ public final class Proto {
 
       private com.shuffle.player.proto.Proto.Signature signature_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Signature, com.shuffle.player.proto.Proto.Signature.Builder, com.shuffle.player.proto.Proto.SignatureOrBuilder> signatureBuilder_;
+              com.shuffle.player.proto.Proto.Signature, com.shuffle.player.proto.Proto.Signature.Builder, com.shuffle.player.proto.Proto.SignatureOrBuilder> signatureBuilder_;
       /**
        * <code>optional .Signature signature = 4;</code>
        */
@@ -3209,7 +3277,7 @@ public final class Proto {
        * <code>optional .Signature signature = 4;</code>
        */
       public Builder setSignature(
-          com.shuffle.player.proto.Proto.Signature.Builder builderForValue) {
+              com.shuffle.player.proto.Proto.Signature.Builder builderForValue) {
         if (signatureBuilder_ == null) {
           signature_ = builderForValue.build();
           onChanged();
@@ -3226,7 +3294,7 @@ public final class Proto {
         if (signatureBuilder_ == null) {
           if (signature_ != null) {
             signature_ =
-              com.shuffle.player.proto.Proto.Signature.newBuilder(signature_).mergeFrom(value).buildPartial();
+                    com.shuffle.player.proto.Proto.Signature.newBuilder(signature_).mergeFrom(value).buildPartial();
           } else {
             signature_ = value;
           }
@@ -3255,7 +3323,7 @@ public final class Proto {
        * <code>optional .Signature signature = 4;</code>
        */
       public com.shuffle.player.proto.Proto.Signature.Builder getSignatureBuilder() {
-        
+
         onChanged();
         return getSignatureFieldBuilder().getBuilder();
       }
@@ -3267,18 +3335,18 @@ public final class Proto {
           return signatureBuilder_.getMessageOrBuilder();
         } else {
           return signature_ == null ?
-              com.shuffle.player.proto.Proto.Signature.getDefaultInstance() : signature_;
+                  com.shuffle.player.proto.Proto.Signature.getDefaultInstance() : signature_;
         }
       }
       /**
        * <code>optional .Signature signature = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Signature, com.shuffle.player.proto.Proto.Signature.Builder, com.shuffle.player.proto.Proto.SignatureOrBuilder> 
-          getSignatureFieldBuilder() {
+              com.shuffle.player.proto.Proto.Signature, com.shuffle.player.proto.Proto.Signature.Builder, com.shuffle.player.proto.Proto.SignatureOrBuilder>
+      getSignatureFieldBuilder() {
         if (signatureBuilder_ == null) {
           signatureBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.shuffle.player.proto.Proto.Signature, com.shuffle.player.proto.Proto.Signature.Builder, com.shuffle.player.proto.Proto.SignatureOrBuilder>(
+                  com.shuffle.player.proto.Proto.Signature, com.shuffle.player.proto.Proto.Signature.Builder, com.shuffle.player.proto.Proto.SignatureOrBuilder>(
                   getSignature(),
                   getParentForChildren(),
                   isClean());
@@ -3287,15 +3355,132 @@ public final class Proto {
         return signatureBuilder_;
       }
 
+      private com.shuffle.player.proto.Proto.Signatures signatures_ = null;
+      private com.google.protobuf.SingleFieldBuilder<
+              com.shuffle.player.proto.Proto.Signatures, com.shuffle.player.proto.Proto.Signatures.Builder, com.shuffle.player.proto.Proto.SignaturesOrBuilder> signaturesBuilder_;
+      /**
+       * <code>optional .Signatures signatures = 5;</code>
+       */
+      public boolean hasSignatures() {
+        return signaturesBuilder_ != null || signatures_ != null;
+      }
+      /**
+       * <code>optional .Signatures signatures = 5;</code>
+       */
+      public com.shuffle.player.proto.Proto.Signatures getSignatures() {
+        if (signaturesBuilder_ == null) {
+          return signatures_ == null ? com.shuffle.player.proto.Proto.Signatures.getDefaultInstance() : signatures_;
+        } else {
+          return signaturesBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .Signatures signatures = 5;</code>
+       */
+      public Builder setSignatures(com.shuffle.player.proto.Proto.Signatures value) {
+        if (signaturesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          signatures_ = value;
+          onChanged();
+        } else {
+          signaturesBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .Signatures signatures = 5;</code>
+       */
+      public Builder setSignatures(
+              com.shuffle.player.proto.Proto.Signatures.Builder builderForValue) {
+        if (signaturesBuilder_ == null) {
+          signatures_ = builderForValue.build();
+          onChanged();
+        } else {
+          signaturesBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .Signatures signatures = 5;</code>
+       */
+      public Builder mergeSignatures(com.shuffle.player.proto.Proto.Signatures value) {
+        if (signaturesBuilder_ == null) {
+          if (signatures_ != null) {
+            signatures_ =
+                    com.shuffle.player.proto.Proto.Signatures.newBuilder(signatures_).mergeFrom(value).buildPartial();
+          } else {
+            signatures_ = value;
+          }
+          onChanged();
+        } else {
+          signaturesBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .Signatures signatures = 5;</code>
+       */
+      public Builder clearSignatures() {
+        if (signaturesBuilder_ == null) {
+          signatures_ = null;
+          onChanged();
+        } else {
+          signatures_ = null;
+          signaturesBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .Signatures signatures = 5;</code>
+       */
+      public com.shuffle.player.proto.Proto.Signatures.Builder getSignaturesBuilder() {
+
+        onChanged();
+        return getSignaturesFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .Signatures signatures = 5;</code>
+       */
+      public com.shuffle.player.proto.Proto.SignaturesOrBuilder getSignaturesOrBuilder() {
+        if (signaturesBuilder_ != null) {
+          return signaturesBuilder_.getMessageOrBuilder();
+        } else {
+          return signatures_ == null ?
+                  com.shuffle.player.proto.Proto.Signatures.getDefaultInstance() : signatures_;
+        }
+      }
+      /**
+       * <code>optional .Signatures signatures = 5;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+              com.shuffle.player.proto.Proto.Signatures, com.shuffle.player.proto.Proto.Signatures.Builder, com.shuffle.player.proto.Proto.SignaturesOrBuilder>
+      getSignaturesFieldBuilder() {
+        if (signaturesBuilder_ == null) {
+          signaturesBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  com.shuffle.player.proto.Proto.Signatures, com.shuffle.player.proto.Proto.Signatures.Builder, com.shuffle.player.proto.Proto.SignaturesOrBuilder>(
+                  getSignatures(),
+                  getParentForChildren(),
+                  isClean());
+          signatures_ = null;
+        }
+        return signaturesBuilder_;
+      }
+
       private java.lang.Object str_ = "";
       /**
-       * <code>optional string str = 5;</code>
+       * <code>optional string str = 6;</code>
        */
       public java.lang.String getStr() {
         java.lang.Object ref = str_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           str_ = s;
           return s;
@@ -3304,15 +3489,15 @@ public final class Proto {
         }
       }
       /**
-       * <code>optional string str = 5;</code>
+       * <code>optional string str = 6;</code>
        */
       public com.google.protobuf.ByteString
-          getStrBytes() {
+      getStrBytes() {
         java.lang.Object ref = str_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           str_ = b;
           return b;
         } else {
@@ -3320,37 +3505,37 @@ public final class Proto {
         }
       }
       /**
-       * <code>optional string str = 5;</code>
+       * <code>optional string str = 6;</code>
        */
       public Builder setStr(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          throw new NullPointerException();
+        }
+
         str_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string str = 5;</code>
+       * <code>optional string str = 6;</code>
        */
       public Builder clearStr() {
-        
+
         str_ = getDefaultInstance().getStr();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string str = 5;</code>
+       * <code>optional string str = 6;</code>
        */
       public Builder setStrBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+          throw new NullPointerException();
+        }
+        checkByteStringIsUtf8(value);
+
         str_ = value;
         onChanged();
         return this;
@@ -3358,15 +3543,15 @@ public final class Proto {
 
       private com.shuffle.player.proto.Proto.Blame blame_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Blame, com.shuffle.player.proto.Proto.Blame.Builder, com.shuffle.player.proto.Proto.BlameOrBuilder> blameBuilder_;
+              com.shuffle.player.proto.Proto.Blame, com.shuffle.player.proto.Proto.Blame.Builder, com.shuffle.player.proto.Proto.BlameOrBuilder> blameBuilder_;
       /**
-       * <code>optional .Blame blame = 6;</code>
+       * <code>optional .Blame blame = 7;</code>
        */
       public boolean hasBlame() {
         return blameBuilder_ != null || blame_ != null;
       }
       /**
-       * <code>optional .Blame blame = 6;</code>
+       * <code>optional .Blame blame = 7;</code>
        */
       public com.shuffle.player.proto.Proto.Blame getBlame() {
         if (blameBuilder_ == null) {
@@ -3376,7 +3561,7 @@ public final class Proto {
         }
       }
       /**
-       * <code>optional .Blame blame = 6;</code>
+       * <code>optional .Blame blame = 7;</code>
        */
       public Builder setBlame(com.shuffle.player.proto.Proto.Blame value) {
         if (blameBuilder_ == null) {
@@ -3392,10 +3577,10 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>optional .Blame blame = 6;</code>
+       * <code>optional .Blame blame = 7;</code>
        */
       public Builder setBlame(
-          com.shuffle.player.proto.Proto.Blame.Builder builderForValue) {
+              com.shuffle.player.proto.Proto.Blame.Builder builderForValue) {
         if (blameBuilder_ == null) {
           blame_ = builderForValue.build();
           onChanged();
@@ -3406,13 +3591,13 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>optional .Blame blame = 6;</code>
+       * <code>optional .Blame blame = 7;</code>
        */
       public Builder mergeBlame(com.shuffle.player.proto.Proto.Blame value) {
         if (blameBuilder_ == null) {
           if (blame_ != null) {
             blame_ =
-              com.shuffle.player.proto.Proto.Blame.newBuilder(blame_).mergeFrom(value).buildPartial();
+                    com.shuffle.player.proto.Proto.Blame.newBuilder(blame_).mergeFrom(value).buildPartial();
           } else {
             blame_ = value;
           }
@@ -3424,7 +3609,7 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>optional .Blame blame = 6;</code>
+       * <code>optional .Blame blame = 7;</code>
        */
       public Builder clearBlame() {
         if (blameBuilder_ == null) {
@@ -3438,33 +3623,33 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>optional .Blame blame = 6;</code>
+       * <code>optional .Blame blame = 7;</code>
        */
       public com.shuffle.player.proto.Proto.Blame.Builder getBlameBuilder() {
-        
+
         onChanged();
         return getBlameFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .Blame blame = 6;</code>
+       * <code>optional .Blame blame = 7;</code>
        */
       public com.shuffle.player.proto.Proto.BlameOrBuilder getBlameOrBuilder() {
         if (blameBuilder_ != null) {
           return blameBuilder_.getMessageOrBuilder();
         } else {
           return blame_ == null ?
-              com.shuffle.player.proto.Proto.Blame.getDefaultInstance() : blame_;
+                  com.shuffle.player.proto.Proto.Blame.getDefaultInstance() : blame_;
         }
       }
       /**
-       * <code>optional .Blame blame = 6;</code>
+       * <code>optional .Blame blame = 7;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Blame, com.shuffle.player.proto.Proto.Blame.Builder, com.shuffle.player.proto.Proto.BlameOrBuilder> 
-          getBlameFieldBuilder() {
+              com.shuffle.player.proto.Proto.Blame, com.shuffle.player.proto.Proto.Blame.Builder, com.shuffle.player.proto.Proto.BlameOrBuilder>
+      getBlameFieldBuilder() {
         if (blameBuilder_ == null) {
           blameBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.shuffle.player.proto.Proto.Blame, com.shuffle.player.proto.Proto.Blame.Builder, com.shuffle.player.proto.Proto.BlameOrBuilder>(
+                  com.shuffle.player.proto.Proto.Blame, com.shuffle.player.proto.Proto.Blame.Builder, com.shuffle.player.proto.Proto.BlameOrBuilder>(
                   getBlame(),
                   getParentForChildren(),
                   isClean());
@@ -3475,15 +3660,15 @@ public final class Proto {
 
       private com.shuffle.player.proto.Proto.Message next_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Message, com.shuffle.player.proto.Proto.Message.Builder, com.shuffle.player.proto.Proto.MessageOrBuilder> nextBuilder_;
+              com.shuffle.player.proto.Proto.Message, com.shuffle.player.proto.Proto.Message.Builder, com.shuffle.player.proto.Proto.MessageOrBuilder> nextBuilder_;
       /**
-       * <code>optional .Message next = 7;</code>
+       * <code>optional .Message next = 8;</code>
        */
       public boolean hasNext() {
         return nextBuilder_ != null || next_ != null;
       }
       /**
-       * <code>optional .Message next = 7;</code>
+       * <code>optional .Message next = 8;</code>
        */
       public com.shuffle.player.proto.Proto.Message getNext() {
         if (nextBuilder_ == null) {
@@ -3493,7 +3678,7 @@ public final class Proto {
         }
       }
       /**
-       * <code>optional .Message next = 7;</code>
+       * <code>optional .Message next = 8;</code>
        */
       public Builder setNext(com.shuffle.player.proto.Proto.Message value) {
         if (nextBuilder_ == null) {
@@ -3509,10 +3694,10 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>optional .Message next = 7;</code>
+       * <code>optional .Message next = 8;</code>
        */
       public Builder setNext(
-          com.shuffle.player.proto.Proto.Message.Builder builderForValue) {
+              com.shuffle.player.proto.Proto.Message.Builder builderForValue) {
         if (nextBuilder_ == null) {
           next_ = builderForValue.build();
           onChanged();
@@ -3523,13 +3708,13 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>optional .Message next = 7;</code>
+       * <code>optional .Message next = 8;</code>
        */
       public Builder mergeNext(com.shuffle.player.proto.Proto.Message value) {
         if (nextBuilder_ == null) {
           if (next_ != null) {
             next_ =
-              com.shuffle.player.proto.Proto.Message.newBuilder(next_).mergeFrom(value).buildPartial();
+                    com.shuffle.player.proto.Proto.Message.newBuilder(next_).mergeFrom(value).buildPartial();
           } else {
             next_ = value;
           }
@@ -3541,7 +3726,7 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>optional .Message next = 7;</code>
+       * <code>optional .Message next = 8;</code>
        */
       public Builder clearNext() {
         if (nextBuilder_ == null) {
@@ -3555,33 +3740,33 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>optional .Message next = 7;</code>
+       * <code>optional .Message next = 8;</code>
        */
       public com.shuffle.player.proto.Proto.Message.Builder getNextBuilder() {
-        
+
         onChanged();
         return getNextFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .Message next = 7;</code>
+       * <code>optional .Message next = 8;</code>
        */
       public com.shuffle.player.proto.Proto.MessageOrBuilder getNextOrBuilder() {
         if (nextBuilder_ != null) {
           return nextBuilder_.getMessageOrBuilder();
         } else {
           return next_ == null ?
-              com.shuffle.player.proto.Proto.Message.getDefaultInstance() : next_;
+                  com.shuffle.player.proto.Proto.Message.getDefaultInstance() : next_;
         }
       }
       /**
-       * <code>optional .Message next = 7;</code>
+       * <code>optional .Message next = 8;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Message, com.shuffle.player.proto.Proto.Message.Builder, com.shuffle.player.proto.Proto.MessageOrBuilder> 
-          getNextFieldBuilder() {
+              com.shuffle.player.proto.Proto.Message, com.shuffle.player.proto.Proto.Message.Builder, com.shuffle.player.proto.Proto.MessageOrBuilder>
+      getNextFieldBuilder() {
         if (nextBuilder_ == null) {
           nextBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.shuffle.player.proto.Proto.Message, com.shuffle.player.proto.Proto.Message.Builder, com.shuffle.player.proto.Proto.MessageOrBuilder>(
+                  com.shuffle.player.proto.Proto.Message, com.shuffle.player.proto.Proto.Message.Builder, com.shuffle.player.proto.Proto.MessageOrBuilder>(
                   getNext(),
                   getParentForChildren(),
                   isClean());
@@ -3590,12 +3775,12 @@ public final class Proto {
         return nextBuilder_;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
@@ -3614,12 +3799,12 @@ public final class Proto {
     }
 
     private static final com.google.protobuf.Parser<Message>
-        PARSER = new com.google.protobuf.AbstractParser<Message>() {
+            PARSER = new com.google.protobuf.AbstractParser<Message>() {
       public Message parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Message(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Message(input, extensionRegistry);
       }
     };
 
@@ -3639,8 +3824,8 @@ public final class Proto {
   }
 
   public interface AddressOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Address)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:Address)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>optional string address = 1;</code>
@@ -3650,15 +3835,15 @@ public final class Proto {
      * <code>optional string address = 1;</code>
      */
     com.google.protobuf.ByteString
-        getAddressBytes();
+    getAddressBytes();
   }
   /**
    * Protobuf type {@code Address}
    */
   public  static final class Address extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:Address)
-      AddressOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:Address)
+          AddressOrBuilder {
     // Use Address.newBuilder() to construct.
     private Address(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -3673,9 +3858,9 @@ public final class Proto {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private Address(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -3704,21 +3889,21 @@ public final class Proto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.shuffle.player.proto.Proto.internal_static_Address_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.shuffle.player.proto.Proto.internal_static_Address_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.shuffle.player.proto.Proto.Address.class, com.shuffle.player.proto.Proto.Address.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      com.shuffle.player.proto.Proto.Address.class, com.shuffle.player.proto.Proto.Address.Builder.class);
     }
 
     public static final int ADDRESS_FIELD_NUMBER = 1;
@@ -3731,8 +3916,8 @@ public final class Proto {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         address_ = s;
         return s;
@@ -3742,12 +3927,12 @@ public final class Proto {
      * <code>optional string address = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getAddressBytes() {
+    getAddressBytes() {
       java.lang.Object ref = address_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         address_ = b;
         return b;
       } else {
@@ -3766,7 +3951,7 @@ public final class Proto {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (!getAddressBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessage.writeString(output, 1, address_);
       }
@@ -3786,62 +3971,62 @@ public final class Proto {
 
     private static final long serialVersionUID = 0L;
     public static com.shuffle.player.proto.Proto.Address parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Address parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Address parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Address parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Address parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Address parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Address parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Address parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Address parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Address parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -3853,12 +4038,12 @@ public final class Proto {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3866,19 +4051,19 @@ public final class Proto {
      * Protobuf type {@code Address}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Address)
-        com.shuffle.player.proto.Proto.AddressOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:Address)
+            com.shuffle.player.proto.Proto.AddressOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return com.shuffle.player.proto.Proto.internal_static_Address_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return com.shuffle.player.proto.Proto.internal_static_Address_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.shuffle.player.proto.Proto.Address.class, com.shuffle.player.proto.Proto.Address.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        com.shuffle.player.proto.Proto.Address.class, com.shuffle.player.proto.Proto.Address.Builder.class);
       }
 
       // Construct using com.shuffle.player.proto.Proto.Address.newBuilder()
@@ -3887,7 +4072,7 @@ public final class Proto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -3903,7 +4088,7 @@ public final class Proto {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.shuffle.player.proto.Proto.internal_static_Address_descriptor;
       }
 
@@ -3950,9 +4135,9 @@ public final class Proto {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         com.shuffle.player.proto.Proto.Address parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -3975,7 +4160,7 @@ public final class Proto {
         java.lang.Object ref = address_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           address_ = s;
           return s;
@@ -3987,12 +4172,12 @@ public final class Proto {
        * <code>optional string address = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getAddressBytes() {
+      getAddressBytes() {
         java.lang.Object ref = address_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           address_ = b;
           return b;
         } else {
@@ -4003,11 +4188,11 @@ public final class Proto {
        * <code>optional string address = 1;</code>
        */
       public Builder setAddress(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          throw new NullPointerException();
+        }
+
         address_ = value;
         onChanged();
         return this;
@@ -4016,7 +4201,7 @@ public final class Proto {
        * <code>optional string address = 1;</code>
        */
       public Builder clearAddress() {
-        
+
         address_ = getDefaultInstance().getAddress();
         onChanged();
         return this;
@@ -4025,23 +4210,23 @@ public final class Proto {
        * <code>optional string address = 1;</code>
        */
       public Builder setAddressBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+          throw new NullPointerException();
+        }
+        checkByteStringIsUtf8(value);
+
         address_ = value;
         onChanged();
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
@@ -4060,12 +4245,12 @@ public final class Proto {
     }
 
     private static final com.google.protobuf.Parser<Address>
-        PARSER = new com.google.protobuf.AbstractParser<Address>() {
+            PARSER = new com.google.protobuf.AbstractParser<Address>() {
       public Address parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Address(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Address(input, extensionRegistry);
       }
     };
 
@@ -4085,8 +4270,8 @@ public final class Proto {
   }
 
   public interface VerificationKeyOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:VerificationKey)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:VerificationKey)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>optional string key = 1;</code>
@@ -4096,15 +4281,15 @@ public final class Proto {
      * <code>optional string key = 1;</code>
      */
     com.google.protobuf.ByteString
-        getKeyBytes();
+    getKeyBytes();
   }
   /**
    * Protobuf type {@code VerificationKey}
    */
   public  static final class VerificationKey extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:VerificationKey)
-      VerificationKeyOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:VerificationKey)
+          VerificationKeyOrBuilder {
     // Use VerificationKey.newBuilder() to construct.
     private VerificationKey(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4119,9 +4304,9 @@ public final class Proto {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private VerificationKey(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -4150,21 +4335,21 @@ public final class Proto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.shuffle.player.proto.Proto.internal_static_VerificationKey_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.shuffle.player.proto.Proto.internal_static_VerificationKey_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.shuffle.player.proto.Proto.VerificationKey.class, com.shuffle.player.proto.Proto.VerificationKey.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      com.shuffle.player.proto.Proto.VerificationKey.class, com.shuffle.player.proto.Proto.VerificationKey.Builder.class);
     }
 
     public static final int KEY_FIELD_NUMBER = 1;
@@ -4177,8 +4362,8 @@ public final class Proto {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         key_ = s;
         return s;
@@ -4188,12 +4373,12 @@ public final class Proto {
      * <code>optional string key = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getKeyBytes() {
+    getKeyBytes() {
       java.lang.Object ref = key_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         key_ = b;
         return b;
       } else {
@@ -4212,7 +4397,7 @@ public final class Proto {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (!getKeyBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessage.writeString(output, 1, key_);
       }
@@ -4232,62 +4417,62 @@ public final class Proto {
 
     private static final long serialVersionUID = 0L;
     public static com.shuffle.player.proto.Proto.VerificationKey parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.VerificationKey parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.VerificationKey parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.VerificationKey parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.VerificationKey parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.VerificationKey parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.VerificationKey parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.VerificationKey parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.VerificationKey parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.VerificationKey parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -4299,12 +4484,12 @@ public final class Proto {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -4312,19 +4497,19 @@ public final class Proto {
      * Protobuf type {@code VerificationKey}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:VerificationKey)
-        com.shuffle.player.proto.Proto.VerificationKeyOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:VerificationKey)
+            com.shuffle.player.proto.Proto.VerificationKeyOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return com.shuffle.player.proto.Proto.internal_static_VerificationKey_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return com.shuffle.player.proto.Proto.internal_static_VerificationKey_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.shuffle.player.proto.Proto.VerificationKey.class, com.shuffle.player.proto.Proto.VerificationKey.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        com.shuffle.player.proto.Proto.VerificationKey.class, com.shuffle.player.proto.Proto.VerificationKey.Builder.class);
       }
 
       // Construct using com.shuffle.player.proto.Proto.VerificationKey.newBuilder()
@@ -4333,7 +4518,7 @@ public final class Proto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -4349,7 +4534,7 @@ public final class Proto {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.shuffle.player.proto.Proto.internal_static_VerificationKey_descriptor;
       }
 
@@ -4396,9 +4581,9 @@ public final class Proto {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         com.shuffle.player.proto.Proto.VerificationKey parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -4421,7 +4606,7 @@ public final class Proto {
         java.lang.Object ref = key_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           key_ = s;
           return s;
@@ -4433,12 +4618,12 @@ public final class Proto {
        * <code>optional string key = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getKeyBytes() {
+      getKeyBytes() {
         java.lang.Object ref = key_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           key_ = b;
           return b;
         } else {
@@ -4449,11 +4634,11 @@ public final class Proto {
        * <code>optional string key = 1;</code>
        */
       public Builder setKey(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          throw new NullPointerException();
+        }
+
         key_ = value;
         onChanged();
         return this;
@@ -4462,7 +4647,7 @@ public final class Proto {
        * <code>optional string key = 1;</code>
        */
       public Builder clearKey() {
-        
+
         key_ = getDefaultInstance().getKey();
         onChanged();
         return this;
@@ -4471,23 +4656,23 @@ public final class Proto {
        * <code>optional string key = 1;</code>
        */
       public Builder setKeyBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+          throw new NullPointerException();
+        }
+        checkByteStringIsUtf8(value);
+
         key_ = value;
         onChanged();
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
@@ -4506,12 +4691,12 @@ public final class Proto {
     }
 
     private static final com.google.protobuf.Parser<VerificationKey>
-        PARSER = new com.google.protobuf.AbstractParser<VerificationKey>() {
+            PARSER = new com.google.protobuf.AbstractParser<VerificationKey>() {
       public VerificationKey parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new VerificationKey(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new VerificationKey(input, extensionRegistry);
       }
     };
 
@@ -4531,8 +4716,8 @@ public final class Proto {
   }
 
   public interface EncryptionKeyOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:EncryptionKey)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:EncryptionKey)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>optional string key = 1;</code>
@@ -4542,15 +4727,15 @@ public final class Proto {
      * <code>optional string key = 1;</code>
      */
     com.google.protobuf.ByteString
-        getKeyBytes();
+    getKeyBytes();
   }
   /**
    * Protobuf type {@code EncryptionKey}
    */
   public  static final class EncryptionKey extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:EncryptionKey)
-      EncryptionKeyOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:EncryptionKey)
+          EncryptionKeyOrBuilder {
     // Use EncryptionKey.newBuilder() to construct.
     private EncryptionKey(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4565,9 +4750,9 @@ public final class Proto {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private EncryptionKey(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -4596,21 +4781,21 @@ public final class Proto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.shuffle.player.proto.Proto.internal_static_EncryptionKey_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.shuffle.player.proto.Proto.internal_static_EncryptionKey_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.shuffle.player.proto.Proto.EncryptionKey.class, com.shuffle.player.proto.Proto.EncryptionKey.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      com.shuffle.player.proto.Proto.EncryptionKey.class, com.shuffle.player.proto.Proto.EncryptionKey.Builder.class);
     }
 
     public static final int KEY_FIELD_NUMBER = 1;
@@ -4623,8 +4808,8 @@ public final class Proto {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         key_ = s;
         return s;
@@ -4634,12 +4819,12 @@ public final class Proto {
      * <code>optional string key = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getKeyBytes() {
+    getKeyBytes() {
       java.lang.Object ref = key_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         key_ = b;
         return b;
       } else {
@@ -4658,7 +4843,7 @@ public final class Proto {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (!getKeyBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessage.writeString(output, 1, key_);
       }
@@ -4678,62 +4863,62 @@ public final class Proto {
 
     private static final long serialVersionUID = 0L;
     public static com.shuffle.player.proto.Proto.EncryptionKey parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.EncryptionKey parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.EncryptionKey parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.EncryptionKey parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.EncryptionKey parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.EncryptionKey parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.EncryptionKey parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.EncryptionKey parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.EncryptionKey parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.EncryptionKey parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -4745,12 +4930,12 @@ public final class Proto {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -4758,19 +4943,19 @@ public final class Proto {
      * Protobuf type {@code EncryptionKey}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:EncryptionKey)
-        com.shuffle.player.proto.Proto.EncryptionKeyOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:EncryptionKey)
+            com.shuffle.player.proto.Proto.EncryptionKeyOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return com.shuffle.player.proto.Proto.internal_static_EncryptionKey_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return com.shuffle.player.proto.Proto.internal_static_EncryptionKey_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.shuffle.player.proto.Proto.EncryptionKey.class, com.shuffle.player.proto.Proto.EncryptionKey.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        com.shuffle.player.proto.Proto.EncryptionKey.class, com.shuffle.player.proto.Proto.EncryptionKey.Builder.class);
       }
 
       // Construct using com.shuffle.player.proto.Proto.EncryptionKey.newBuilder()
@@ -4779,7 +4964,7 @@ public final class Proto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -4795,7 +4980,7 @@ public final class Proto {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.shuffle.player.proto.Proto.internal_static_EncryptionKey_descriptor;
       }
 
@@ -4842,9 +5027,9 @@ public final class Proto {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         com.shuffle.player.proto.Proto.EncryptionKey parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -4867,7 +5052,7 @@ public final class Proto {
         java.lang.Object ref = key_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           key_ = s;
           return s;
@@ -4879,12 +5064,12 @@ public final class Proto {
        * <code>optional string key = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getKeyBytes() {
+      getKeyBytes() {
         java.lang.Object ref = key_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           key_ = b;
           return b;
         } else {
@@ -4895,11 +5080,11 @@ public final class Proto {
        * <code>optional string key = 1;</code>
        */
       public Builder setKey(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          throw new NullPointerException();
+        }
+
         key_ = value;
         onChanged();
         return this;
@@ -4908,7 +5093,7 @@ public final class Proto {
        * <code>optional string key = 1;</code>
        */
       public Builder clearKey() {
-        
+
         key_ = getDefaultInstance().getKey();
         onChanged();
         return this;
@@ -4917,23 +5102,23 @@ public final class Proto {
        * <code>optional string key = 1;</code>
        */
       public Builder setKeyBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+          throw new NullPointerException();
+        }
+        checkByteStringIsUtf8(value);
+
         key_ = value;
         onChanged();
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
@@ -4952,12 +5137,12 @@ public final class Proto {
     }
 
     private static final com.google.protobuf.Parser<EncryptionKey>
-        PARSER = new com.google.protobuf.AbstractParser<EncryptionKey>() {
+            PARSER = new com.google.protobuf.AbstractParser<EncryptionKey>() {
       public EncryptionKey parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new EncryptionKey(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new EncryptionKey(input, extensionRegistry);
       }
     };
 
@@ -4977,8 +5162,8 @@ public final class Proto {
   }
 
   public interface DecryptionKeyOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:DecryptionKey)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:DecryptionKey)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>optional string key = 1;</code>
@@ -4988,7 +5173,7 @@ public final class Proto {
      * <code>optional string key = 1;</code>
      */
     com.google.protobuf.ByteString
-        getKeyBytes();
+    getKeyBytes();
 
     /**
      * <code>optional string public = 2;</code>
@@ -4998,15 +5183,15 @@ public final class Proto {
      * <code>optional string public = 2;</code>
      */
     com.google.protobuf.ByteString
-        getPublicBytes();
+    getPublicBytes();
   }
   /**
    * Protobuf type {@code DecryptionKey}
    */
   public  static final class DecryptionKey extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:DecryptionKey)
-      DecryptionKeyOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:DecryptionKey)
+          DecryptionKeyOrBuilder {
     // Use DecryptionKey.newBuilder() to construct.
     private DecryptionKey(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5022,9 +5207,9 @@ public final class Proto {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private DecryptionKey(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -5059,21 +5244,21 @@ public final class Proto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.shuffle.player.proto.Proto.internal_static_DecryptionKey_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.shuffle.player.proto.Proto.internal_static_DecryptionKey_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.shuffle.player.proto.Proto.DecryptionKey.class, com.shuffle.player.proto.Proto.DecryptionKey.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      com.shuffle.player.proto.Proto.DecryptionKey.class, com.shuffle.player.proto.Proto.DecryptionKey.Builder.class);
     }
 
     public static final int KEY_FIELD_NUMBER = 1;
@@ -5086,8 +5271,8 @@ public final class Proto {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         key_ = s;
         return s;
@@ -5097,12 +5282,12 @@ public final class Proto {
      * <code>optional string key = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getKeyBytes() {
+    getKeyBytes() {
       java.lang.Object ref = key_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         key_ = b;
         return b;
       } else {
@@ -5120,8 +5305,8 @@ public final class Proto {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         public_ = s;
         return s;
@@ -5131,12 +5316,12 @@ public final class Proto {
      * <code>optional string public = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getPublicBytes() {
+    getPublicBytes() {
       java.lang.Object ref = public_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         public_ = b;
         return b;
       } else {
@@ -5155,7 +5340,7 @@ public final class Proto {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (!getKeyBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessage.writeString(output, 1, key_);
       }
@@ -5181,62 +5366,62 @@ public final class Proto {
 
     private static final long serialVersionUID = 0L;
     public static com.shuffle.player.proto.Proto.DecryptionKey parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.DecryptionKey parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.DecryptionKey parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.DecryptionKey parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.DecryptionKey parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.DecryptionKey parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.DecryptionKey parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.DecryptionKey parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.DecryptionKey parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.DecryptionKey parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -5248,12 +5433,12 @@ public final class Proto {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -5261,19 +5446,19 @@ public final class Proto {
      * Protobuf type {@code DecryptionKey}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:DecryptionKey)
-        com.shuffle.player.proto.Proto.DecryptionKeyOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:DecryptionKey)
+            com.shuffle.player.proto.Proto.DecryptionKeyOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return com.shuffle.player.proto.Proto.internal_static_DecryptionKey_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return com.shuffle.player.proto.Proto.internal_static_DecryptionKey_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.shuffle.player.proto.Proto.DecryptionKey.class, com.shuffle.player.proto.Proto.DecryptionKey.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        com.shuffle.player.proto.Proto.DecryptionKey.class, com.shuffle.player.proto.Proto.DecryptionKey.Builder.class);
       }
 
       // Construct using com.shuffle.player.proto.Proto.DecryptionKey.newBuilder()
@@ -5282,7 +5467,7 @@ public final class Proto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -5300,7 +5485,7 @@ public final class Proto {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.shuffle.player.proto.Proto.internal_static_DecryptionKey_descriptor;
       }
 
@@ -5352,9 +5537,9 @@ public final class Proto {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         com.shuffle.player.proto.Proto.DecryptionKey parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -5377,7 +5562,7 @@ public final class Proto {
         java.lang.Object ref = key_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           key_ = s;
           return s;
@@ -5389,12 +5574,12 @@ public final class Proto {
        * <code>optional string key = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getKeyBytes() {
+      getKeyBytes() {
         java.lang.Object ref = key_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           key_ = b;
           return b;
         } else {
@@ -5405,11 +5590,11 @@ public final class Proto {
        * <code>optional string key = 1;</code>
        */
       public Builder setKey(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          throw new NullPointerException();
+        }
+
         key_ = value;
         onChanged();
         return this;
@@ -5418,7 +5603,7 @@ public final class Proto {
        * <code>optional string key = 1;</code>
        */
       public Builder clearKey() {
-        
+
         key_ = getDefaultInstance().getKey();
         onChanged();
         return this;
@@ -5427,12 +5612,12 @@ public final class Proto {
        * <code>optional string key = 1;</code>
        */
       public Builder setKeyBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+          throw new NullPointerException();
+        }
+        checkByteStringIsUtf8(value);
+
         key_ = value;
         onChanged();
         return this;
@@ -5446,7 +5631,7 @@ public final class Proto {
         java.lang.Object ref = public_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           public_ = s;
           return s;
@@ -5458,12 +5643,12 @@ public final class Proto {
        * <code>optional string public = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getPublicBytes() {
+      getPublicBytes() {
         java.lang.Object ref = public_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           public_ = b;
           return b;
         } else {
@@ -5474,11 +5659,11 @@ public final class Proto {
        * <code>optional string public = 2;</code>
        */
       public Builder setPublic(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          throw new NullPointerException();
+        }
+
         public_ = value;
         onChanged();
         return this;
@@ -5487,7 +5672,7 @@ public final class Proto {
        * <code>optional string public = 2;</code>
        */
       public Builder clearPublic() {
-        
+
         public_ = getDefaultInstance().getPublic();
         onChanged();
         return this;
@@ -5496,23 +5681,23 @@ public final class Proto {
        * <code>optional string public = 2;</code>
        */
       public Builder setPublicBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+          throw new NullPointerException();
+        }
+        checkByteStringIsUtf8(value);
+
         public_ = value;
         onChanged();
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
@@ -5531,12 +5716,12 @@ public final class Proto {
     }
 
     private static final com.google.protobuf.Parser<DecryptionKey>
-        PARSER = new com.google.protobuf.AbstractParser<DecryptionKey>() {
+            PARSER = new com.google.protobuf.AbstractParser<DecryptionKey>() {
       public DecryptionKey parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new DecryptionKey(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new DecryptionKey(input, extensionRegistry);
       }
     };
 
@@ -5556,8 +5741,8 @@ public final class Proto {
   }
 
   public interface HashOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Hash)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:Hash)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>optional bytes hash = 1;</code>
@@ -5568,9 +5753,9 @@ public final class Proto {
    * Protobuf type {@code Hash}
    */
   public  static final class Hash extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:Hash)
-      HashOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:Hash)
+          HashOrBuilder {
     // Use Hash.newBuilder() to construct.
     private Hash(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5585,9 +5770,9 @@ public final class Proto {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private Hash(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -5615,21 +5800,21 @@ public final class Proto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.shuffle.player.proto.Proto.internal_static_Hash_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.shuffle.player.proto.Proto.internal_static_Hash_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.shuffle.player.proto.Proto.Hash.class, com.shuffle.player.proto.Proto.Hash.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      com.shuffle.player.proto.Proto.Hash.class, com.shuffle.player.proto.Proto.Hash.Builder.class);
     }
 
     public static final int HASH_FIELD_NUMBER = 1;
@@ -5652,7 +5837,7 @@ public final class Proto {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (!hash_.isEmpty()) {
         output.writeBytes(1, hash_);
       }
@@ -5665,7 +5850,7 @@ public final class Proto {
       size = 0;
       if (!hash_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, hash_);
+                .computeBytesSize(1, hash_);
       }
       memoizedSize = size;
       return size;
@@ -5673,62 +5858,62 @@ public final class Proto {
 
     private static final long serialVersionUID = 0L;
     public static com.shuffle.player.proto.Proto.Hash parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Hash parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Hash parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Hash parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Hash parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Hash parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Hash parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Hash parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Hash parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Hash parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -5740,12 +5925,12 @@ public final class Proto {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -5753,19 +5938,19 @@ public final class Proto {
      * Protobuf type {@code Hash}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Hash)
-        com.shuffle.player.proto.Proto.HashOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:Hash)
+            com.shuffle.player.proto.Proto.HashOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return com.shuffle.player.proto.Proto.internal_static_Hash_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return com.shuffle.player.proto.Proto.internal_static_Hash_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.shuffle.player.proto.Proto.Hash.class, com.shuffle.player.proto.Proto.Hash.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        com.shuffle.player.proto.Proto.Hash.class, com.shuffle.player.proto.Proto.Hash.Builder.class);
       }
 
       // Construct using com.shuffle.player.proto.Proto.Hash.newBuilder()
@@ -5774,7 +5959,7 @@ public final class Proto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -5790,7 +5975,7 @@ public final class Proto {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.shuffle.player.proto.Proto.internal_static_Hash_descriptor;
       }
 
@@ -5836,9 +6021,9 @@ public final class Proto {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         com.shuffle.player.proto.Proto.Hash parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -5865,9 +6050,9 @@ public final class Proto {
        */
       public Builder setHash(com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          throw new NullPointerException();
+        }
+
         hash_ = value;
         onChanged();
         return this;
@@ -5876,18 +6061,18 @@ public final class Proto {
        * <code>optional bytes hash = 1;</code>
        */
       public Builder clearHash() {
-        
+
         hash_ = getDefaultInstance().getHash();
         onChanged();
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
@@ -5906,12 +6091,12 @@ public final class Proto {
     }
 
     private static final com.google.protobuf.Parser<Hash>
-        PARSER = new com.google.protobuf.AbstractParser<Hash>() {
+            PARSER = new com.google.protobuf.AbstractParser<Hash>() {
       public Hash parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Hash(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Hash(input, extensionRegistry);
       }
     };
 
@@ -5931,8 +6116,8 @@ public final class Proto {
   }
 
   public interface SignatureOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Signature)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:Signature)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>optional bytes signature = 1;</code>
@@ -5943,9 +6128,9 @@ public final class Proto {
    * Protobuf type {@code Signature}
    */
   public  static final class Signature extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:Signature)
-      SignatureOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:Signature)
+          SignatureOrBuilder {
     // Use Signature.newBuilder() to construct.
     private Signature(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5960,9 +6145,9 @@ public final class Proto {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private Signature(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -5990,21 +6175,21 @@ public final class Proto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.shuffle.player.proto.Proto.internal_static_Signature_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.shuffle.player.proto.Proto.internal_static_Signature_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.shuffle.player.proto.Proto.Signature.class, com.shuffle.player.proto.Proto.Signature.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      com.shuffle.player.proto.Proto.Signature.class, com.shuffle.player.proto.Proto.Signature.Builder.class);
     }
 
     public static final int SIGNATURE_FIELD_NUMBER = 1;
@@ -6027,7 +6212,7 @@ public final class Proto {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (!signature_.isEmpty()) {
         output.writeBytes(1, signature_);
       }
@@ -6040,7 +6225,7 @@ public final class Proto {
       size = 0;
       if (!signature_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, signature_);
+                .computeBytesSize(1, signature_);
       }
       memoizedSize = size;
       return size;
@@ -6048,62 +6233,62 @@ public final class Proto {
 
     private static final long serialVersionUID = 0L;
     public static com.shuffle.player.proto.Proto.Signature parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Signature parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Signature parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Signature parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Signature parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Signature parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Signature parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Signature parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Signature parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Signature parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -6115,12 +6300,12 @@ public final class Proto {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -6128,19 +6313,19 @@ public final class Proto {
      * Protobuf type {@code Signature}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Signature)
-        com.shuffle.player.proto.Proto.SignatureOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:Signature)
+            com.shuffle.player.proto.Proto.SignatureOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return com.shuffle.player.proto.Proto.internal_static_Signature_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return com.shuffle.player.proto.Proto.internal_static_Signature_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.shuffle.player.proto.Proto.Signature.class, com.shuffle.player.proto.Proto.Signature.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        com.shuffle.player.proto.Proto.Signature.class, com.shuffle.player.proto.Proto.Signature.Builder.class);
       }
 
       // Construct using com.shuffle.player.proto.Proto.Signature.newBuilder()
@@ -6149,7 +6334,7 @@ public final class Proto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -6165,7 +6350,7 @@ public final class Proto {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.shuffle.player.proto.Proto.internal_static_Signature_descriptor;
       }
 
@@ -6211,9 +6396,9 @@ public final class Proto {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         com.shuffle.player.proto.Proto.Signature parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -6240,9 +6425,9 @@ public final class Proto {
        */
       public Builder setSignature(com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          throw new NullPointerException();
+        }
+
         signature_ = value;
         onChanged();
         return this;
@@ -6251,18 +6436,18 @@ public final class Proto {
        * <code>optional bytes signature = 1;</code>
        */
       public Builder clearSignature() {
-        
+
         signature_ = getDefaultInstance().getSignature();
         onChanged();
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
@@ -6281,12 +6466,12 @@ public final class Proto {
     }
 
     private static final com.google.protobuf.Parser<Signature>
-        PARSER = new com.google.protobuf.AbstractParser<Signature>() {
+            PARSER = new com.google.protobuf.AbstractParser<Signature>() {
       public Signature parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Signature(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Signature(input, extensionRegistry);
       }
     };
 
@@ -6305,9 +6490,472 @@ public final class Proto {
 
   }
 
+  public interface SignaturesOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:Signatures)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated bytes signatures = 1;</code>
+     */
+    java.util.List<com.google.protobuf.ByteString> getSignaturesList();
+    /**
+     * <code>repeated bytes signatures = 1;</code>
+     */
+    int getSignaturesCount();
+    /**
+     * <code>repeated bytes signatures = 1;</code>
+     */
+    com.google.protobuf.ByteString getSignatures(int index);
+  }
+  /**
+   * Protobuf type {@code Signatures}
+   */
+  public  static final class Signatures extends
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:Signatures)
+          SignaturesOrBuilder {
+    // Use Signatures.newBuilder() to construct.
+    private Signatures(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private Signatures() {
+      signatures_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private Signatures(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                signatures_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              signatures_.add(input.readBytes());
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+                e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          signatures_ = java.util.Collections.unmodifiableList(signatures_);
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return com.shuffle.player.proto.Proto.internal_static_Signatures_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return com.shuffle.player.proto.Proto.internal_static_Signatures_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      com.shuffle.player.proto.Proto.Signatures.class, com.shuffle.player.proto.Proto.Signatures.Builder.class);
+    }
+
+    public static final int SIGNATURES_FIELD_NUMBER = 1;
+    private java.util.List<com.google.protobuf.ByteString> signatures_;
+    /**
+     * <code>repeated bytes signatures = 1;</code>
+     */
+    public java.util.List<com.google.protobuf.ByteString>
+    getSignaturesList() {
+      return signatures_;
+    }
+    /**
+     * <code>repeated bytes signatures = 1;</code>
+     */
+    public int getSignaturesCount() {
+      return signatures_.size();
+    }
+    /**
+     * <code>repeated bytes signatures = 1;</code>
+     */
+    public com.google.protobuf.ByteString getSignatures(int index) {
+      return signatures_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      for (int i = 0; i < signatures_.size(); i++) {
+        output.writeBytes(1, signatures_.get(i));
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      {
+        int dataSize = 0;
+        for (int i = 0; i < signatures_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+                  .computeBytesSizeNoTag(signatures_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getSignaturesList().size();
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    public static com.shuffle.player.proto.Proto.Signatures parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.shuffle.player.proto.Proto.Signatures parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.shuffle.player.proto.Proto.Signatures parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.shuffle.player.proto.Proto.Signatures parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.shuffle.player.proto.Proto.Signatures parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+              .parseWithIOException(PARSER, input);
+    }
+    public static com.shuffle.player.proto.Proto.Signatures parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+              .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.shuffle.player.proto.Proto.Signatures parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+              .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.shuffle.player.proto.Proto.Signatures parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.shuffle.player.proto.Proto.Signatures parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+              .parseWithIOException(PARSER, input);
+    }
+    public static com.shuffle.player.proto.Proto.Signatures parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+              .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.shuffle.player.proto.Proto.Signatures prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+              ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code Signatures}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:Signatures)
+            com.shuffle.player.proto.Proto.SignaturesOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return com.shuffle.player.proto.Proto.internal_static_Signatures_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return com.shuffle.player.proto.Proto.internal_static_Signatures_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        com.shuffle.player.proto.Proto.Signatures.class, com.shuffle.player.proto.Proto.Signatures.Builder.class);
+      }
+
+      // Construct using com.shuffle.player.proto.Proto.Signatures.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        signatures_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return com.shuffle.player.proto.Proto.internal_static_Signatures_descriptor;
+      }
+
+      public com.shuffle.player.proto.Proto.Signatures getDefaultInstanceForType() {
+        return com.shuffle.player.proto.Proto.Signatures.getDefaultInstance();
+      }
+
+      public com.shuffle.player.proto.Proto.Signatures build() {
+        com.shuffle.player.proto.Proto.Signatures result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.shuffle.player.proto.Proto.Signatures buildPartial() {
+        com.shuffle.player.proto.Proto.Signatures result = new com.shuffle.player.proto.Proto.Signatures(this);
+        int from_bitField0_ = bitField0_;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          signatures_ = java.util.Collections.unmodifiableList(signatures_);
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.signatures_ = signatures_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.shuffle.player.proto.Proto.Signatures) {
+          return mergeFrom((com.shuffle.player.proto.Proto.Signatures)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.shuffle.player.proto.Proto.Signatures other) {
+        if (other == com.shuffle.player.proto.Proto.Signatures.getDefaultInstance()) return this;
+        if (!other.signatures_.isEmpty()) {
+          if (signatures_.isEmpty()) {
+            signatures_ = other.signatures_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureSignaturesIsMutable();
+            signatures_.addAll(other.signatures_);
+          }
+          onChanged();
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        com.shuffle.player.proto.Proto.Signatures parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.shuffle.player.proto.Proto.Signatures) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<com.google.protobuf.ByteString> signatures_ = java.util.Collections.emptyList();
+      private void ensureSignaturesIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          signatures_ = new java.util.ArrayList<com.google.protobuf.ByteString>(signatures_);
+          bitField0_ |= 0x00000001;
+        }
+      }
+      /**
+       * <code>repeated bytes signatures = 1;</code>
+       */
+      public java.util.List<com.google.protobuf.ByteString>
+      getSignaturesList() {
+        return java.util.Collections.unmodifiableList(signatures_);
+      }
+      /**
+       * <code>repeated bytes signatures = 1;</code>
+       */
+      public int getSignaturesCount() {
+        return signatures_.size();
+      }
+      /**
+       * <code>repeated bytes signatures = 1;</code>
+       */
+      public com.google.protobuf.ByteString getSignatures(int index) {
+        return signatures_.get(index);
+      }
+      /**
+       * <code>repeated bytes signatures = 1;</code>
+       */
+      public Builder setSignatures(
+              int index, com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureSignaturesIsMutable();
+        signatures_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated bytes signatures = 1;</code>
+       */
+      public Builder addSignatures(com.google.protobuf.ByteString value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureSignaturesIsMutable();
+        signatures_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated bytes signatures = 1;</code>
+       */
+      public Builder addAllSignatures(
+              java.lang.Iterable<? extends com.google.protobuf.ByteString> values) {
+        ensureSignaturesIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                values, signatures_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated bytes signatures = 1;</code>
+       */
+      public Builder clearSignatures() {
+        signatures_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:Signatures)
+    }
+
+    // @@protoc_insertion_point(class_scope:Signatures)
+    private static final com.shuffle.player.proto.Proto.Signatures DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.shuffle.player.proto.Proto.Signatures();
+    }
+
+    public static com.shuffle.player.proto.Proto.Signatures getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<Signatures>
+            PARSER = new com.google.protobuf.AbstractParser<Signatures>() {
+      public Signatures parsePartialFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Signatures(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Signatures> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Signatures> getParserForType() {
+      return PARSER;
+    }
+
+    public com.shuffle.player.proto.Proto.Signatures getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface TransactionOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Transaction)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:Transaction)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>optional bytes transaction = 1;</code>
@@ -6318,9 +6966,9 @@ public final class Proto {
    * Protobuf type {@code Transaction}
    */
   public  static final class Transaction extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:Transaction)
-      TransactionOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:Transaction)
+          TransactionOrBuilder {
     // Use Transaction.newBuilder() to construct.
     private Transaction(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -6335,9 +6983,9 @@ public final class Proto {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private Transaction(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -6365,21 +7013,21 @@ public final class Proto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.shuffle.player.proto.Proto.internal_static_Transaction_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.shuffle.player.proto.Proto.internal_static_Transaction_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.shuffle.player.proto.Proto.Transaction.class, com.shuffle.player.proto.Proto.Transaction.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      com.shuffle.player.proto.Proto.Transaction.class, com.shuffle.player.proto.Proto.Transaction.Builder.class);
     }
 
     public static final int TRANSACTION_FIELD_NUMBER = 1;
@@ -6402,7 +7050,7 @@ public final class Proto {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (!transaction_.isEmpty()) {
         output.writeBytes(1, transaction_);
       }
@@ -6415,7 +7063,7 @@ public final class Proto {
       size = 0;
       if (!transaction_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, transaction_);
+                .computeBytesSize(1, transaction_);
       }
       memoizedSize = size;
       return size;
@@ -6423,62 +7071,62 @@ public final class Proto {
 
     private static final long serialVersionUID = 0L;
     public static com.shuffle.player.proto.Proto.Transaction parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Transaction parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Transaction parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Transaction parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Transaction parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Transaction parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Transaction parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Transaction parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Transaction parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Transaction parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -6490,12 +7138,12 @@ public final class Proto {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -6503,19 +7151,19 @@ public final class Proto {
      * Protobuf type {@code Transaction}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Transaction)
-        com.shuffle.player.proto.Proto.TransactionOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:Transaction)
+            com.shuffle.player.proto.Proto.TransactionOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return com.shuffle.player.proto.Proto.internal_static_Transaction_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return com.shuffle.player.proto.Proto.internal_static_Transaction_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.shuffle.player.proto.Proto.Transaction.class, com.shuffle.player.proto.Proto.Transaction.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        com.shuffle.player.proto.Proto.Transaction.class, com.shuffle.player.proto.Proto.Transaction.Builder.class);
       }
 
       // Construct using com.shuffle.player.proto.Proto.Transaction.newBuilder()
@@ -6524,7 +7172,7 @@ public final class Proto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -6540,7 +7188,7 @@ public final class Proto {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.shuffle.player.proto.Proto.internal_static_Transaction_descriptor;
       }
 
@@ -6586,9 +7234,9 @@ public final class Proto {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         com.shuffle.player.proto.Proto.Transaction parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -6615,9 +7263,9 @@ public final class Proto {
        */
       public Builder setTransaction(com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          throw new NullPointerException();
+        }
+
         transaction_ = value;
         onChanged();
         return this;
@@ -6626,18 +7274,18 @@ public final class Proto {
        * <code>optional bytes transaction = 1;</code>
        */
       public Builder clearTransaction() {
-        
+
         transaction_ = getDefaultInstance().getTransaction();
         onChanged();
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
@@ -6656,12 +7304,12 @@ public final class Proto {
     }
 
     private static final com.google.protobuf.Parser<Transaction>
-        PARSER = new com.google.protobuf.AbstractParser<Transaction>() {
+            PARSER = new com.google.protobuf.AbstractParser<Transaction>() {
       public Transaction parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Transaction(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Transaction(input, extensionRegistry);
       }
     };
 
@@ -6681,8 +7329,8 @@ public final class Proto {
   }
 
   public interface BlameOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Blame)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:Blame)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>optional .Reason reason = 1;</code>
@@ -6762,9 +7410,9 @@ public final class Proto {
    * Protobuf type {@code Blame}
    */
   public  static final class Blame extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:Blame)
-      BlameOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:Blame)
+          BlameOrBuilder {
     // Use Blame.newBuilder() to construct.
     private Blame(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -6779,9 +7427,9 @@ public final class Proto {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private Blame(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -6875,21 +7523,21 @@ public final class Proto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.shuffle.player.proto.Proto.internal_static_Blame_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.shuffle.player.proto.Proto.internal_static_Blame_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.shuffle.player.proto.Proto.Blame.class, com.shuffle.player.proto.Proto.Blame.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      com.shuffle.player.proto.Proto.Blame.class, com.shuffle.player.proto.Proto.Blame.Builder.class);
     }
 
     public static final int REASON_FIELD_NUMBER = 1;
@@ -7024,7 +7672,7 @@ public final class Proto {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (reason_ != com.shuffle.player.proto.Proto.Reason.INSUFFICIENTFUNDS.getNumber()) {
         output.writeEnum(1, reason_);
       }
@@ -7052,27 +7700,27 @@ public final class Proto {
       size = 0;
       if (reason_ != com.shuffle.player.proto.Proto.Reason.INSUFFICIENTFUNDS.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, reason_);
+                .computeEnumSize(1, reason_);
       }
       if (accused_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getAccused());
+                .computeMessageSize(2, getAccused());
       }
       if (key_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getKey());
+                .computeMessageSize(3, getKey());
       }
       if (transaction_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getTransaction());
+                .computeMessageSize(4, getTransaction());
       }
       if (invalid_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, getInvalid());
+                .computeMessageSize(5, getInvalid());
       }
       if (packets_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, getPackets());
+                .computeMessageSize(6, getPackets());
       }
       memoizedSize = size;
       return size;
@@ -7080,62 +7728,62 @@ public final class Proto {
 
     private static final long serialVersionUID = 0L;
     public static com.shuffle.player.proto.Proto.Blame parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Blame parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Blame parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Blame parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Blame parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Blame parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Blame parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Blame parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Blame parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Blame parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -7147,12 +7795,12 @@ public final class Proto {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -7160,19 +7808,19 @@ public final class Proto {
      * Protobuf type {@code Blame}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Blame)
-        com.shuffle.player.proto.Proto.BlameOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:Blame)
+            com.shuffle.player.proto.Proto.BlameOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return com.shuffle.player.proto.Proto.internal_static_Blame_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return com.shuffle.player.proto.Proto.internal_static_Blame_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.shuffle.player.proto.Proto.Blame.class, com.shuffle.player.proto.Proto.Blame.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        com.shuffle.player.proto.Proto.Blame.class, com.shuffle.player.proto.Proto.Blame.Builder.class);
       }
 
       // Construct using com.shuffle.player.proto.Proto.Blame.newBuilder()
@@ -7181,7 +7829,7 @@ public final class Proto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -7227,7 +7875,7 @@ public final class Proto {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.shuffle.player.proto.Proto.internal_static_Blame_descriptor;
       }
 
@@ -7313,9 +7961,9 @@ public final class Proto {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         com.shuffle.player.proto.Proto.Blame parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -7359,7 +8007,7 @@ public final class Proto {
         if (value == null) {
           throw new NullPointerException();
         }
-        
+
         reason_ = value.getNumber();
         onChanged();
         return this;
@@ -7368,7 +8016,7 @@ public final class Proto {
        * <code>optional .Reason reason = 1;</code>
        */
       public Builder clearReason() {
-        
+
         reason_ = 0;
         onChanged();
         return this;
@@ -7376,7 +8024,7 @@ public final class Proto {
 
       private com.shuffle.player.proto.Proto.VerificationKey accused_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder> accusedBuilder_;
+              com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder> accusedBuilder_;
       /**
        * <code>optional .VerificationKey accused = 2;</code>
        */
@@ -7413,7 +8061,7 @@ public final class Proto {
        * <code>optional .VerificationKey accused = 2;</code>
        */
       public Builder setAccused(
-          com.shuffle.player.proto.Proto.VerificationKey.Builder builderForValue) {
+              com.shuffle.player.proto.Proto.VerificationKey.Builder builderForValue) {
         if (accusedBuilder_ == null) {
           accused_ = builderForValue.build();
           onChanged();
@@ -7430,7 +8078,7 @@ public final class Proto {
         if (accusedBuilder_ == null) {
           if (accused_ != null) {
             accused_ =
-              com.shuffle.player.proto.Proto.VerificationKey.newBuilder(accused_).mergeFrom(value).buildPartial();
+                    com.shuffle.player.proto.Proto.VerificationKey.newBuilder(accused_).mergeFrom(value).buildPartial();
           } else {
             accused_ = value;
           }
@@ -7459,7 +8107,7 @@ public final class Proto {
        * <code>optional .VerificationKey accused = 2;</code>
        */
       public com.shuffle.player.proto.Proto.VerificationKey.Builder getAccusedBuilder() {
-        
+
         onChanged();
         return getAccusedFieldBuilder().getBuilder();
       }
@@ -7471,18 +8119,18 @@ public final class Proto {
           return accusedBuilder_.getMessageOrBuilder();
         } else {
           return accused_ == null ?
-              com.shuffle.player.proto.Proto.VerificationKey.getDefaultInstance() : accused_;
+                  com.shuffle.player.proto.Proto.VerificationKey.getDefaultInstance() : accused_;
         }
       }
       /**
        * <code>optional .VerificationKey accused = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder> 
-          getAccusedFieldBuilder() {
+              com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder>
+      getAccusedFieldBuilder() {
         if (accusedBuilder_ == null) {
           accusedBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder>(
+                  com.shuffle.player.proto.Proto.VerificationKey, com.shuffle.player.proto.Proto.VerificationKey.Builder, com.shuffle.player.proto.Proto.VerificationKeyOrBuilder>(
                   getAccused(),
                   getParentForChildren(),
                   isClean());
@@ -7493,7 +8141,7 @@ public final class Proto {
 
       private com.shuffle.player.proto.Proto.DecryptionKey key_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.DecryptionKey, com.shuffle.player.proto.Proto.DecryptionKey.Builder, com.shuffle.player.proto.Proto.DecryptionKeyOrBuilder> keyBuilder_;
+              com.shuffle.player.proto.Proto.DecryptionKey, com.shuffle.player.proto.Proto.DecryptionKey.Builder, com.shuffle.player.proto.Proto.DecryptionKeyOrBuilder> keyBuilder_;
       /**
        * <code>optional .DecryptionKey key = 3;</code>
        */
@@ -7530,7 +8178,7 @@ public final class Proto {
        * <code>optional .DecryptionKey key = 3;</code>
        */
       public Builder setKey(
-          com.shuffle.player.proto.Proto.DecryptionKey.Builder builderForValue) {
+              com.shuffle.player.proto.Proto.DecryptionKey.Builder builderForValue) {
         if (keyBuilder_ == null) {
           key_ = builderForValue.build();
           onChanged();
@@ -7547,7 +8195,7 @@ public final class Proto {
         if (keyBuilder_ == null) {
           if (key_ != null) {
             key_ =
-              com.shuffle.player.proto.Proto.DecryptionKey.newBuilder(key_).mergeFrom(value).buildPartial();
+                    com.shuffle.player.proto.Proto.DecryptionKey.newBuilder(key_).mergeFrom(value).buildPartial();
           } else {
             key_ = value;
           }
@@ -7576,7 +8224,7 @@ public final class Proto {
        * <code>optional .DecryptionKey key = 3;</code>
        */
       public com.shuffle.player.proto.Proto.DecryptionKey.Builder getKeyBuilder() {
-        
+
         onChanged();
         return getKeyFieldBuilder().getBuilder();
       }
@@ -7588,18 +8236,18 @@ public final class Proto {
           return keyBuilder_.getMessageOrBuilder();
         } else {
           return key_ == null ?
-              com.shuffle.player.proto.Proto.DecryptionKey.getDefaultInstance() : key_;
+                  com.shuffle.player.proto.Proto.DecryptionKey.getDefaultInstance() : key_;
         }
       }
       /**
        * <code>optional .DecryptionKey key = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.DecryptionKey, com.shuffle.player.proto.Proto.DecryptionKey.Builder, com.shuffle.player.proto.Proto.DecryptionKeyOrBuilder> 
-          getKeyFieldBuilder() {
+              com.shuffle.player.proto.Proto.DecryptionKey, com.shuffle.player.proto.Proto.DecryptionKey.Builder, com.shuffle.player.proto.Proto.DecryptionKeyOrBuilder>
+      getKeyFieldBuilder() {
         if (keyBuilder_ == null) {
           keyBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.shuffle.player.proto.Proto.DecryptionKey, com.shuffle.player.proto.Proto.DecryptionKey.Builder, com.shuffle.player.proto.Proto.DecryptionKeyOrBuilder>(
+                  com.shuffle.player.proto.Proto.DecryptionKey, com.shuffle.player.proto.Proto.DecryptionKey.Builder, com.shuffle.player.proto.Proto.DecryptionKeyOrBuilder>(
                   getKey(),
                   getParentForChildren(),
                   isClean());
@@ -7610,7 +8258,7 @@ public final class Proto {
 
       private com.shuffle.player.proto.Proto.Transaction transaction_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Transaction, com.shuffle.player.proto.Proto.Transaction.Builder, com.shuffle.player.proto.Proto.TransactionOrBuilder> transactionBuilder_;
+              com.shuffle.player.proto.Proto.Transaction, com.shuffle.player.proto.Proto.Transaction.Builder, com.shuffle.player.proto.Proto.TransactionOrBuilder> transactionBuilder_;
       /**
        * <code>optional .Transaction transaction = 4;</code>
        */
@@ -7647,7 +8295,7 @@ public final class Proto {
        * <code>optional .Transaction transaction = 4;</code>
        */
       public Builder setTransaction(
-          com.shuffle.player.proto.Proto.Transaction.Builder builderForValue) {
+              com.shuffle.player.proto.Proto.Transaction.Builder builderForValue) {
         if (transactionBuilder_ == null) {
           transaction_ = builderForValue.build();
           onChanged();
@@ -7664,7 +8312,7 @@ public final class Proto {
         if (transactionBuilder_ == null) {
           if (transaction_ != null) {
             transaction_ =
-              com.shuffle.player.proto.Proto.Transaction.newBuilder(transaction_).mergeFrom(value).buildPartial();
+                    com.shuffle.player.proto.Proto.Transaction.newBuilder(transaction_).mergeFrom(value).buildPartial();
           } else {
             transaction_ = value;
           }
@@ -7693,7 +8341,7 @@ public final class Proto {
        * <code>optional .Transaction transaction = 4;</code>
        */
       public com.shuffle.player.proto.Proto.Transaction.Builder getTransactionBuilder() {
-        
+
         onChanged();
         return getTransactionFieldBuilder().getBuilder();
       }
@@ -7705,18 +8353,18 @@ public final class Proto {
           return transactionBuilder_.getMessageOrBuilder();
         } else {
           return transaction_ == null ?
-              com.shuffle.player.proto.Proto.Transaction.getDefaultInstance() : transaction_;
+                  com.shuffle.player.proto.Proto.Transaction.getDefaultInstance() : transaction_;
         }
       }
       /**
        * <code>optional .Transaction transaction = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Transaction, com.shuffle.player.proto.Proto.Transaction.Builder, com.shuffle.player.proto.Proto.TransactionOrBuilder> 
-          getTransactionFieldBuilder() {
+              com.shuffle.player.proto.Proto.Transaction, com.shuffle.player.proto.Proto.Transaction.Builder, com.shuffle.player.proto.Proto.TransactionOrBuilder>
+      getTransactionFieldBuilder() {
         if (transactionBuilder_ == null) {
           transactionBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.shuffle.player.proto.Proto.Transaction, com.shuffle.player.proto.Proto.Transaction.Builder, com.shuffle.player.proto.Proto.TransactionOrBuilder>(
+                  com.shuffle.player.proto.Proto.Transaction, com.shuffle.player.proto.Proto.Transaction.Builder, com.shuffle.player.proto.Proto.TransactionOrBuilder>(
                   getTransaction(),
                   getParentForChildren(),
                   isClean());
@@ -7727,7 +8375,7 @@ public final class Proto {
 
       private com.shuffle.player.proto.Proto.Invalid invalid_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Invalid, com.shuffle.player.proto.Proto.Invalid.Builder, com.shuffle.player.proto.Proto.InvalidOrBuilder> invalidBuilder_;
+              com.shuffle.player.proto.Proto.Invalid, com.shuffle.player.proto.Proto.Invalid.Builder, com.shuffle.player.proto.Proto.InvalidOrBuilder> invalidBuilder_;
       /**
        * <code>optional .Invalid invalid = 5;</code>
        */
@@ -7764,7 +8412,7 @@ public final class Proto {
        * <code>optional .Invalid invalid = 5;</code>
        */
       public Builder setInvalid(
-          com.shuffle.player.proto.Proto.Invalid.Builder builderForValue) {
+              com.shuffle.player.proto.Proto.Invalid.Builder builderForValue) {
         if (invalidBuilder_ == null) {
           invalid_ = builderForValue.build();
           onChanged();
@@ -7781,7 +8429,7 @@ public final class Proto {
         if (invalidBuilder_ == null) {
           if (invalid_ != null) {
             invalid_ =
-              com.shuffle.player.proto.Proto.Invalid.newBuilder(invalid_).mergeFrom(value).buildPartial();
+                    com.shuffle.player.proto.Proto.Invalid.newBuilder(invalid_).mergeFrom(value).buildPartial();
           } else {
             invalid_ = value;
           }
@@ -7810,7 +8458,7 @@ public final class Proto {
        * <code>optional .Invalid invalid = 5;</code>
        */
       public com.shuffle.player.proto.Proto.Invalid.Builder getInvalidBuilder() {
-        
+
         onChanged();
         return getInvalidFieldBuilder().getBuilder();
       }
@@ -7822,18 +8470,18 @@ public final class Proto {
           return invalidBuilder_.getMessageOrBuilder();
         } else {
           return invalid_ == null ?
-              com.shuffle.player.proto.Proto.Invalid.getDefaultInstance() : invalid_;
+                  com.shuffle.player.proto.Proto.Invalid.getDefaultInstance() : invalid_;
         }
       }
       /**
        * <code>optional .Invalid invalid = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Invalid, com.shuffle.player.proto.Proto.Invalid.Builder, com.shuffle.player.proto.Proto.InvalidOrBuilder> 
-          getInvalidFieldBuilder() {
+              com.shuffle.player.proto.Proto.Invalid, com.shuffle.player.proto.Proto.Invalid.Builder, com.shuffle.player.proto.Proto.InvalidOrBuilder>
+      getInvalidFieldBuilder() {
         if (invalidBuilder_ == null) {
           invalidBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.shuffle.player.proto.Proto.Invalid, com.shuffle.player.proto.Proto.Invalid.Builder, com.shuffle.player.proto.Proto.InvalidOrBuilder>(
+                  com.shuffle.player.proto.Proto.Invalid, com.shuffle.player.proto.Proto.Invalid.Builder, com.shuffle.player.proto.Proto.InvalidOrBuilder>(
                   getInvalid(),
                   getParentForChildren(),
                   isClean());
@@ -7844,7 +8492,7 @@ public final class Proto {
 
       private com.shuffle.player.proto.Proto.Packets packets_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Packets, com.shuffle.player.proto.Proto.Packets.Builder, com.shuffle.player.proto.Proto.PacketsOrBuilder> packetsBuilder_;
+              com.shuffle.player.proto.Proto.Packets, com.shuffle.player.proto.Proto.Packets.Builder, com.shuffle.player.proto.Proto.PacketsOrBuilder> packetsBuilder_;
       /**
        * <code>optional .Packets packets = 6;</code>
        */
@@ -7881,7 +8529,7 @@ public final class Proto {
        * <code>optional .Packets packets = 6;</code>
        */
       public Builder setPackets(
-          com.shuffle.player.proto.Proto.Packets.Builder builderForValue) {
+              com.shuffle.player.proto.Proto.Packets.Builder builderForValue) {
         if (packetsBuilder_ == null) {
           packets_ = builderForValue.build();
           onChanged();
@@ -7898,7 +8546,7 @@ public final class Proto {
         if (packetsBuilder_ == null) {
           if (packets_ != null) {
             packets_ =
-              com.shuffle.player.proto.Proto.Packets.newBuilder(packets_).mergeFrom(value).buildPartial();
+                    com.shuffle.player.proto.Proto.Packets.newBuilder(packets_).mergeFrom(value).buildPartial();
           } else {
             packets_ = value;
           }
@@ -7927,7 +8575,7 @@ public final class Proto {
        * <code>optional .Packets packets = 6;</code>
        */
       public com.shuffle.player.proto.Proto.Packets.Builder getPacketsBuilder() {
-        
+
         onChanged();
         return getPacketsFieldBuilder().getBuilder();
       }
@@ -7939,18 +8587,18 @@ public final class Proto {
           return packetsBuilder_.getMessageOrBuilder();
         } else {
           return packets_ == null ?
-              com.shuffle.player.proto.Proto.Packets.getDefaultInstance() : packets_;
+                  com.shuffle.player.proto.Proto.Packets.getDefaultInstance() : packets_;
         }
       }
       /**
        * <code>optional .Packets packets = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.shuffle.player.proto.Proto.Packets, com.shuffle.player.proto.Proto.Packets.Builder, com.shuffle.player.proto.Proto.PacketsOrBuilder> 
-          getPacketsFieldBuilder() {
+              com.shuffle.player.proto.Proto.Packets, com.shuffle.player.proto.Proto.Packets.Builder, com.shuffle.player.proto.Proto.PacketsOrBuilder>
+      getPacketsFieldBuilder() {
         if (packetsBuilder_ == null) {
           packetsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.shuffle.player.proto.Proto.Packets, com.shuffle.player.proto.Proto.Packets.Builder, com.shuffle.player.proto.Proto.PacketsOrBuilder>(
+                  com.shuffle.player.proto.Proto.Packets, com.shuffle.player.proto.Proto.Packets.Builder, com.shuffle.player.proto.Proto.PacketsOrBuilder>(
                   getPackets(),
                   getParentForChildren(),
                   isClean());
@@ -7959,12 +8607,12 @@ public final class Proto {
         return packetsBuilder_;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
@@ -7983,12 +8631,12 @@ public final class Proto {
     }
 
     private static final com.google.protobuf.Parser<Blame>
-        PARSER = new com.google.protobuf.AbstractParser<Blame>() {
+            PARSER = new com.google.protobuf.AbstractParser<Blame>() {
       public Blame parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Blame(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Blame(input, extensionRegistry);
       }
     };
 
@@ -8008,8 +8656,8 @@ public final class Proto {
   }
 
   public interface InvalidOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Invalid)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:Invalid)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>optional bytes invalid = 1;</code>
@@ -8020,9 +8668,9 @@ public final class Proto {
    * Protobuf type {@code Invalid}
    */
   public  static final class Invalid extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:Invalid)
-      InvalidOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:Invalid)
+          InvalidOrBuilder {
     // Use Invalid.newBuilder() to construct.
     private Invalid(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -8037,9 +8685,9 @@ public final class Proto {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private Invalid(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -8067,21 +8715,21 @@ public final class Proto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.shuffle.player.proto.Proto.internal_static_Invalid_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.shuffle.player.proto.Proto.internal_static_Invalid_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.shuffle.player.proto.Proto.Invalid.class, com.shuffle.player.proto.Proto.Invalid.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      com.shuffle.player.proto.Proto.Invalid.class, com.shuffle.player.proto.Proto.Invalid.Builder.class);
     }
 
     public static final int INVALID_FIELD_NUMBER = 1;
@@ -8104,7 +8752,7 @@ public final class Proto {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (!invalid_.isEmpty()) {
         output.writeBytes(1, invalid_);
       }
@@ -8117,7 +8765,7 @@ public final class Proto {
       size = 0;
       if (!invalid_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, invalid_);
+                .computeBytesSize(1, invalid_);
       }
       memoizedSize = size;
       return size;
@@ -8125,62 +8773,62 @@ public final class Proto {
 
     private static final long serialVersionUID = 0L;
     public static com.shuffle.player.proto.Proto.Invalid parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Invalid parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Invalid parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Invalid parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Invalid parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Invalid parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Invalid parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Invalid parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Invalid parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Invalid parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -8192,12 +8840,12 @@ public final class Proto {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -8205,19 +8853,19 @@ public final class Proto {
      * Protobuf type {@code Invalid}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Invalid)
-        com.shuffle.player.proto.Proto.InvalidOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:Invalid)
+            com.shuffle.player.proto.Proto.InvalidOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return com.shuffle.player.proto.Proto.internal_static_Invalid_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return com.shuffle.player.proto.Proto.internal_static_Invalid_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.shuffle.player.proto.Proto.Invalid.class, com.shuffle.player.proto.Proto.Invalid.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        com.shuffle.player.proto.Proto.Invalid.class, com.shuffle.player.proto.Proto.Invalid.Builder.class);
       }
 
       // Construct using com.shuffle.player.proto.Proto.Invalid.newBuilder()
@@ -8226,7 +8874,7 @@ public final class Proto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -8242,7 +8890,7 @@ public final class Proto {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.shuffle.player.proto.Proto.internal_static_Invalid_descriptor;
       }
 
@@ -8288,9 +8936,9 @@ public final class Proto {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         com.shuffle.player.proto.Proto.Invalid parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -8317,9 +8965,9 @@ public final class Proto {
        */
       public Builder setInvalid(com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          throw new NullPointerException();
+        }
+
         invalid_ = value;
         onChanged();
         return this;
@@ -8328,18 +8976,18 @@ public final class Proto {
        * <code>optional bytes invalid = 1;</code>
        */
       public Builder clearInvalid() {
-        
+
         invalid_ = getDefaultInstance().getInvalid();
         onChanged();
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
@@ -8358,12 +9006,12 @@ public final class Proto {
     }
 
     private static final com.google.protobuf.Parser<Invalid>
-        PARSER = new com.google.protobuf.AbstractParser<Invalid>() {
+            PARSER = new com.google.protobuf.AbstractParser<Invalid>() {
       public Invalid parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Invalid(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Invalid(input, extensionRegistry);
       }
     };
 
@@ -8383,14 +9031,14 @@ public final class Proto {
   }
 
   public interface PacketsOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Packets)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:Packets)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>repeated .Signed packet = 1;</code>
      */
-    java.util.List<com.shuffle.player.proto.Proto.Signed> 
-        getPacketList();
+    java.util.List<com.shuffle.player.proto.Proto.Signed>
+    getPacketList();
     /**
      * <code>repeated .Signed packet = 1;</code>
      */
@@ -8402,21 +9050,21 @@ public final class Proto {
     /**
      * <code>repeated .Signed packet = 1;</code>
      */
-    java.util.List<? extends com.shuffle.player.proto.Proto.SignedOrBuilder> 
-        getPacketOrBuilderList();
+    java.util.List<? extends com.shuffle.player.proto.Proto.SignedOrBuilder>
+    getPacketOrBuilderList();
     /**
      * <code>repeated .Signed packet = 1;</code>
      */
     com.shuffle.player.proto.Proto.SignedOrBuilder getPacketOrBuilder(
-        int index);
+            int index);
   }
   /**
    * Protobuf type {@code Packets}
    */
   public  static final class Packets extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:Packets)
-      PacketsOrBuilder {
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:Packets)
+          PacketsOrBuilder {
     // Use Packets.newBuilder() to construct.
     private Packets(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -8431,9 +9079,9 @@ public final class Proto {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private Packets(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -8464,7 +9112,7 @@ public final class Proto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           packet_ = java.util.Collections.unmodifiableList(packet_);
@@ -8473,15 +9121,15 @@ public final class Proto {
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return com.shuffle.player.proto.Proto.internal_static_Packets_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return com.shuffle.player.proto.Proto.internal_static_Packets_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.shuffle.player.proto.Proto.Packets.class, com.shuffle.player.proto.Proto.Packets.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      com.shuffle.player.proto.Proto.Packets.class, com.shuffle.player.proto.Proto.Packets.Builder.class);
     }
 
     public static final int PACKET_FIELD_NUMBER = 1;
@@ -8495,8 +9143,8 @@ public final class Proto {
     /**
      * <code>repeated .Signed packet = 1;</code>
      */
-    public java.util.List<? extends com.shuffle.player.proto.Proto.SignedOrBuilder> 
-        getPacketOrBuilderList() {
+    public java.util.List<? extends com.shuffle.player.proto.Proto.SignedOrBuilder>
+    getPacketOrBuilderList() {
       return packet_;
     }
     /**
@@ -8515,7 +9163,7 @@ public final class Proto {
      * <code>repeated .Signed packet = 1;</code>
      */
     public com.shuffle.player.proto.Proto.SignedOrBuilder getPacketOrBuilder(
-        int index) {
+            int index) {
       return packet_.get(index);
     }
 
@@ -8530,7 +9178,7 @@ public final class Proto {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       for (int i = 0; i < packet_.size(); i++) {
         output.writeMessage(1, packet_.get(i));
       }
@@ -8543,7 +9191,7 @@ public final class Proto {
       size = 0;
       for (int i = 0; i < packet_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, packet_.get(i));
+                .computeMessageSize(1, packet_.get(i));
       }
       memoizedSize = size;
       return size;
@@ -8551,62 +9199,62 @@ public final class Proto {
 
     private static final long serialVersionUID = 0L;
     public static com.shuffle.player.proto.Proto.Packets parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Packets parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Packets parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static com.shuffle.player.proto.Proto.Packets parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Packets parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Packets parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Packets parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Packets parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.shuffle.player.proto.Proto.Packets parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static com.shuffle.player.proto.Proto.Packets parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -8618,12 +9266,12 @@ public final class Proto {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -8631,19 +9279,19 @@ public final class Proto {
      * Protobuf type {@code Packets}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Packets)
-        com.shuffle.player.proto.Proto.PacketsOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:Packets)
+            com.shuffle.player.proto.Proto.PacketsOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return com.shuffle.player.proto.Proto.internal_static_Packets_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return com.shuffle.player.proto.Proto.internal_static_Packets_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.shuffle.player.proto.Proto.Packets.class, com.shuffle.player.proto.Proto.Packets.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        com.shuffle.player.proto.Proto.Packets.class, com.shuffle.player.proto.Proto.Packets.Builder.class);
       }
 
       // Construct using com.shuffle.player.proto.Proto.Packets.newBuilder()
@@ -8652,7 +9300,7 @@ public final class Proto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -8673,7 +9321,7 @@ public final class Proto {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return com.shuffle.player.proto.Proto.internal_static_Packets_descriptor;
       }
 
@@ -8734,9 +9382,9 @@ public final class Proto {
               packetBuilder_ = null;
               packet_ = other.packet_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              packetBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getPacketFieldBuilder() : null;
+              packetBuilder_ =
+                      com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                              getPacketFieldBuilder() : null;
             } else {
               packetBuilder_.addAllMessages(other.packet_);
             }
@@ -8751,9 +9399,9 @@ public final class Proto {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         com.shuffle.player.proto.Proto.Packets parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -8770,16 +9418,16 @@ public final class Proto {
       private int bitField0_;
 
       private java.util.List<com.shuffle.player.proto.Proto.Signed> packet_ =
-        java.util.Collections.emptyList();
+              java.util.Collections.emptyList();
       private void ensurePacketIsMutable() {
         if (!((bitField0_ & 0x00000001) == 0x00000001)) {
           packet_ = new java.util.ArrayList<com.shuffle.player.proto.Proto.Signed>(packet_);
           bitField0_ |= 0x00000001;
-         }
+        }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.shuffle.player.proto.Proto.Signed, com.shuffle.player.proto.Proto.Signed.Builder, com.shuffle.player.proto.Proto.SignedOrBuilder> packetBuilder_;
+              com.shuffle.player.proto.Proto.Signed, com.shuffle.player.proto.Proto.Signed.Builder, com.shuffle.player.proto.Proto.SignedOrBuilder> packetBuilder_;
 
       /**
        * <code>repeated .Signed packet = 1;</code>
@@ -8815,7 +9463,7 @@ public final class Proto {
        * <code>repeated .Signed packet = 1;</code>
        */
       public Builder setPacket(
-          int index, com.shuffle.player.proto.Proto.Signed value) {
+              int index, com.shuffle.player.proto.Proto.Signed value) {
         if (packetBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8832,7 +9480,7 @@ public final class Proto {
        * <code>repeated .Signed packet = 1;</code>
        */
       public Builder setPacket(
-          int index, com.shuffle.player.proto.Proto.Signed.Builder builderForValue) {
+              int index, com.shuffle.player.proto.Proto.Signed.Builder builderForValue) {
         if (packetBuilder_ == null) {
           ensurePacketIsMutable();
           packet_.set(index, builderForValue.build());
@@ -8862,7 +9510,7 @@ public final class Proto {
        * <code>repeated .Signed packet = 1;</code>
        */
       public Builder addPacket(
-          int index, com.shuffle.player.proto.Proto.Signed value) {
+              int index, com.shuffle.player.proto.Proto.Signed value) {
         if (packetBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -8879,7 +9527,7 @@ public final class Proto {
        * <code>repeated .Signed packet = 1;</code>
        */
       public Builder addPacket(
-          com.shuffle.player.proto.Proto.Signed.Builder builderForValue) {
+              com.shuffle.player.proto.Proto.Signed.Builder builderForValue) {
         if (packetBuilder_ == null) {
           ensurePacketIsMutable();
           packet_.add(builderForValue.build());
@@ -8893,7 +9541,7 @@ public final class Proto {
        * <code>repeated .Signed packet = 1;</code>
        */
       public Builder addPacket(
-          int index, com.shuffle.player.proto.Proto.Signed.Builder builderForValue) {
+              int index, com.shuffle.player.proto.Proto.Signed.Builder builderForValue) {
         if (packetBuilder_ == null) {
           ensurePacketIsMutable();
           packet_.add(index, builderForValue.build());
@@ -8907,11 +9555,11 @@ public final class Proto {
        * <code>repeated .Signed packet = 1;</code>
        */
       public Builder addAllPacket(
-          java.lang.Iterable<? extends com.shuffle.player.proto.Proto.Signed> values) {
+              java.lang.Iterable<? extends com.shuffle.player.proto.Proto.Signed> values) {
         if (packetBuilder_ == null) {
           ensurePacketIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, packet_);
+                  values, packet_);
           onChanged();
         } else {
           packetBuilder_.addAllMessages(values);
@@ -8948,14 +9596,14 @@ public final class Proto {
        * <code>repeated .Signed packet = 1;</code>
        */
       public com.shuffle.player.proto.Proto.Signed.Builder getPacketBuilder(
-          int index) {
+              int index) {
         return getPacketFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .Signed packet = 1;</code>
        */
       public com.shuffle.player.proto.Proto.SignedOrBuilder getPacketOrBuilder(
-          int index) {
+              int index) {
         if (packetBuilder_ == null) {
           return packet_.get(index);  } else {
           return packetBuilder_.getMessageOrBuilder(index);
@@ -8964,8 +9612,8 @@ public final class Proto {
       /**
        * <code>repeated .Signed packet = 1;</code>
        */
-      public java.util.List<? extends com.shuffle.player.proto.Proto.SignedOrBuilder> 
-           getPacketOrBuilderList() {
+      public java.util.List<? extends com.shuffle.player.proto.Proto.SignedOrBuilder>
+      getPacketOrBuilderList() {
         if (packetBuilder_ != null) {
           return packetBuilder_.getMessageOrBuilderList();
         } else {
@@ -8977,29 +9625,29 @@ public final class Proto {
        */
       public com.shuffle.player.proto.Proto.Signed.Builder addPacketBuilder() {
         return getPacketFieldBuilder().addBuilder(
-            com.shuffle.player.proto.Proto.Signed.getDefaultInstance());
+                com.shuffle.player.proto.Proto.Signed.getDefaultInstance());
       }
       /**
        * <code>repeated .Signed packet = 1;</code>
        */
       public com.shuffle.player.proto.Proto.Signed.Builder addPacketBuilder(
-          int index) {
+              int index) {
         return getPacketFieldBuilder().addBuilder(
-            index, com.shuffle.player.proto.Proto.Signed.getDefaultInstance());
+                index, com.shuffle.player.proto.Proto.Signed.getDefaultInstance());
       }
       /**
        * <code>repeated .Signed packet = 1;</code>
        */
-      public java.util.List<com.shuffle.player.proto.Proto.Signed.Builder> 
-           getPacketBuilderList() {
+      public java.util.List<com.shuffle.player.proto.Proto.Signed.Builder>
+      getPacketBuilderList() {
         return getPacketFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.shuffle.player.proto.Proto.Signed, com.shuffle.player.proto.Proto.Signed.Builder, com.shuffle.player.proto.Proto.SignedOrBuilder> 
-          getPacketFieldBuilder() {
+              com.shuffle.player.proto.Proto.Signed, com.shuffle.player.proto.Proto.Signed.Builder, com.shuffle.player.proto.Proto.SignedOrBuilder>
+      getPacketFieldBuilder() {
         if (packetBuilder_ == null) {
           packetBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.shuffle.player.proto.Proto.Signed, com.shuffle.player.proto.Proto.Signed.Builder, com.shuffle.player.proto.Proto.SignedOrBuilder>(
+                  com.shuffle.player.proto.Proto.Signed, com.shuffle.player.proto.Proto.Signed.Builder, com.shuffle.player.proto.Proto.SignedOrBuilder>(
                   packet_,
                   ((bitField0_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
@@ -9009,12 +9657,12 @@ public final class Proto {
         return packetBuilder_;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
       }
 
@@ -9033,12 +9681,12 @@ public final class Proto {
     }
 
     private static final com.google.protobuf.Parser<Packets>
-        PARSER = new com.google.protobuf.AbstractParser<Packets>() {
+            PARSER = new com.google.protobuf.AbstractParser<Packets>() {
       public Packets parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Packets(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Packets(input, extensionRegistry);
       }
     };
 
@@ -9058,204 +9706,216 @@ public final class Proto {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Signed_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_Signed_fieldAccessorTable;
+          internal_static_Signed_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_Signed_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Packet_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_Packet_fieldAccessorTable;
+          internal_static_Packet_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_Packet_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Message_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_Message_fieldAccessorTable;
+          internal_static_Message_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_Message_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Address_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_Address_fieldAccessorTable;
+          internal_static_Address_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_Address_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_VerificationKey_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_VerificationKey_fieldAccessorTable;
+          internal_static_VerificationKey_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_VerificationKey_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_EncryptionKey_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_EncryptionKey_fieldAccessorTable;
+          internal_static_EncryptionKey_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_EncryptionKey_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_DecryptionKey_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_DecryptionKey_fieldAccessorTable;
+          internal_static_DecryptionKey_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_DecryptionKey_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Hash_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_Hash_fieldAccessorTable;
+          internal_static_Hash_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_Hash_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Signature_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_Signature_fieldAccessorTable;
+          internal_static_Signature_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_Signature_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Transaction_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_Transaction_fieldAccessorTable;
+          internal_static_Signatures_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_Signatures_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Blame_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_Blame_fieldAccessorTable;
+          internal_static_Transaction_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_Transaction_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Invalid_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_Invalid_fieldAccessorTable;
+          internal_static_Blame_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_Blame_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Packets_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_Packets_fieldAccessorTable;
+          internal_static_Invalid_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_Invalid_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_Packets_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_Packets_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
+  getDescriptor() {
     return descriptor;
   }
   private static  com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
+          descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n4src/main/java/com/shuffle/player/proto" +
-      "/message.proto\"@\n\006Signed\022\027\n\006packet\030\001 \001(\013" +
-      "2\007.Packet\022\035\n\tsignature\030\002 \001(\0132\n.Signature" +
-      "\"\231\001\n\006Packet\022\017\n\007session\030\001 \001(\014\022\016\n\006number\030\002" +
-      " \001(\r\022\036\n\004from\030\003 \001(\0132\020.VerificationKey\022\034\n\002" +
-      "to\030\004 \001(\0132\020.VerificationKey\022\025\n\005phase\030\005 \001(" +
-      "\0162\006.Phase\022\031\n\007message\030\006 \001(\0132\010.Message\"\261\001\n" +
-      "\007Message\022\031\n\007address\030\001 \001(\0132\010.Address\022\033\n\003k" +
-      "ey\030\002 \001(\0132\016.EncryptionKey\022\023\n\004hash\030\003 \001(\0132\005" +
-      ".Hash\022\035\n\tsignature\030\004 \001(\0132\n.Signature\022\013\n\003",
-      "str\030\005 \001(\t\022\025\n\005blame\030\006 \001(\0132\006.Blame\022\026\n\004next" +
-      "\030\007 \001(\0132\010.Message\"\032\n\007Address\022\017\n\007address\030\001" +
-      " \001(\t\"\036\n\017VerificationKey\022\013\n\003key\030\001 \001(\t\"\034\n\r" +
-      "EncryptionKey\022\013\n\003key\030\001 \001(\t\",\n\rDecryption" +
-      "Key\022\013\n\003key\030\001 \001(\t\022\016\n\006public\030\002 \001(\t\"\024\n\004Hash" +
-      "\022\014\n\004hash\030\001 \001(\014\"\036\n\tSignature\022\021\n\tsignature" +
-      "\030\001 \001(\014\"\"\n\013Transaction\022\023\n\013transaction\030\001 \001" +
-      "(\014\"\271\001\n\005Blame\022\027\n\006reason\030\001 \001(\0162\007.Reason\022!\n" +
-      "\007accused\030\002 \001(\0132\020.VerificationKey\022\033\n\003key\030" +
-      "\003 \001(\0132\016.DecryptionKey\022!\n\013transaction\030\004 \001",
-      "(\0132\014.Transaction\022\031\n\007invalid\030\005 \001(\0132\010.Inva" +
-      "lid\022\031\n\007packets\030\006 \001(\0132\010.Packets\"\032\n\007Invali" +
-      "d\022\017\n\007invalid\030\001 \001(\014\"\"\n\007Packets\022\027\n\006packet\030" +
-      "\001 \003(\0132\007.Signed*\220\001\n\005Phase\022\010\n\004NONE\020\000\022\020\n\014AN" +
-      "NOUNCEMENT\020\001\022\013\n\007SHUFFLE\020\002\022\r\n\tBROADCAST\020\003" +
-      "\022\026\n\022EQUIVOCATION_CHECK\020\004\022\013\n\007SIGNING\020\005\022\037\n" +
-      "\033VERIFICATION_AND_SUBMISSION\020\006\022\t\n\005BLAME\020" +
-      "\007*\306\001\n\006Reason\022\025\n\021INSUFFICIENTFUNDS\020\000\022\017\n\013D" +
-      "OUBLESPEND\020\001\022\027\n\023EQUIVOCATIONFAILURE\020\002\022\022\n" +
-      "\016SHUFFLEFAILURE\020\003\022!\n\035SHUFFLEANDEQUIVOCAT",
-      "IONFAILURE\020\004\022\024\n\020INVALIDSIGNATURE\020\005\022\021\n\rMI" +
-      "SSINGOUTPUT\020\006\022\010\n\004LIAR\020\007\022\021\n\rINVALIDFORMAT" +
-      "\020\010B!\n\030com.shuffle.player.protoB\005Protob\006p" +
-      "roto3"
+            "\n4src/main/java/com/shuffle/player/proto" +
+                    "/message.proto\"@\n\006Signed\022\027\n\006packet\030\001 \001(\013" +
+                    "2\007.Packet\022\035\n\tsignature\030\002 \001(\0132\n.Signature" +
+                    "\"\231\001\n\006Packet\022\017\n\007session\030\001 \001(\014\022\016\n\006number\030\002" +
+                    " \001(\r\022\036\n\004from\030\003 \001(\0132\020.VerificationKey\022\034\n\002" +
+                    "to\030\004 \001(\0132\020.VerificationKey\022\025\n\005phase\030\005 \001(" +
+                    "\0162\006.Phase\022\031\n\007message\030\006 \001(\0132\010.Message\"\322\001\n" +
+                    "\007Message\022\031\n\007address\030\001 \001(\0132\010.Address\022\033\n\003k" +
+                    "ey\030\002 \001(\0132\016.EncryptionKey\022\023\n\004hash\030\003 \001(\0132\005" +
+                    ".Hash\022\035\n\tsignature\030\004 \001(\0132\n.Signature\022\037\n\n",
+            "signatures\030\005 \001(\0132\013.Signatures\022\013\n\003str\030\006 \001" +
+                    "(\t\022\025\n\005blame\030\007 \001(\0132\006.Blame\022\026\n\004next\030\010 \001(\0132" +
+                    "\010.Message\"\032\n\007Address\022\017\n\007address\030\001 \001(\t\"\036\n" +
+                    "\017VerificationKey\022\013\n\003key\030\001 \001(\t\"\034\n\rEncrypt" +
+                    "ionKey\022\013\n\003key\030\001 \001(\t\",\n\rDecryptionKey\022\013\n\003" +
+                    "key\030\001 \001(\t\022\016\n\006public\030\002 \001(\t\"\024\n\004Hash\022\014\n\004has" +
+                    "h\030\001 \001(\014\"\036\n\tSignature\022\021\n\tsignature\030\001 \001(\014\"" +
+                    " \n\nSignatures\022\022\n\nsignatures\030\001 \003(\014\"\"\n\013Tra" +
+                    "nsaction\022\023\n\013transaction\030\001 \001(\014\"\271\001\n\005Blame\022" +
+                    "\027\n\006reason\030\001 \001(\0162\007.Reason\022!\n\007accused\030\002 \001(",
+            "\0132\020.VerificationKey\022\033\n\003key\030\003 \001(\0132\016.Decry" +
+                    "ptionKey\022!\n\013transaction\030\004 \001(\0132\014.Transact" +
+                    "ion\022\031\n\007invalid\030\005 \001(\0132\010.Invalid\022\031\n\007packet" +
+                    "s\030\006 \001(\0132\010.Packets\"\032\n\007Invalid\022\017\n\007invalid\030" +
+                    "\001 \001(\014\"\"\n\007Packets\022\027\n\006packet\030\001 \003(\0132\007.Signe" +
+                    "d*\220\001\n\005Phase\022\010\n\004NONE\020\000\022\020\n\014ANNOUNCEMENT\020\001\022" +
+                    "\013\n\007SHUFFLE\020\002\022\r\n\tBROADCAST\020\003\022\026\n\022EQUIVOCAT" +
+                    "ION_CHECK\020\004\022\013\n\007SIGNING\020\005\022\037\n\033VERIFICATION" +
+                    "_AND_SUBMISSION\020\006\022\t\n\005BLAME\020\007*\306\001\n\006Reason\022" +
+                    "\025\n\021INSUFFICIENTFUNDS\020\000\022\017\n\013DOUBLESPEND\020\001\022",
+            "\027\n\023EQUIVOCATIONFAILURE\020\002\022\022\n\016SHUFFLEFAILU" +
+                    "RE\020\003\022!\n\035SHUFFLEANDEQUIVOCATIONFAILURE\020\004\022" +
+                    "\024\n\020INVALIDSIGNATURE\020\005\022\021\n\rMISSINGOUTPUT\020\006" +
+                    "\022\010\n\004LIAR\020\007\022\021\n\rINVALIDFORMAT\020\010B!\n\030com.shu" +
+                    "ffle.player.protoB\005Protob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+            new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+              public com.google.protobuf.ExtensionRegistry assignDescriptors(
+                      com.google.protobuf.Descriptors.FileDescriptor root) {
+                descriptor = root;
+                return null;
+              }
+            };
     com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
+            .internalBuildGeneratedFileFrom(descriptorData,
+                    new com.google.protobuf.Descriptors.FileDescriptor[] {
+                    }, assigner);
     internal_static_Signed_descriptor =
-      getDescriptor().getMessageTypes().get(0);
+            getDescriptor().getMessageTypes().get(0);
     internal_static_Signed_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_Signed_descriptor,
-        new java.lang.String[] { "Packet", "Signature", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_Signed_descriptor,
+            new java.lang.String[] { "Packet", "Signature", });
     internal_static_Packet_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+            getDescriptor().getMessageTypes().get(1);
     internal_static_Packet_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_Packet_descriptor,
-        new java.lang.String[] { "Session", "Number", "From", "To", "Phase", "Message", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_Packet_descriptor,
+            new java.lang.String[] { "Session", "Number", "From", "To", "Phase", "Message", });
     internal_static_Message_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+            getDescriptor().getMessageTypes().get(2);
     internal_static_Message_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_Message_descriptor,
-        new java.lang.String[] { "Address", "Key", "Hash", "Signature", "Str", "Blame", "Next", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_Message_descriptor,
+            new java.lang.String[] { "Address", "Key", "Hash", "Signature", "Signatures", "Str", "Blame", "Next", });
     internal_static_Address_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+            getDescriptor().getMessageTypes().get(3);
     internal_static_Address_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_Address_descriptor,
-        new java.lang.String[] { "Address", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_Address_descriptor,
+            new java.lang.String[] { "Address", });
     internal_static_VerificationKey_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+            getDescriptor().getMessageTypes().get(4);
     internal_static_VerificationKey_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_VerificationKey_descriptor,
-        new java.lang.String[] { "Key", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_VerificationKey_descriptor,
+            new java.lang.String[] { "Key", });
     internal_static_EncryptionKey_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+            getDescriptor().getMessageTypes().get(5);
     internal_static_EncryptionKey_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_EncryptionKey_descriptor,
-        new java.lang.String[] { "Key", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_EncryptionKey_descriptor,
+            new java.lang.String[] { "Key", });
     internal_static_DecryptionKey_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+            getDescriptor().getMessageTypes().get(6);
     internal_static_DecryptionKey_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_DecryptionKey_descriptor,
-        new java.lang.String[] { "Key", "Public", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_DecryptionKey_descriptor,
+            new java.lang.String[] { "Key", "Public", });
     internal_static_Hash_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+            getDescriptor().getMessageTypes().get(7);
     internal_static_Hash_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_Hash_descriptor,
-        new java.lang.String[] { "Hash", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_Hash_descriptor,
+            new java.lang.String[] { "Hash", });
     internal_static_Signature_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+            getDescriptor().getMessageTypes().get(8);
     internal_static_Signature_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_Signature_descriptor,
-        new java.lang.String[] { "Signature", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_Signature_descriptor,
+            new java.lang.String[] { "Signature", });
+    internal_static_Signatures_descriptor =
+            getDescriptor().getMessageTypes().get(9);
+    internal_static_Signatures_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_Signatures_descriptor,
+            new java.lang.String[] { "Signatures", });
     internal_static_Transaction_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+            getDescriptor().getMessageTypes().get(10);
     internal_static_Transaction_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_Transaction_descriptor,
-        new java.lang.String[] { "Transaction", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_Transaction_descriptor,
+            new java.lang.String[] { "Transaction", });
     internal_static_Blame_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+            getDescriptor().getMessageTypes().get(11);
     internal_static_Blame_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_Blame_descriptor,
-        new java.lang.String[] { "Reason", "Accused", "Key", "Transaction", "Invalid", "Packets", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_Blame_descriptor,
+            new java.lang.String[] { "Reason", "Accused", "Key", "Transaction", "Invalid", "Packets", });
     internal_static_Invalid_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+            getDescriptor().getMessageTypes().get(12);
     internal_static_Invalid_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_Invalid_descriptor,
-        new java.lang.String[] { "Invalid", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_Invalid_descriptor,
+            new java.lang.String[] { "Invalid", });
     internal_static_Packets_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+            getDescriptor().getMessageTypes().get(13);
     internal_static_Packets_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_Packets_descriptor,
-        new java.lang.String[] { "Packet", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_Packets_descriptor,
+            new java.lang.String[] { "Packet", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
