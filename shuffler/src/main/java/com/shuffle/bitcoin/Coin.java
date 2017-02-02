@@ -8,15 +8,13 @@
 
 package com.shuffle.bitcoin;
 
- import com.shuffle.bitcoin.Address;
- import com.shuffle.bitcoin.CoinNetworkException;
- import com.shuffle.bitcoin.Transaction;
- import com.shuffle.bitcoin.VerificationKey;
+ import com.neemre.btcdcli4j.core.BitcoindException;
+ import com.neemre.btcdcli4j.core.CommunicationException;
 
  import org.bitcoinj.core.AddressFormatException;
+ import org.bitcoinj.store.BlockStoreException;
 
  import java.io.IOException;
- import java.util.List;
  import java.util.Map;
  import java.util.Queue;
 
@@ -32,19 +30,20 @@ package com.shuffle.bitcoin;
 public interface Coin {
     Transaction shuffleTransaction(
             long amount,
-            long fee,
-            Map<VerificationKey, Address> from,
+            Map<VerificationKey, Long> playerFees,
+            Map<VerificationKey, Address> peers,
             Queue<Address> to,
             Map<VerificationKey, Address> changeAddresses) throws CoinNetworkException, AddressFormatException;
 
-    long valueHeld(Address addr) throws CoinNetworkException, AddressFormatException;
+    long valueHeld(Address a) throws CoinNetworkException, AddressFormatException;
 
     // Returns true if the address follows the correct format for CoinShuffle.
     // Returns false otherwise.
-    boolean sufficientFunds(Address addr, long amount) throws CoinNetworkException, AddressFormatException, IOException;
+    boolean sufficientFunds(Address a, long amount) throws CoinNetworkException, AddressFormatException, IOException;
 
     // If there is a conflicting transaction in the mempool or blockchain, this function
     // returns that transaction.
-    Transaction getConflictingTransaction(Transaction transaction, Address addr, long amount) throws CoinNetworkException, AddressFormatException;
+    Transaction getConflictingTransaction(Transaction transaction, Address addr, long amount) 
+            throws CoinNetworkException, AddressFormatException, BlockStoreException, BitcoindException, CommunicationException, IOException;
 
 }
