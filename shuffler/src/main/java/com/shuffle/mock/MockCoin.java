@@ -11,6 +11,7 @@ package com.shuffle.mock;
 import com.shuffle.bitcoin.Address;
 import com.shuffle.bitcoin.Coin;
 import com.shuffle.bitcoin.CoinNetworkException;
+import com.shuffle.bitcoin.Signatures;
 import com.shuffle.bitcoin.SigningKey;
 import com.shuffle.bitcoin.Transaction;
 import com.shuffle.bitcoin.VerificationKey;
@@ -172,12 +173,14 @@ public class MockCoin implements com.shuffle.sim.MockCoin {
         }
 
         @Override
-        public Bytestring sign(SigningKey sk) {
+        public Signatures sign(SigningKey sk) {
             try {
                 ByteArrayOutputStream b = new ByteArrayOutputStream();
                 ObjectOutputStream o = new ObjectOutputStream(b);
                 o.writeObject(new MockSignature(sk, z));
-                return new Bytestring(b.toByteArray());
+                Bytestring[] arr = new Bytestring[1];
+                arr[0] = new Bytestring(b.toByteArray());
+                return new Signatures(arr);
             } catch (IOException e) {
                 // This should not really happen.
                 throw new RuntimeException(e);
@@ -310,7 +313,9 @@ public class MockCoin implements com.shuffle.sim.MockCoin {
         out.add(new Output(to, amount));
 
         Transaction t = new MockTransaction(in, out, this);
-        t.addInputScript(t.sign(from));
+        for (Bytestring b : t.sign(from).sigs) {
+            t.addInputScript(b);
+        }
 
         return t;
     }
@@ -370,8 +375,8 @@ public class MockCoin implements com.shuffle.sim.MockCoin {
     @Override
     public Transaction shuffleTransaction(
             final long amount,
-            final long fee,
-            Map<VerificationKey, Address> from,
+            Map<VerificationKey, Long> playerFees,
+            Map<VerificationKey, Address> peers,
             Queue<Address> to,
             Map<VerificationKey, Address> changeAddresses) throws CoinNetworkException {
 
@@ -382,7 +387,8 @@ public class MockCoin implements com.shuffle.sim.MockCoin {
         List<Output> outputs = new LinkedList<>();
 
         // Are there inputs big enough to make this transaction?
-        for (VerificationKey key : from.keySet()) {
+        for (Map.Entry<VerificationKey, Address> entry : peers.entrySet()) {
+            VerificationKey key = entry.getKey();
             final Address address = key.address();
             final long value = valueHeld(address);
 
@@ -394,7 +400,7 @@ public class MockCoin implements com.shuffle.sim.MockCoin {
 
             // If a change address has been provided, add that.
             Address change = changeAddresses.get(key);
-            if (change != null) changes.add(new Output(change, value - amount - fee));
+            if (change != null) changes.add(new Output(change, value - amount - playerFees.get(key)));
         }
 
         for (Address address : to) outputs.add(new Output(address, amount));
