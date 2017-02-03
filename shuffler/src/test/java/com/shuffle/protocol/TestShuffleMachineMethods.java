@@ -63,12 +63,16 @@ public class TestShuffleMachineMethods {
 
         SortedSet<VerificationKey> playerSet = new TreeSet<>();
         playerSet.addAll(players.values());
+        Map<VerificationKey, Long> playerFees = new HashMap<>();
+        for (VerificationKey vk : playerSet) {
+            playerFees.put(vk, fee);
+        }
         CoinShuffle shuffle = new CoinShuffle(
                 messages, new MockCrypto(new InsecureRandom(seed)), new MockCoin()
         );
         CoinShuffle.CurrentPhase machine = new CoinShuffle.CurrentPhase();
         return shuffle.new Round(
-                machine, amount, fee, sk, players, addr, null, new Mailbox(sk.VerificationKey(), playerSet, messages)
+                machine, amount, playerFees, sk, players, null, addr, null, new Mailbox(sk.VerificationKey(), playerSet, messages)
         );
     }
 
@@ -395,13 +399,18 @@ public class TestShuffleMachineMethods {
         long amount = 20L;
         long fee = 5000L;
 
+        Map<VerificationKey, Long> playerFees = new HashMap<>();
+        for (SigningKey key : others) {
+            playerFees.put(key.VerificationKey(), fee);
+        }
+
         MockNetwork net = new MockNetwork(session, sk, others, 100);
 
         CoinShuffle shuffle = new CoinShuffle(net.messages(sk.VerificationKey()),
                 crypto, new MockCoin());
 
         return shuffle.new Round(
-                new CoinShuffle.CurrentPhase(), amount, fee, sk, players, addr, null, mailbox
+                new CoinShuffle.CurrentPhase(), amount, playerFees, sk, players, null, addr, null, mailbox
         );
     }
 
