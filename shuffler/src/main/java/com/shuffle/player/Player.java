@@ -163,7 +163,7 @@ class Player {
                 // it has been successful.
                 Messages messages = new Messages(session, sk, collector.connected, collector.inbox, m);
                 CoinShuffle cs = new CoinShuffle(messages, crypto, coin);
-                return Report.success(cs.runProtocol(amount, playerFees, sk, addrs, anon, change, ch));
+                return Report.success(cs.runProtocol(amount, playerFees, sk, addrs, fundedOutputs, anon, change, ch));
             } catch (Matrix m) {
                 return Report.failure(m, addrs);
             } catch (TimeoutException e) {
