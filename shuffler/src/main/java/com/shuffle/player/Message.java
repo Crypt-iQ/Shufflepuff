@@ -2,6 +2,7 @@ package com.shuffle.player;
 
 import com.shuffle.bitcoin.Address;
 import com.shuffle.bitcoin.EncryptionKey;
+import com.shuffle.bitcoin.Signatures;
 import com.shuffle.bitcoin.VerificationKey;
 import com.shuffle.chan.packet.Marshaller;
 import com.shuffle.p2p.Bytestring;
@@ -58,9 +59,9 @@ public class Message implements com.shuffle.protocol.message.Message, Serializab
         public final Address addr;
         public final EncryptionKey ek;
         public final SecureHash secureHash;
-        public final Bytestring sig;
         public final String string;
         public final Blame blame;
+        public final Signatures sigs;
 
         public final Atom next;
 
@@ -68,9 +69,9 @@ public class Message implements com.shuffle.protocol.message.Message, Serializab
                 Address addr,
                 EncryptionKey ek,
                 SecureHash secureHash,
-                Bytestring sig,
                 String string,
                 Blame blame,
+                Signatures sigs,
                 //com.shuffle.protocol.message.Packet packet,
                 Atom next
         ) {
@@ -78,8 +79,8 @@ public class Message implements com.shuffle.protocol.message.Message, Serializab
             format:
             {
                 if (addr != null) {
-                    if (ek != null || sig != null || secureHash != null
-                            || blame != null || string != null) {
+                    if (ek != null || secureHash != null || string != null
+                            || blame != null || sigs != null) {
 
                         throw new IllegalArgumentException();
                     }
@@ -87,34 +88,34 @@ public class Message implements com.shuffle.protocol.message.Message, Serializab
                 }
 
                 if (ek != null) {
-                    if (sig != null || secureHash != null || string != null || blame != null) {
-                        throw new IllegalArgumentException();
-                    }
-                    break format;
-                }
-
-                if (sig != null) {
-                    if (secureHash != null || string != null || blame != null) {
+                    if (secureHash != null || string != null || blame != null || sigs != null) {
                         throw new IllegalArgumentException();
                     }
                     break format;
                 }
 
                 if (secureHash != null) {
-                    if (string != null || blame != null) {
+                    if (string != null || blame != null || sigs != null) {
                         throw new IllegalArgumentException();
                     }
                     break format;
                 }
 
                 if (string != null) {
-                    if (blame != null) {
+                    if (blame != null || sigs != null) {
                         throw new IllegalArgumentException();
                     }
                     break format;
                 }
 
                 if (blame != null) {
+                    if (sigs != null) {
+                        throw new IllegalArgumentException();
+                    }
+                    break format;
+                }
+
+                if (sigs != null) {
                     break format;
                 }
 
@@ -123,10 +124,10 @@ public class Message implements com.shuffle.protocol.message.Message, Serializab
 
             this.addr = addr;
             this.ek = ek;
-            this.sig = sig;
             this.secureHash = secureHash;
             this.string = string;
             this.blame = blame;
+            this.sigs = sigs;
             this.next = next;
         }
 
@@ -140,14 +141,14 @@ public class Message implements com.shuffle.protocol.message.Message, Serializab
             if (o instanceof SecureHash) {
                 return new Atom(null, null, (SecureHash) o, null, null, null, next);
             }
-            if (o instanceof Bytestring) {
-                return new Atom(null, null, null, (Bytestring) o, null, null, next);
-            }
             if (o instanceof String) {
-                return new Atom(null, null, null, null, (String)o, null, next);
+                return new Atom(null, null, null, (String) o, null, null, next);
             }
             if (o instanceof Blame) {
-                return new Atom(null, null, null, null, null, (Blame) o, next);
+                return new Atom(null, null, null, null, (Blame)o, null, next);
+            }
+            if (o instanceof Signatures) {
+                return new Atom(null, null, null, null, null, (Signatures) o, next);
             }
 
             throw new IllegalArgumentException();
@@ -162,7 +163,7 @@ public class Message implements com.shuffle.protocol.message.Message, Serializab
                 return o;
             }
 
-            return new Atom(a.addr, a.ek, a.secureHash, a.sig, a.string, a.blame, attach(a.next, o));
+            return new Atom(a.addr, a.ek, a.secureHash, a.string, a.blame, a.sigs, attach(a.next, o));
         }
 
         @Override
@@ -177,12 +178,13 @@ public class Message implements com.shuffle.protocol.message.Message, Serializab
 
             Atom a = (Atom) o;
 
-            return this == a || (a.sig == null && sig == null || sig != null && sig.equals(a.sig))
+            return this == a
                     && (a.ek == null && ek == null || ek != null && ek.equals(a.ek))
                     && (a.addr == null && addr == null || addr != null && addr.equals(a.addr))
                     && (a.blame == null && blame == null || blame != null && blame.equals(a.blame))
                     && (a.secureHash == null && secureHash == null || secureHash != null && secureHash.equals(a.secureHash))
                     && (a.string == null && string == null || string != null && string.equals(a.string))
+                    && (a.sigs == null && sigs == null || sigs != null && sigs.equals(a.sigs))
                     && (a.next == null && next == null || next != null && next.equals(a.next));
         }
 
@@ -190,9 +192,9 @@ public class Message implements com.shuffle.protocol.message.Message, Serializab
         public int hashCode() {
             int hash = addr == null ? 0 : addr.hashCode();
             hash = hash * 15 + (ek == null ? 0 : ek.hashCode());
-            hash = hash * 15 + (sig == null ? 0 : sig.hashCode());
             hash = hash * 15 + (this.secureHash == null ? 0 : this.secureHash.hashCode());
             hash = hash * 15 + (blame == null ? 0 : blame.hashCode());
+            hash = hash * 15 + (sigs == null ? 0 : sigs.hashCode());
             hash = hash * 15 + (next == null ? 0 : next.hashCode());
             return hash;
         }
@@ -205,13 +207,13 @@ public class Message implements com.shuffle.protocol.message.Message, Serializab
 
             if (ek != null) str += ("\"" + ek.toString() + "\"");
 
-            if (sig != null) str += sig.toString();
-
             if (secureHash != null) str += secureHash.toString();
 
             if (string != null) str += ("\"" + string + "\"");
 
             if (blame != null) str += blame.toString();
+
+            if (sigs != null) str += sigs.toString();
 
             if (next != null) str += "⊕" + next.toString();
 
@@ -269,10 +271,10 @@ public class Message implements com.shuffle.protocol.message.Message, Serializab
     }
 
     @Override
-    public com.shuffle.protocol.message.Message attach(Bytestring sig) {
-        if (sig == null) throw new NullPointerException();
+    public com.shuffle.protocol.message.Message attach(Signatures sigs) {
+        if (sigs == null) throw new NullPointerException();
 
-        return new Message(Atom.attach(atoms, Atom.make(sig)), addressMarshaller, messages);
+        return new Message(Atom.attach(atoms, Atom.make(sigs)), addressMarshaller, messages);
     }
 
     @Override
@@ -321,10 +323,10 @@ public class Message implements com.shuffle.protocol.message.Message, Serializab
     }
 
     @Override
-    public Bytestring readSignature() throws FormatException {
-        if (atoms == null || atoms.sig == null) throw new FormatException("Signature not found");
+    public Signatures readSigs() throws FormatException {
+        if (atoms == null || atoms.sigs == null) throw new FormatException("Signature not found");
 
-        return atoms.sig;
+        return atoms.sigs;
     }
 
     @Override
