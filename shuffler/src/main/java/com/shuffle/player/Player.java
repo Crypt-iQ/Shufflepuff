@@ -15,6 +15,7 @@ import com.shuffle.bitcoin.Crypto;
 import com.shuffle.bitcoin.SigningKey;
 import com.shuffle.bitcoin.Transaction;
 import com.shuffle.bitcoin.VerificationKey;
+import com.shuffle.bitcoin.impl.AddressUtxoImpl;
 import com.shuffle.chan.BasicChan;
 import com.shuffle.chan.Chan;
 import com.shuffle.chan.packet.Packet;
@@ -36,6 +37,7 @@ import com.shuffle.protocol.message.Phase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bitcoinj.core.AddressFormatException;
+import org.bitcoinj.core.TransactionOutPoint;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -72,10 +74,12 @@ class Player {
 
     private final SortedSet<VerificationKey> addrs;
 
+    private final Map<VerificationKey, HashSet<TransactionOutPoint>> fundedOutputs;
+
     private final long time; // The time at which the join is scheduled to happen.
 
     private final long amount;
-    private final long fee;
+    private final Map<VerificationKey, Long> playerFees;
     private final Address anon;
     private final Address change;
     private final Messages.ShuffleMarshaller m;
@@ -91,17 +95,18 @@ class Player {
          Address anon,
          Address change, // Can be null to indicate no change address.
          SortedSet<VerificationKey> addrs,
+         Map<VerificationKey, HashSet<TransactionOutPoint>> fundedOutputs,
          long time,
          long amount,
-         long fee,
+         Map<VerificationKey, Long> playerFees,
          Coin coin, // Connects us to the Bitcoin or other cryptocurrency netork.
          Crypto crypto,
          Channel<VerificationKey, Signed<Packet<VerificationKey, Payload>>> channel,
          Messages.ShuffleMarshaller m,
          PrintStream stream
     ) {
-        if (sk == null || coin == null || session == null || addrs == null
-                || crypto == null || anon == null || channel == null) {
+        if (sk == null || coin == null || session == null || addrs == null || fundedOutputs == null
+                || playerFees == null || crypto == null || anon == null || channel == null) {
             throw new NullPointerException();
         }
         this.session = session;
@@ -110,11 +115,12 @@ class Player {
         this.crypto = crypto;
         this.time = time;
         this.amount = amount;
-        this.fee = fee;
+        this.playerFees = playerFees;
         this.anon = anon;
         this.change = change;
         this.channel = channel;
         this.addrs = addrs;
+        this.fundedOutputs = fundedOutputs;
         this.m = m;
         this.stream = stream;
     }
@@ -157,7 +163,7 @@ class Player {
                 // it has been successful.
                 Messages messages = new Messages(session, sk, collector.connected, collector.inbox, m);
                 CoinShuffle cs = new CoinShuffle(messages, crypto, coin);
-                return Report.success(cs.runProtocol(amount, fee, sk, addrs, anon, change, ch));
+                return Report.success(cs.runProtocol(amount, playerFees, sk, addrs, anon, change, ch));
             } catch (Matrix m) {
                 return Report.failure(m, addrs);
             } catch (TimeoutException e) {
@@ -185,13 +191,13 @@ class Player {
             try {
 
                 // Check whether I have sufficient funds to engage in this join.
-                Address addr = sk.VerificationKey().address();
+                AddressUtxoImpl a = new AddressUtxoImpl(fundedOutputs.get(sk.VerificationKey()));
                 // funds will be 0 because valueHeld is messed up
-                long funds = coin.valueHeld(addr);
+                long funds = coin.valueHeld(a);
                 // if (funds < amount) {
-                if (!coin.sufficientFunds(addr, amount)) {
+                if (!coin.sufficientFunds(a, amount)) {
                     connect.close();
-                    return Report.invalidInitialState("Insufficient funds! Address " + addr + " holds only " + funds + "; need at least " + amount);
+                    return Report.invalidInitialState("Insufficient funds! Address " + a + " holds only " + funds + "; need at least " + amount);
                 }
 
                 final Chan<Phase> ch = new BasicChan<>(2);
