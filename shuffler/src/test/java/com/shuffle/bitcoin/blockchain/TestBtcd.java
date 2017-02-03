@@ -13,10 +13,7 @@ import org.bitcoinj.core.Transaction;
 import org.bitcoinj.params.MainNetParams;
 
 import com.shuffle.bitcoin.CoinNetworkException;
-import com.shuffle.bitcoin.blockchain.Bitcoin;
-import com.shuffle.bitcoin.blockchain.Btcd;
 
-import org.bitcoinj.params.TestNet3Params;
 import org.bitcoinj.store.BlockStoreException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,9 +23,7 @@ import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
-import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 
 /**
