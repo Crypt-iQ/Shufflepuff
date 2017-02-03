@@ -1,7 +1,10 @@
 package com.shuffle.bitcoin.blockchain;
 
+import com.neemre.btcdcli4j.core.BitcoindException;
+import com.neemre.btcdcli4j.core.CommunicationException;
 import com.shuffle.bitcoin.Address;
 import com.shuffle.bitcoin.CoinNetworkException;
+import com.shuffle.bitcoin.impl.AddressUtxoImpl;
 import com.shuffle.mock.MockAddress;
 import com.shuffle.p2p.Bytestring;
 
@@ -12,6 +15,7 @@ import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.NetworkParameters;
 import org.bitcoinj.core.Transaction;
 import org.bitcoinj.core.TransactionInput;
+import org.bitcoinj.store.BlockStoreException;
 import org.bouncycastle.util.encoders.Hex;
 import org.junit.Assert;
 import org.junit.Test;
@@ -33,7 +37,17 @@ public class TestBitcoin {
         }
 
         @Override
-        protected List<Transaction> getAddressTransactionsInner(String address) throws IOException, CoinNetworkException, AddressFormatException {
+        public boolean isUtxo(String transactionHash, int vout) {
+            return true;
+        }
+
+        @Override
+        public com.shuffle.bitcoin.Transaction getConflictingTransactionInner(com.shuffle.bitcoin.Transaction t, Address a, long amount) throws CoinNetworkException, AddressFormatException, BlockStoreException, BitcoindException, CommunicationException, IOException {
+            return null;
+        }
+
+        @Override
+        protected List<Transaction> getTransactionsFromUtxosInner(AddressUtxoImpl address) throws IOException, CoinNetworkException, AddressFormatException {
             return null;
         }
 
@@ -42,7 +56,6 @@ public class TestBitcoin {
             return null;
         }
 
-        @Override
         protected List<Transaction> getAddressTransactions(String address) {
             HexBinaryAdapter adapter = new HexBinaryAdapter();
             Context context = Context.getOrCreate(this.netParams);
@@ -201,8 +214,8 @@ public class TestBitcoin {
         tx.addInput(parentTx2.getOutput(0));
         Assert.assertNotNull(mock.getSignature(tx, privKey1));
         Assert.assertNotNull(mock.getSignature(tx, privKey2));
-        Bytestring sig1 = mock.getSignature(tx, privKey1);
-        Bytestring sig2 = mock.getSignature(tx, privKey2);
+        Bytestring sig1 = mock.getSignature(tx, privKey1).sigs[0];
+        Bytestring sig2 = mock.getSignature(tx, privKey2).sigs[1];
         List<Bytestring> signatures = new LinkedList<>();
         signatures.add(sig1);
         signatures.add(sig2);
@@ -228,8 +241,8 @@ public class TestBitcoin {
         tx2.addInput(parentTx4.getOutput(0));
         Assert.assertNotNull(mock.getSignature(tx2, privKey3));
         Assert.assertNotNull(mock.getSignature(tx2, privKey4));
-        Bytestring sig3 = mock.getSignature(tx2, privKey3);
-        Bytestring sig4 = mock.getSignature(tx2, privKey4);
+        Bytestring sig3 = mock.getSignature(tx2, privKey3).sigs[0];
+        Bytestring sig4 = mock.getSignature(tx2, privKey4).sigs[0];
         List<Bytestring> signatures2 = new LinkedList<>();
         signatures2.add(sig3);
         signatures2.add(sig4);
