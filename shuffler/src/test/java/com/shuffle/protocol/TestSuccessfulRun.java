@@ -13,9 +13,7 @@ import com.shuffle.bitcoin.Crypto;
 import com.shuffle.bitcoin.SigningKey;
 import com.shuffle.bitcoin.Transaction;
 import com.shuffle.bitcoin.impl.BitcoinCrypto;
-import com.shuffle.mock.InsecureRandom;
 import com.shuffle.mock.MockCoin;
-import com.shuffle.mock.MockCrypto;
 import com.shuffle.monad.Either;
 import com.shuffle.protocol.blame.Matrix;
 import com.shuffle.sim.InitialState;
@@ -23,7 +21,6 @@ import com.shuffle.sim.Simulator;
 import com.shuffle.sim.TestCase;
 import com.shuffle.sim.init.Initializer;
 
-import org.bouncycastle.util.encoders.Hex;
 import org.junit.Assert;
 import org.junit.Test;
 
