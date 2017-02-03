@@ -10,8 +10,8 @@ package com.shuffle.protocol.message;
 
 import com.shuffle.bitcoin.Address;
 import com.shuffle.bitcoin.EncryptionKey;
+import com.shuffle.bitcoin.Signatures;
 import com.shuffle.bitcoin.VerificationKey;
-import com.shuffle.p2p.Bytestring;
 import com.shuffle.protocol.FormatException;
 import com.shuffle.protocol.blame.Blame;
 
@@ -30,13 +30,13 @@ public interface Message extends Serializable {
 
     Message attach(String str);
 
-    Message attach(Bytestring sig);
+    Message attach(Signatures sig);
 
     Message attach(Blame blame);
 
     EncryptionKey readEncryptionKey() throws FormatException;
 
-    Bytestring readSignature() throws FormatException;
+    Signatures readSigs() throws FormatException;
 
     Address readAddress() throws FormatException;
 
