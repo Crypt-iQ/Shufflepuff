@@ -8,15 +8,19 @@
 
 package com.shuffle.protocol;
 
+import com.neemre.btcdcli4j.core.BitcoindException;
+import com.neemre.btcdcli4j.core.CommunicationException;
 import com.shuffle.bitcoin.Address;
 import com.shuffle.bitcoin.Coin;
 import com.shuffle.bitcoin.CoinNetworkException;
 import com.shuffle.bitcoin.Crypto;
 import com.shuffle.bitcoin.DecryptionKey;
 import com.shuffle.bitcoin.EncryptionKey;
+import com.shuffle.bitcoin.Signatures;
 import com.shuffle.bitcoin.SigningKey;
 import com.shuffle.bitcoin.Transaction;
 import com.shuffle.bitcoin.VerificationKey;
+import com.shuffle.bitcoin.impl.AddressUtxoImpl;
 import com.shuffle.chan.Send;
 import com.shuffle.p2p.Bytestring;
 import com.shuffle.protocol.blame.Blame;
@@ -32,6 +36,8 @@ import com.shuffle.protocol.message.Phase;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.bitcoinj.core.AddressFormatException;
+import org.bitcoinj.core.TransactionOutPoint;
+import org.bitcoinj.store.BlockStoreException;
 
 import java.io.IOException;
 import java.util.Deque;
@@ -74,13 +80,15 @@ public class CoinShuffle {
 
         private final long amount; // The amount to be shuffled.
 
-        private final long fee; // The miner fee to be paid per player.
+        private final Map<VerificationKey, Long> playerFees; // The miner fee to be paid per player.
 
         final SigningKey sk; // My signing private key.
 
         public final int me; // Which player am I?
 
         public final Map<Integer, VerificationKey> players; // The players' public keys.
+
+        public final Map<VerificationKey, HashSet<TransactionOutPoint>> fundedOutputs; // The player's UTXOs.
 
         public final int N; // The number of players.
 
@@ -98,9 +106,9 @@ public class CoinShuffle {
 
         public final Address change; // My change address. (may be null).
 
-        public final Map<VerificationKey, Bytestring> signatures = new HashMap<>();
-
         public final Mailbox mailbox;
+
+        private Map<VerificationKey, Address> peers = new HashMap<>();
 
         Transaction protocolDefinition(
         ) throws TimeoutException, Matrix, InterruptedException,
@@ -232,17 +240,28 @@ public class CoinShuffle {
             phase.set(Phase.VerificationAndSubmission);
             System.out.println("Player " + me + " reaches phase 5. ");
 
-            Map<VerificationKey, Address> inputs = new HashMap<>();
-            for (int i = 1; i <= N; i++) {
-                VerificationKey key = players.get(i);
-                inputs.put(key, key.address());
+            if (fundedOutputs != null) {
+                for (VerificationKey player : fundedOutputs.keySet()) {
+                    AddressUtxoImpl a = new AddressUtxoImpl(fundedOutputs.get(player));
+                    peers.put(player, a);
+                }
+            } else {
+                for (Map.Entry<Integer, VerificationKey> entry : players.entrySet()) {
+                    VerificationKey vk = entry.getValue();
+                    peers.put(vk, vk.address());
+                }
             }
 
             // Generate the join transaction.
             Transaction t = coin.shuffleTransaction(
-                    amount, fee, inputs, newAddresses, changeAddresses);
+                    amount, playerFees, peers, newAddresses, changeAddresses);
 
-            checkDoubleSpending(t);
+            try {
+                checkDoubleSpending(t);
+            } catch (BlockStoreException e) {
+                throw new RuntimeException("Could not determine if a double-spend occurred.");
+            }
+
             if (t == null) throw new RuntimeException("Transaction in null. This should not happen.");
 
             // Generate the input script using our signing key.
@@ -255,7 +274,7 @@ public class CoinShuffle {
             // Send signature messages around and receive them from other players.
             // During this time we could also get notices of invalid signatures
             // or double spends, so we have to watch out for that.
-            Map<VerificationKey, Message> signatureMessages = null;
+            Map<VerificationKey, Message> signatureMessages;
             boolean invalidClaim = false;
             try {
                 signatureMessages = mailbox.receiveFromMultiple(playerSet(1, N), phase.get());
@@ -284,11 +303,12 @@ public class CoinShuffle {
             Map<VerificationKey, Bytestring> invalid = new HashMap<>();
             for (Map.Entry<VerificationKey, Message> sig : signatureMessages.entrySet()) {
                 VerificationKey key = sig.getKey();
-                Bytestring signature = sig.getValue().readSignature();
-                signatures.put(key, signature);
+                Signatures signature = sig.getValue().readSigs();
 
-                if (!t.addInputScript(signature)) {
-                    invalid.put(key, signature);
+                for (Bytestring b : signature.sigs) {
+                    if (!t.addInputScript(b)) {
+                        invalid.put(key, b);
+                    }
                 }
             }
 
@@ -318,8 +338,8 @@ public class CoinShuffle {
         // Everyone except player 1 creates a new keypair and sends it around to everyone else.
         DecryptionKey broadcastNewKey(Map<VerificationKey, Address> changeAddresses)
                 throws TimeoutException, InterruptedException, IOException, FormatException {
-            DecryptionKey dk = null;
-            dk = crypto.makeDecryptionKey();
+
+            DecryptionKey dk = crypto.makeDecryptionKey();
 
             // Broadcast the public key and store it in the set with everyone else's.
             encryptionKeys.put(vk, dk.EncryptionKey());
@@ -425,18 +445,17 @@ public class CoinShuffle {
         // Players run an equivocation check when they must confirm that they all have
         // the same information.
         void equivocationCheck(
-                Map<VerificationKey,
-                EncryptionKey> encryptonKeys,
+                Map<VerificationKey, EncryptionKey> encryptionKeys,
                 Queue<Address> newAddresses,
                 boolean errorCase // There is an equivocation check that occurs
         ) throws InterruptedException, TimeoutException, Matrix, IOException, FormatException {
 
-            Message equivocationCheck = equivocationCheckHash(players, encryptonKeys, newAddresses);
+            Message equivocationCheck = equivocationCheckHash(players, encryptionKeys, newAddresses);
             mailbox.broadcast(equivocationCheck, phase.get());
             System.out.println("Player " + me + " equivocation message " + equivocationCheck);
 
             // Wait for a similar message from everyone else and check that the result is the name.
-            Map<VerificationKey, Message> hashes = null;
+            Map<VerificationKey, Message> hashes;
             hashes = mailbox.receiveFromMultipleBlameless(playerSet(1, players.size()),
                     phase.get());
 
@@ -478,9 +497,23 @@ public class CoinShuffle {
 
             // Check that each participant has the required amounts.
             for (VerificationKey player : players.values()) {
-                if (!coin.sufficientFunds(player.address(), amount + fee)) {
-                    // Enter the blame phase.
-                    offenders.add(player);
+                Long fee = playerFees.get(player);
+                if (fee != null) {
+                    int playerFee = fee.intValue();
+                    if (fundedOutputs != null) {
+                        AddressUtxoImpl a = new AddressUtxoImpl(fundedOutputs.get(player));
+                        if (!coin.sufficientFunds(a, amount + playerFee)) {
+                            // Enter the blame phase.
+                            offenders.add(player);
+                        }
+                    } else {
+                        if (!coin.sufficientFunds(player.address(), amount + playerFee)) {
+                            offenders.add(player);
+                        }
+                    }
+                } else {
+                    // fee is null for player, exit
+                    throw new NullPointerException("Fee is null");
                 }
             }
 
@@ -520,14 +553,33 @@ public class CoinShuffle {
         }
 
         void checkDoubleSpending(Transaction t) throws InterruptedException, IOException,
-                FormatException, TimeoutException, Matrix, CoinNetworkException, AddressFormatException {
+                FormatException, TimeoutException, Matrix, CoinNetworkException, AddressFormatException, BlockStoreException {
 
             // Check for double spending.
             Message doubleSpend = messages.make();
             for (VerificationKey key : players.values()) {
-                Transaction o = coin.getConflictingTransaction(t, key.address(), amount);
-                if (o != null) {
-                    doubleSpend = doubleSpend.attach(Blame.DoubleSpend(key, o));
+                if (fundedOutputs != null) {
+                    AddressUtxoImpl a = new AddressUtxoImpl(fundedOutputs.get(key));
+                    Transaction o;
+                    try {
+                        o = coin.getConflictingTransaction(t, a, amount);
+                    } catch (BitcoindException | CommunicationException e) {
+                        throw new CoinNetworkException("Could not determine if a double-spend occurred.");
+                    }
+                    if (o != null) {
+                        doubleSpend = doubleSpend.attach(Blame.DoubleSpend(key, o));
+                    }
+                } else {
+                    Address a = key.address();
+                    Transaction o;
+                    try {
+                        o = coin.getConflictingTransaction(t, a, amount);
+                    } catch (BitcoindException | CommunicationException e) {
+                        throw new CoinNetworkException("Could not determine if a double-spend occurred.");
+                    }
+                    if (o != null) {
+                        doubleSpend = doubleSpend.attach(Blame.DoubleSpend(key, o));
+                    }
                 }
             }
 
@@ -842,8 +894,6 @@ public class CoinShuffle {
 
             // Put all temporary encryption keys into a list and hash the result.
             Message check = messages.make();
-            System.out.println("  Player " + me + "'s encryption keys: " + encryptionKeys);
-            System.out.println("  Player " + me + "'s players: " + players);
             for (int i = 1; i <= players.size(); i++) {
                 EncryptionKey key = encryptionKeys.get(players.get(i));
                 if (key == null) {
@@ -869,18 +919,20 @@ public class CoinShuffle {
         // A round is a single run of the protocol.
         Round(  CurrentPhase phase,
                 long amount,
-                long fee,
+                Map<VerificationKey, Long> playerFees,
                 SigningKey sk,
                 Map<Integer, VerificationKey> players,
+                Map<VerificationKey, HashSet<TransactionOutPoint>> fundedOutputs,
                 Address addrNew,
                 Address change,
                 Mailbox mailbox) throws InvalidParticipantSetException {
 
             this.phase = phase;
             this.amount = amount;
-            this.fee = fee;
+            this.playerFees = playerFees;
             this.sk = sk;
             this.players = players;
+            this.fundedOutputs = fundedOutputs;
             this.change = change;
             vk = sk.VerificationKey();
             this.mailbox = mailbox;
@@ -1168,10 +1220,10 @@ public class CoinShuffle {
     // Run the protocol without creating a new thread.
     public Transaction runProtocol(
             long amount, // The amount to be shuffled per player.
-            long fee, // The miner fee to be paid per player.
+            Map<VerificationKey, Long> playerFees, // Each player's respective fee.
             SigningKey sk, // The signing key of the current player.
-            // The set of players, sorted alphabetically by address.
-            SortedSet<VerificationKey> players,
+            SortedSet<VerificationKey> players, // The set of players, sorted alphabetically by address.
+            Map<VerificationKey, HashSet<TransactionOutPoint>> fundedOutputs,
             Address addrNew, // My new (anonymous) address.
             Address change, // Change address. (can be null)
             // If this is not null, the machine is put in this channel so that another thread can
@@ -1207,7 +1259,7 @@ public class CoinShuffle {
                 sk.VerificationKey(), numberedPlayers.values(), messages);
 
         return this.new Round(
-                machine, amount, fee, sk, numberedPlayers, addrNew, change, mailbox
+                machine, amount, playerFees, sk, numberedPlayers, fundedOutputs, addrNew, change, mailbox
         ).protocolDefinition();
     }
 
