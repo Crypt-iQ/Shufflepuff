@@ -5,7 +5,6 @@ import com.neemre.btcdcli4j.core.CommunicationException;
 import com.shuffle.bitcoin.Address;
 import com.shuffle.bitcoin.CoinNetworkException;
 import com.shuffle.bitcoin.impl.AddressUtxoImpl;
-import com.shuffle.mock.MockAddress;
 import com.shuffle.p2p.Bytestring;
 
 import org.bitcoinj.core.AddressFormatException;
@@ -14,7 +13,6 @@ import org.bitcoinj.core.Context;
 import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.NetworkParameters;
 import org.bitcoinj.core.Transaction;
-import org.bitcoinj.core.TransactionInput;
 import org.bitcoinj.store.BlockStoreException;
 import org.bouncycastle.util.encoders.Hex;
 import org.junit.Assert;
