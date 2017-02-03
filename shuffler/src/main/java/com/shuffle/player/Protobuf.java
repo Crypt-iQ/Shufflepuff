@@ -5,6 +5,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.shuffle.bitcoin.Address;
 import com.shuffle.bitcoin.DecryptionKey;
 import com.shuffle.bitcoin.EncryptionKey;
+import com.shuffle.bitcoin.Signatures;
 import com.shuffle.bitcoin.Transaction;
 import com.shuffle.bitcoin.VerificationKey;
 import com.shuffle.chan.packet.Marshaller;
@@ -119,9 +120,12 @@ public abstract class Protobuf implements Messages.ShuffleMarshaller {
         } else if (atom.secureHash != null) {
             ab.setHash(Proto.Hash.newBuilder().setHash(
                     ByteString.copyFrom(atom.secureHash.hashed.bytes)));
-        } else if (atom.sig != null) {
-            ab.setSignature(Proto.Signature.newBuilder().setSignature(
-                    ByteString.copyFrom(atom.sig.bytes)));
+        } else if (atom.sigs != null) {
+            Proto.Signatures.Builder builder = Proto.Signatures.newBuilder();
+            for (Bytestring b : atom.sigs.sigs) {
+                builder.addSignatures(ByteString.copyFrom(b.bytes));
+            }
+            ab.setSignatures(builder);
         } else if (atom.string != null) {
             ab.setStr(atom.string);
         } else if (atom.blame != null) {
@@ -188,13 +192,13 @@ public abstract class Protobuf implements Messages.ShuffleMarshaller {
         }
 
         if (b.packets != null) {
-            Proto.Packets.Builder packets = Proto.Packets.newBuilder();
+            Proto.Packets.Builder builder = Proto.Packets.newBuilder();
 
             for (com.shuffle.protocol.message.Packet p : b.packets) {
-                bb.setPackets(packets.addPacket(marshallSignedPacket(p)));
+                builder.addPacket(marshallSignedPacket(p));
             }
 
-            bb.setPackets(packets);
+            bb.setPackets(builder);
         }
 
         return bb;
@@ -205,19 +209,19 @@ public abstract class Protobuf implements Messages.ShuffleMarshaller {
         Object o;
         // Only one field is allowed to be set in the Atom.
         if (!atom.getStr().equals("")) {
-            if (atom.hasAddress() || atom.hasKey() || atom.hasSignature() || atom.hasBlame()) {
+            if (atom.hasAddress() || atom.hasKey() || atom.hasHash() || atom.hasSignatures() || atom.hasBlame()) {
                 throw new FormatException("Atom contains more than one value.");
             }
 
             o = atom.getStr();
         } else if (atom.hasAddress()) {
-            if (atom.hasKey() || atom.hasHash() || atom.hasSignature() || atom.hasBlame()) {
+            if (atom.hasKey() || atom.hasHash() || atom.hasSignatures() || atom.hasBlame()) {
                 throw new FormatException("Atom contains more than one value.");
             }
 
             o = unmarshallAdress(atom.getAddress().getAddress());
         } else if (atom.hasKey()) {
-            if (atom.hasHash() || atom.hasSignature() || atom.hasBlame()) {
+            if (atom.hasHash() || atom.hasSignatures() || atom.hasBlame()) {
                 throw new FormatException("Atom contains more than one value.");
             }
 
@@ -229,15 +233,23 @@ public abstract class Protobuf implements Messages.ShuffleMarshaller {
                 throw new FormatException("Could not read " + atom.getKey().getKey() + " as number.");
             }
         } else if (atom.hasHash()) {
-            if (atom.hasSignature() || atom.hasBlame()) {
+            if (atom.hasSignatures() || atom.hasBlame()) {
                 throw new FormatException("Atom contains more than one value.");
             }
 
             o = new Message.SecureHash(new Bytestring(atom.getHash().getHash().toByteArray()));
-        } else if (atom.hasSignature()) {
+        } else if (atom.hasSignatures()) {
             if (atom.hasBlame()) throw new FormatException("Atom contains more than one value.");
 
-            o = new Bytestring(atom.getSignature().getSignature().toByteArray());
+            Bytestring[] arr = new Bytestring[atom.getSignatures().getSignaturesList().size()];
+
+            int index = 0;
+            for (ByteString b : atom.getSignatures().getSignaturesList()) {
+                arr[index] = new Bytestring(b.toByteArray());
+                index++;
+            }
+
+            o = new Signatures(arr);
         } else if (atom.hasBlame()) {
             o = unmarshallBlame(atom.getBlame());
         } else {
