@@ -178,13 +178,12 @@ public class Message implements com.shuffle.protocol.message.Message, Serializab
 
             Atom a = (Atom) o;
 
-            return this == a
+            return this == a || (a.sigs == null && sigs == null || sigs != null && sigs.equals(a.sigs))
                     && (a.ek == null && ek == null || ek != null && ek.equals(a.ek))
                     && (a.addr == null && addr == null || addr != null && addr.equals(a.addr))
                     && (a.blame == null && blame == null || blame != null && blame.equals(a.blame))
                     && (a.secureHash == null && secureHash == null || secureHash != null && secureHash.equals(a.secureHash))
                     && (a.string == null && string == null || string != null && string.equals(a.string))
-                    && (a.sigs == null && sigs == null || sigs != null && sigs.equals(a.sigs))
                     && (a.next == null && next == null || next != null && next.equals(a.next));
         }
 
