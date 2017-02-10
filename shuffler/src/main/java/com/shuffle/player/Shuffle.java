@@ -81,7 +81,7 @@ import joptsimple.OptionSpecBuilder;
  */
 public class Shuffle {
     // Turn this on to enable test mode options.
-    private static boolean TEST_MODE = false;
+    private static boolean TEST_MODE = true;
 
     // 1 / 100 of a bitcoin.
     private static long MIN_AMOUNT = 1000000;
@@ -209,7 +209,7 @@ public class Shuffle {
     // Map<VerificationKey, Either<InetSocketAddress, Integer>> peers = new HashMap<>();
     Map<VerificationKey, InetSocketAddress> peers = new HashMap<>();
     SortedSet<VerificationKey> keys = new TreeSet<>();
-    Map<VerificationKey, HashSet<TransactionOutPoint>> fundedOutputs;
+    Map<VerificationKey, HashSet<TransactionOutPoint>> fundedOutputs = new HashMap<>();
     public final String report; // Where to save the report.
 
     public final ExecutorService executor;
@@ -643,6 +643,7 @@ public class Shuffle {
                     }
                     case "real": {
                         sk = new SigningKeyImpl(key, ((BitcoinCrypto) crypto).getParams());
+                        break;
                     }
                     default: {
                         throw new IllegalArgumentException("Only test crypto supported in this pre-alpha version.");
@@ -875,9 +876,6 @@ public class Shuffle {
         keys.add(vk);
         // peers.put(vk, new Either<>(null, id));
 
-        // TODO
-        // Since we haven't included a MockChannel (this would require a Multiplexer, which in turn
-        // requires MappedChannel to be updated), can we even accurately run any of the Mock tests ?
 		Channel<VerificationKey, Signed<Packet<VerificationKey, Payload>>> channel =
 				new MarshallChannel<>(
 						new MappedChannel<>(
