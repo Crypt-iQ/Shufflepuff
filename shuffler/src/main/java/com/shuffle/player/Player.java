@@ -79,7 +79,7 @@ class Player {
     private final long time; // The time at which the join is scheduled to happen.
 
     private final long amount;
-    private final Map<VerificationKey, Long> playerFees;
+    private final long fee;
     private final Address anon;
     private final Address change;
     private final Messages.ShuffleMarshaller m;
@@ -98,7 +98,7 @@ class Player {
          Map<VerificationKey, HashSet<TransactionOutPoint>> fundedOutputs,
          long time,
          long amount,
-         Map<VerificationKey, Long> playerFees,
+         long fee,
          Coin coin, // Connects us to the Bitcoin or other cryptocurrency netork.
          Crypto crypto,
          Channel<VerificationKey, Signed<Packet<VerificationKey, Payload>>> channel,
@@ -106,7 +106,7 @@ class Player {
          PrintStream stream
     ) {
         if (sk == null || coin == null || session == null || addrs == null || fundedOutputs == null
-                || playerFees == null || crypto == null || anon == null || channel == null) {
+                || crypto == null || anon == null || channel == null) {
             throw new NullPointerException();
         }
         this.session = session;
@@ -115,7 +115,7 @@ class Player {
         this.crypto = crypto;
         this.time = time;
         this.amount = amount;
-        this.playerFees = playerFees;
+        this.fee = fee;
         this.anon = anon;
         this.change = change;
         this.channel = channel;
@@ -163,7 +163,7 @@ class Player {
                 // it has been successful.
                 Messages messages = new Messages(session, sk, collector.connected, collector.inbox, m);
                 CoinShuffle cs = new CoinShuffle(messages, crypto, coin);
-                return Report.success(cs.runProtocol(amount, playerFees, sk, addrs, fundedOutputs, anon, change, ch));
+                return Report.success(cs.runProtocol(amount, fee, sk, addrs, fundedOutputs, anon, change, ch));
             } catch (Matrix m) {
                 return Report.failure(m, addrs);
             } catch (TimeoutException e) {

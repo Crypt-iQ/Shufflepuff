@@ -38,6 +38,9 @@ import org.apache.logging.log4j.LogManager;
 import org.bitcoinj.core.AddressFormatException;
 import org.bitcoinj.core.TransactionOutPoint;
 import org.bitcoinj.store.BlockStoreException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 import java.io.IOException;
 import java.util.Deque;
@@ -79,8 +82,10 @@ public class CoinShuffle {
         final CurrentPhase phase;
 
         private final long amount; // The amount to be shuffled.
+        
+        private final long fee;
 
-        private final Map<VerificationKey, Long> playerFees; // The miner fee to be paid per player.
+        private Map<VerificationKey, Long> playerFees; // The miner fee to be paid per player.
 
         final SigningKey sk; // My signing private key.
 
@@ -345,6 +350,13 @@ public class CoinShuffle {
             encryptionKeys.put(vk, dk.EncryptionKey());
             changeAddresses.put(vk, change);
             Message message = messages.make().attach(dk.EncryptionKey());
+
+            // Construct a json string from our utxos to send to other players
+            if (fundedOutputs != null) {
+                String jsonUtxoString = makeJSONString(fundedOutputs.get(vk));
+                message = message.attach(jsonUtxoString);
+            }
+
             if (change != null) {
                 message = message.attach(change);
             }
@@ -919,7 +931,7 @@ public class CoinShuffle {
         // A round is a single run of the protocol.
         Round(  CurrentPhase phase,
                 long amount,
-                Map<VerificationKey, Long> playerFees,
+                long fee,
                 SigningKey sk,
                 Map<Integer, VerificationKey> players,
                 Map<VerificationKey, HashSet<TransactionOutPoint>> fundedOutputs,
@@ -929,7 +941,7 @@ public class CoinShuffle {
 
             this.phase = phase;
             this.amount = amount;
-            this.playerFees = playerFees;
+            this.fee = fee;
             this.sk = sk;
             this.players = players;
             this.fundedOutputs = fundedOutputs;
@@ -1003,6 +1015,42 @@ public class CoinShuffle {
         }
 
         return true;
+    }
+
+    private static String makeJSONString(HashSet<TransactionOutPoint> utxos) {
+
+        String jsonString = "[";
+        String txhash = "\"txhash\"";
+        String vout = "\"vout\"";
+        for (TransactionOutPoint t : utxos) {
+            jsonString = jsonString.concat("{");
+            jsonString = jsonString.concat(txhash + ":" + "\"" + t.getHash().toString() + "\"");
+            jsonString = jsonString.concat(",");
+            jsonString = jsonString.concat(vout + ":" + String.valueOf(t.getIndex()));
+            jsonString = jsonString.concat("}");
+            if (t != utxos.toArray()[utxos.size() - 1]) {
+                jsonString = jsonString.concat(",");
+            }
+        }
+        jsonString = jsonString.concat("]");
+
+        return jsonString;
+
+    }
+
+    private static JSONArray readJSONArray(String ar) {
+
+        try {
+            JSONObject json = (JSONObject) JSONValue.parse("{\"x\":" + ar + "}");
+            if (json == null) {
+                throw new IllegalArgumentException("Could not parse json object " + ar + ".");
+            }
+
+            return (JSONArray) json.get("x");
+
+        } catch (ClassCastException e) {
+            throw new IllegalArgumentException("Could not parse json object " + ar + ".");
+        }
     }
 
     // In phase 1, everybody announces their new encryption keys to one another. They also
@@ -1220,7 +1268,7 @@ public class CoinShuffle {
     // Run the protocol without creating a new thread.
     public Transaction runProtocol(
             long amount, // The amount to be shuffled per player.
-            Map<VerificationKey, Long> playerFees, // Each player's respective fee.
+            long fee, // Each player's respective fee.
             SigningKey sk, // The signing key of the current player.
             SortedSet<VerificationKey> players, // The set of players, sorted alphabetically by address.
             Map<VerificationKey, HashSet<TransactionOutPoint>> fundedOutputs,
@@ -1259,7 +1307,7 @@ public class CoinShuffle {
                 sk.VerificationKey(), numberedPlayers.values(), messages);
 
         return this.new Round(
-                machine, amount, playerFees, sk, numberedPlayers, fundedOutputs, addrNew, change, mailbox
+                machine, amount, fee, sk, numberedPlayers, fundedOutputs, addrNew, change, mailbox
         ).protocolDefinition();
     }
 

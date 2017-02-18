@@ -397,7 +397,7 @@ public class Shuffle {
         }
 
         // Finally, get the peers.
-        JSONArray jsonPeers = readNestedJson((String)options.valueOf("peers"));
+        JSONArray jsonPeers = readJSONArray((String)options.valueOf("peers"));
         if (jsonPeers == null) {
             throw new IllegalArgumentException("Could not read " + options.valueOf("peers") + " as json array.");
         }
@@ -412,7 +412,7 @@ public class Shuffle {
                         + jsonPeers.get(i - 1) + " as json object.");
             }
 
-            String key, addr, utxos;
+            String key, addr;
 
             try {
                 key = (String) o.get("key");
@@ -424,66 +424,12 @@ public class Shuffle {
             } catch (ClassCastException e) {
                 throw new IllegalArgumentException("Could not read " + o.get("address") + " as string.");
             }
-            try {
-                utxos = "'" + o.get("utxos") + "'";
-            } catch (ClassCastException e) {
-                throw new IllegalArgumentException("Could not read option " + "'" + o.get("utxos") + "'" + " as string.");
-            }
-
-            JSONArray jsonUtxos = readJSONArrayUtxo(utxos);
 
             if (key == null) {
                 throw new IllegalArgumentException("Peer missing field \"key\".");
             }
             if (addr == null) {
                 throw new IllegalArgumentException("Peer missing field \"address\".");
-            }
-            if (utxos.equals("''")) {
-                throw new IllegalArgumentException("Peer missing field \"utxos\".");
-            }
-
-            if (jsonUtxos == null) {
-                throw new IllegalArgumentException("Could not read " + o.get("utxos") + " as json array.");
-            }
-
-            HashSet<TransactionOutPoint> checkDuplicateUtxo = new HashSet<>();
-            for (int j = 1; j <= jsonUtxos.size(); j++) {
-
-                JSONObject obj;
-                try {
-                    obj = (JSONObject) jsonUtxos.get(j - 1);
-                } catch (ClassCastException e) {
-                    throw new IllegalArgumentException("Could not read "
-                            + jsonUtxos.get(j - 1) + " as json object.");
-                }
-
-                // Long because we compare to null
-                Long vout;
-                Sha256Hash transactionHash;
-                try {
-                    vout = Long.valueOf((String) obj.get("vout"));
-                } catch (ClassCastException e) {
-                    throw new IllegalArgumentException("Could not read option " + obj.get("vout") + " as Long.");
-                }
-                try {
-                    transactionHash = Sha256Hash.wrap((String) obj.get("transactionHash"));
-                } catch (ClassCastException e) {
-                    throw new IllegalArgumentException("Could not read option " + obj.get("transactionHash") + " as string.");
-                }
-                if (vout == null) {
-                    throw new IllegalArgumentException("Utxo missing field \"vout\".");
-                }
-                if (transactionHash == null) {
-                    throw new IllegalArgumentException("Utxo missing field \"transactionHash\".");
-                }
-
-                TransactionOutPoint t = new TransactionOutPoint(netParams, vout, transactionHash);
-                if (checkDuplicateUtxo.contains(t)) {
-                    throw new IllegalArgumentException("Duplicate TransactionOutPoint.");
-                } else {
-                    checkDuplicateUtxo.add(t);
-                }
-
             }
 
             if (checkDuplicateAddress.contains(addr)) {
@@ -516,12 +462,6 @@ public class Shuffle {
 
             if (peers.containsKey(vk)) {
                 throw new IllegalArgumentException("Duplicate key " + key);
-            }
-
-            // TODO
-            // Check for duplicates in UTXOs amongst players?
-            if (!checkDuplicateUtxo.isEmpty()) {
-                this.fundedOutputs.put(vk, checkDuplicateUtxo);
             }
  
             // peers.put(vk, address);
@@ -562,8 +502,6 @@ public class Shuffle {
                 throw new IllegalArgumentException("At least two players total must be specified.");
             }
 
-            Map<SigningKey, HashSet<TransactionOutPoint>> localMap = new HashMap<>();
-            Map<String, SigningKey> keyMap = new HashMap<>();
             for (int i = 1; i <= local.size(); i ++) {
                 JSONObject o;
                 try {
@@ -573,7 +511,7 @@ public class Shuffle {
                             + local.get(i - 1) + " as json object.");
                 }
 
-                String key, utxos;
+                String key, anon, change, utxos;
                 Long port;
 
                 try {
@@ -582,14 +520,24 @@ public class Shuffle {
                     throw new IllegalArgumentException("Could not read option " + o.get("key") + " as string.");
                 }
                 try {
-                    utxos = "'" + o.get("utxos") + "'";
+                    anon = (String) o.get("anon");
                 } catch (ClassCastException e) {
-                    throw new IllegalArgumentException("Could not read option " + "'" + o.get("utxos") + "'" + " as string.");
+                    throw new IllegalArgumentException("Could not read option " + o.get("anon") + " as string.");
+                }
+                try {
+                    change = (String) o.get("change");
+                } catch (ClassCastException e) {
+                    throw new IllegalArgumentException("Could not read option " + o.get("change") + " as string.");
                 }
                 try {
                     port = (Long) o.get("port");
                 } catch (ClassCastException e) {
                     throw new IllegalArgumentException("Could not read option " + o.get("port") + " as string.");
+                }
+                try {
+                    utxos = "'" + o.get("utxos") + "'";
+                } catch (ClassCastException e) {
+                    throw new IllegalArgumentException("Could not read option " + "'" + o.get("utxos") + "'" + " as string.");
                 }
 
                 JSONArray jsonUtxos = readJSONArrayUtxo(utxos);
@@ -597,11 +545,14 @@ public class Shuffle {
                 if (key == null) {
                     throw new IllegalArgumentException("Player missing field \"key\".");
                 }
-                if (utxos.equals("''")) {
-                    throw new IllegalArgumentException("Player missing field \"utxos\".");
+                if (anon == null) {
+                    throw new IllegalArgumentException("Player missing field \"anon\".");
                 }
                 if (port == null) {
                     throw new IllegalArgumentException("Player missing field \"port\".");
+                }
+                if (utxos.equals("''")) {
+                    throw new IllegalArgumentException("Player missing field \"utxos\".");
                 }
 
                 if (jsonUtxos == null) {
@@ -644,72 +595,7 @@ public class Shuffle {
                     }
                 }
 
-                SigningKey sk;
-                switch ((String) options.valueOf("crypto")) {
-                    case "mock": {
-                        sk = new MockSigningKey(Integer.parseInt(key));
-                        break;
-                    }
-                    case "real": {
-                        sk = new SigningKeyImpl(key, ((BitcoinCrypto) crypto).getParams());
-                        break;
-                    }
-                    default: {
-                        throw new IllegalArgumentException("Only test crypto supported in this pre-alpha version.");
-                    }
-                }
-
-                localMap.put(sk, checkDuplicateUtxo);
-                keyMap.put(key, sk);
-                peers.put(sk.VerificationKey(), new InetSocketAddress(InetAddress.getLocalHost(), port.intValue()));
-
-            }
-
-            for (int i = 1; i <= local.size(); i ++) {
-                JSONObject o;
-                try {
-                    o = (JSONObject) local.get(i - 1);
-                } catch (ClassCastException e) {
-                    throw new IllegalArgumentException("Could not read "
-                            + local.get(i - 1) + " as json object.");
-                }
-
-                String key, anon, change;
-                Long port;
-                try {
-                    key = (String) o.get("key");
-                } catch (ClassCastException e) {
-                    throw new IllegalArgumentException("Could not read option " + o.get("key") + " as string.");
-                }
-                try {
-                    anon = (String) o.get("anon");
-                } catch (ClassCastException e) {
-                    throw new IllegalArgumentException("Could not read option " + o.get("anon") + " as string.");
-                }
-                try {
-                    change = (String) o.get("change");
-                } catch (ClassCastException e) {
-                    throw new IllegalArgumentException("Could not read option " + o.get("change") + " as string.");
-                }
-                try {
-                    port = (Long) o.get("port");
-                } catch (ClassCastException e) {
-                    throw new IllegalArgumentException("Could not read option " + o.get("port") + " as string.");
-                }
-
-                if (key == null) {
-                    throw new IllegalArgumentException("Player missing field \"key\".");
-                }
-                if (anon == null) {
-                    throw new IllegalArgumentException("Player missing field \"anon\".");
-                }
-                if (port == null) {
-                    throw new IllegalArgumentException("Player missing field \"port\".");
-                }
-
-                HashSet<TransactionOutPoint> utxoSet = localMap.get(keyMap.get(key));
-
-                this.local.add(readPlayer(options, key, i, utxoSet, port, anon, change, m, localMap));
+                this.local.add(readPlayer(options, key, i, checkDuplicateUtxo, port, anon, change, m));
             }
         } else {
             if (jsonPeers.size() == 0) {
@@ -815,9 +701,9 @@ public class Shuffle {
             }
 
             if (!options.has("change")) {
-                this.local.add(readPlayer(options, key, 1, utxoSet, port, anon, null, m, null));
+                this.local.add(readPlayer(options, key, 1, utxoSet, port, anon, null, m));
             } else {
-                this.local.add(readPlayer(options, key, 1, utxoSet, port, anon, change, m, null));
+                this.local.add(readPlayer(options, key, 1, utxoSet, port, anon, change, m));
             }
         }
 
@@ -831,8 +717,7 @@ public class Shuffle {
             long port,
             String anon,
             String change,
-            Messages.ShuffleMarshaller m,
-            Map<SigningKey, HashSet<TransactionOutPoint>> localMap) throws UnknownHostException, FormatException, AddressFormatException {
+            Messages.ShuffleMarshaller m) throws UnknownHostException, FormatException, AddressFormatException {
 
         SigningKey sk;
         Address anonAddress;
@@ -880,12 +765,6 @@ public class Shuffle {
 
         fundedOutputs.put(sk.VerificationKey(), utxoSet);
 
-        if (localMap != null) {
-            for (SigningKey k : localMap.keySet()) {
-                fundedOutputs.put(k.VerificationKey(), localMap.get(k));
-            }
-        }
-
         keys.add(vk);
         // peers.put(vk, new Either<>(null, id));
 
@@ -896,15 +775,10 @@ public class Shuffle {
 						peers, vk),
 				m.signedMarshaller());
 
-        // Using each player's UTXOs, we determine the fee each player must pay.
-        // We assume all players use a change address since we don't yet know if each player
-        // has included one.
-        Map<VerificationKey, Long> playerFees = Bitcoin.getPlayersP2PKHFees(fundedOutputs, fee);
-
         return new Player(
                 sk, session, anonAddress,
                 changeAddress, keys, fundedOutputs, time,
-                amount, playerFees, coin, crypto, channel, m, System.out);
+                amount, fee, coin, crypto, channel, m, System.out);
     }
 
     private static JSONArray readJSONArray(String ar) {
