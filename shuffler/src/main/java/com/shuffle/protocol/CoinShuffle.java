@@ -91,7 +91,7 @@ public class CoinShuffle {
         
         private final long fee;
 
-        private Map<VerificationKey, Long> playerFees; // The miner fee to be paid per player.
+        private Map<VerificationKey, Long> playerFees = new HashMap<>(); // The miner fee to be paid per player.
 
         final SigningKey sk; // My signing private key.
 
