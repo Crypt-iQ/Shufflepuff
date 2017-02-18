@@ -532,7 +532,7 @@ public class Shuffle {
                 try {
                     port = (Long) o.get("port");
                 } catch (ClassCastException e) {
-                    throw new IllegalArgumentException("Could not read option " + o.get("port") + " as string.");
+                    throw new IllegalArgumentException("Could not read option " + o.get("port") + " as Long.");
                 }
                 try {
                     utxos = "'" + o.get("utxos") + "'";
@@ -658,9 +658,9 @@ public class Shuffle {
             }
 
             // Get our UTXOs
-            JSONArray jsonUtxos = readJSONArray((String) options.valueOf("utxos"));
+            JSONArray jsonUtxos = readJSONArray(utxos);
             if (jsonUtxos == null) {
-                throw new IllegalArgumentException("Could not read " + options.valueOf("utxos") + " as json array.");
+                throw new IllegalArgumentException("Could not read " + utxos + " as json array.");
             }
 
             HashSet<TransactionOutPoint> utxoSet = new HashSet<>();
