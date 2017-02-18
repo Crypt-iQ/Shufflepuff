@@ -502,6 +502,54 @@ public class Shuffle {
                 throw new IllegalArgumentException("At least two players total must be specified.");
             }
 
+            for (int i = 1; i <= local.size(); i++) {
+                JSONObject o;
+                try {
+                    o = (JSONObject) local.get(i - 1);
+                } catch (ClassCastException e) {
+                    throw new IllegalArgumentException("Could not read "
+                            + local.get(i - 1) + " as json object.");
+                }
+
+                String key;
+                Long port;
+
+                try {
+                    key = (String) o.get("key");
+                } catch (ClassCastException e) {
+                    throw new IllegalArgumentException("Could not read option " + o.get("key") + " as string.");
+                }
+                try {
+                    port = (Long) o.get("port");
+                } catch (ClassCastException e) {
+                    throw new IllegalArgumentException("Could not read option " + o.get("port") + " as Long.");
+                }
+
+                if (key == null) {
+                    throw new IllegalArgumentException("Player missing field \"key\".");
+                }
+                if (port == null) {
+                    throw new IllegalArgumentException("Player missing field \"port\".");
+                }
+
+                SigningKey sk;
+                switch ((String) options.valueOf("crypto")) {
+                    case "mock": {
+                        sk = new MockSigningKey(Integer.parseInt(key));
+                        break;
+                    }
+                    case "real": {
+                        sk = new SigningKeyImpl(key, ((BitcoinCrypto) crypto).getParams());
+                        break;
+                    }
+                    default: {
+                        throw new IllegalArgumentException("Only test crypto supported in this pre-alpha version.");
+                    }
+                }
+
+                peers.put(sk.VerificationKey(), new InetSocketAddress(InetAddress.getLocalHost(), port.intValue()));
+            }
+
             for (int i = 1; i <= local.size(); i ++) {
                 JSONObject o;
                 try {
