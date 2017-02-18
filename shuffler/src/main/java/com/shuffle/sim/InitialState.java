@@ -281,12 +281,7 @@ public class InitialState {
                 shuffle = new CoinShuffle(messages, testCase.crypto(), coin);
             }
 
-            Map<VerificationKey, Long> playerFees = new HashMap<>();
-            for (VerificationKey vk : keys) {
-                playerFees.put(vk, testCase.fee);
-            }
-
-            return new Adversary(testCase.amount, playerFees, sk, keys, addr, change, shuffle);
+            return new Adversary(testCase.amount, testCase.fee, sk, keys, addr, change, shuffle);
         }
 
         // The sort of malicious behavior to be performed by this player, if any.
