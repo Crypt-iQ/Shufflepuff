@@ -20,6 +20,7 @@ import com.shuffle.bitcoin.Signatures;
 import com.shuffle.bitcoin.SigningKey;
 import com.shuffle.bitcoin.Transaction;
 import com.shuffle.bitcoin.VerificationKey;
+import com.shuffle.bitcoin.blockchain.Bitcoin;
 import com.shuffle.bitcoin.impl.AddressUtxoImpl;
 import com.shuffle.chan.Send;
 import com.shuffle.p2p.Bytestring;
@@ -36,7 +37,10 @@ import com.shuffle.protocol.message.Phase;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.bitcoinj.core.AddressFormatException;
+import org.bitcoinj.core.NetworkParameters;
+import org.bitcoinj.core.Sha256Hash;
 import org.bitcoinj.core.TransactionOutPoint;
+import org.bitcoinj.params.TestNet3Params;
 import org.bitcoinj.store.BlockStoreException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -75,6 +79,8 @@ public class CoinShuffle {
     private final Coin coin;
 
     final MessageFactory messages;
+
+    static NetworkParameters netParams;
 
     // A single round of the protocol. It is possible that the players may go through
     // several failed rounds until they have eliminated malicious players.
@@ -130,15 +136,13 @@ public class CoinShuffle {
             log.info("Player " + me + " begins CoinShuffle protocol " + " with " + N + " players.");
             System.out.println("Player " + me + " begins CoinShuffle protocol " + " with " + N + " players.");
 
-            // Check for sufficient funds.
-            // There was a problem with the wording of the original paper which would have meant
-            // that player 1's funds never would have been checked, but it's necessary to check
-            // everybody.
-            blameInsufficientFunds();
-            System.out.println("Player " + me + " finds sufficient funds");
-
             // This will contain the change addresses.
             Map<VerificationKey, Address> changeAddresses = new HashMap<>();
+
+            if (fundedOutputs != null) {
+                TransactionOutPoint t = fundedOutputs.get(vk).iterator().next();
+                netParams = t.getParams();
+            }
 
             // Everyone creates a new keypair and sends it around to everyone else.
             // Note that the key for player 1 is not actually used; however, player 1
@@ -159,7 +163,25 @@ public class CoinShuffle {
             }
             System.out.println("Player " + me + " is about to read announcements.");
 
-            readAnnouncements(announcement, encryptionKeys, changeAddresses);
+            Map<VerificationKey, HashSet<TransactionOutPoint>> peerOutputs = readAnnouncements(announcement, encryptionKeys, changeAddresses);
+            for (Map.Entry<VerificationKey, HashSet<TransactionOutPoint>> entry : peerOutputs.entrySet()) {
+                fundedOutputs.put(entry.getKey(), entry.getValue());
+            }
+
+            if (fundedOutputs != null) {
+                playerFees = Bitcoin.getPlayersP2PKHFees(fundedOutputs, fee);
+            } else {
+                for (VerificationKey key : players.values()) {
+                    playerFees.put(key, fee);
+                }
+            }
+
+            // Check for sufficient funds.
+            // There was a problem with the wording of the original paper which would have meant
+            // that player 1's funds never would have been checked, but it's necessary to check
+            // everybody.
+            blameInsufficientFunds();
+            System.out.println("Player " + me + " finds sufficient funds");
 
             // Phase 2: Shuffle
             // In the shuffle phase, players go in order and reorder the addresses they have been
@@ -352,10 +374,15 @@ public class CoinShuffle {
             Message message = messages.make().attach(dk.EncryptionKey());
 
             // Construct a json string from our utxos to send to other players
+            String jsonUtxoString;
             if (fundedOutputs != null) {
-                String jsonUtxoString = makeJSONString(fundedOutputs.get(vk));
-                message = message.attach(jsonUtxoString);
+                jsonUtxoString = makeJSONString(fundedOutputs.get(vk));
+            } else {
+                // Unit tests don't use fundedOutputs
+                jsonUtxoString = "null";
             }
+
+            message = message.attach(jsonUtxoString);
 
             if (change != null) {
                 message = message.attach(change);
@@ -1056,9 +1083,11 @@ public class CoinShuffle {
     // In phase 1, everybody announces their new encryption keys to one another. They also
     // optionally send change addresses to one another. This function reads that information
     // from a message and puts it in some nice data structures.
-    private static void readAnnouncements(Map<VerificationKey, Message> messages,
+    private static Map<VerificationKey, HashSet<TransactionOutPoint>> readAnnouncements(Map<VerificationKey, Message> messages,
                            Map<VerificationKey, EncryptionKey> encryptionKeys,
                            Map<VerificationKey, Address> change) throws FormatException {
+
+        Map<VerificationKey, HashSet<TransactionOutPoint>> outputs = new HashMap<>();
 
         for (Map.Entry<VerificationKey, Message> entry : messages.entrySet()) {
             VerificationKey key = entry.getKey();
@@ -1067,10 +1096,37 @@ public class CoinShuffle {
             encryptionKeys.put(key, message.readEncryptionKey());
 
             message = message.rest();
+
             if (!message.isEmpty()) {
-                change.put(key, message.readAddress());
+                try {
+                    if (message.readString().equals("null")) {
+                        message = message.rest();
+                        if (!message.isEmpty()) change.put(key, message.readAddress());
+                    } else {
+                        JSONArray utxoList = readJSONArray(message.readString());
+
+                        HashSet<TransactionOutPoint> peerUtxoSet = new HashSet<>();
+                        for (int i = 1; i <= utxoList.size(); i++) {
+                            JSONObject o = (JSONObject) utxoList.get(i - 1);
+                            long vout = (long) o.get("vout");
+                            Sha256Hash transactionHash = Sha256Hash.wrap((String) o.get("txhash"));
+                            TransactionOutPoint t = new TransactionOutPoint(netParams, vout, transactionHash);
+                            peerUtxoSet.add(t);
+                        }
+
+                        outputs.put(key, peerUtxoSet);
+
+                        message = message.rest();
+
+                        if (!message.isEmpty()) change.put(key, message.readAddress());
+                    }
+                } catch (FormatException e) {
+                    
+                }
             }
         }
+
+        return outputs;
     }
 
     // This function is only called by fillBlameMatrix to collect messages sent in
