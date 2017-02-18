@@ -47,12 +47,12 @@ public class Adversary {
     private final Address anon;
     private final SortedSet<VerificationKey> players;
     private final long amount;
-    private final Map<VerificationKey, Long> playerFees;
+    private final long fee;
     private final Address change; // Change address. (can be null)
 
     Adversary(
             long amount,
-            Map<VerificationKey, Long> playerFees,
+            long fee,
             SigningKey sk,
             SortedSet<VerificationKey> players,
             Address anon,
@@ -63,7 +63,7 @@ public class Adversary {
             throw new NullPointerException();
 
         this.amount = amount;
-        this.playerFees = playerFees;
+        this.fee = fee;
         this.sk = sk;
         this.players = players;
         this.shuffle = shuffle;
@@ -77,7 +77,7 @@ public class Adversary {
 
             final CoinShuffle shuffle,
             final long amount, // The amount to be shuffled per player.
-            final Map<VerificationKey, Long> playerFees, // A map of VerificationKey to miner fee (Long) per player. 
+            final long fee, // A map of VerificationKey to miner fee (Long) per player. 
             final SigningKey sk, // The signing key of the current player.
             // The set of players, sorted alphabetically by address.
             final SortedSet<VerificationKey> players
@@ -98,7 +98,7 @@ public class Adversary {
                 try {
                     try {
                         q.send(new Either<>(shuffle.runProtocol(
-                                amount, playerFees, sk, players, null, anon, change, null
+                                amount, fee, sk, players, null, anon, change, null
                         ), null));
 
                     } catch (Matrix m) {
@@ -197,7 +197,7 @@ public class Adversary {
     // Return a future that can be composed with others.
     public Future<Summable.SummableElement<Map<SigningKey, Either<Transaction, Matrix>>>> turnOn() {
 
-        return runProtocolFuture(shuffle, amount, playerFees, sk, players);
+        return runProtocolFuture(shuffle, amount, fee, sk, players);
     }
 
     public SigningKey identity() {
