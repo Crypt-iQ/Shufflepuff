@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 
 /**
@@ -142,4 +143,30 @@ public class BitcoinCore extends Bitcoin {
 
         return txList;
     }
+
+    // TODO
+    @Override
+    protected boolean send(Bitcoin.Transaction t) {
+        if (!t.canSend || t.sent) {
+            return false;
+        }
+
+        String hexTx = null;
+        try {
+            hexTx = DatatypeConverter.printHexBinary(t.bitcoinj().bitcoinSerialize());
+        } catch (BlockStoreException | IOException e) {
+            return false;
+        }
+
+        // TODO response
+
+        String txid;
+        try {
+            txid = client.sendRawTransaction(hexTx);
+        } catch (BitcoindException | CommunicationException e) {
+            return false;
+        }
+
+        return txid != null;
+    } 
 }
