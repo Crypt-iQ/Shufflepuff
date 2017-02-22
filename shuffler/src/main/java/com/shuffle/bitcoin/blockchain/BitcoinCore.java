@@ -57,7 +57,7 @@ public class BitcoinCore extends Bitcoin {
     public synchronized boolean isUtxo(String transactionHash, int vout) throws IOException, BitcoindException, CommunicationException {
         return client.getTxOut(transactionHash, vout, false);
     }
-    
+
     public synchronized com.shuffle.bitcoin.Transaction getConflictingTransactionInner(com.shuffle.bitcoin.Transaction t, Address a, long amount)
         throws CoinNetworkException, AddressFormatException, BlockStoreException, BitcoindException, CommunicationException, IOException {
 
@@ -68,7 +68,7 @@ public class BitcoinCore extends Bitcoin {
 
         for (TransactionOutPoint to : addrUtxo.getUtxos()) {
             org.bitcoinj.core.Transaction tx = getTransaction(to.getHash().toString());
-            // TODO
+            // TODO - query mempool ?
         }
 
         return null;

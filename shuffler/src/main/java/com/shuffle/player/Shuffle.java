@@ -5,6 +5,7 @@ import com.neemre.btcdcli4j.core.CommunicationException;
 import com.shuffle.bitcoin.Address;
 import com.shuffle.bitcoin.CoinNetworkException;
 import com.shuffle.bitcoin.blockchain.Bitcoin;
+import com.shuffle.bitcoin.blockchain.BitcoinCore;
 import com.shuffle.bitcoin.impl.BitcoinCrypto;
 import com.shuffle.bitcoin.Coin;
 import com.shuffle.bitcoin.Crypto;
@@ -301,6 +302,23 @@ public class Shuffle {
         }
 
         switch (query) {
+            case "bitcoin-core" : {
+                if (!options.has("blockchain")) {
+                    throw new IllegalArgumentException("Need to set blockchain parameter (test or main)");
+                } else if (options.has("minbitcoinnetworkpeers")) {
+                    throw new IllegalArgumentException("minbitcoinnetworkpeers not required for Bitcoin Core.");
+                } else if (!options.has("rpcuser")) {
+                    throw new IllegalArgumentException("Need to set rpcuser parameter (rpc server login)");
+                } else if (!options.has("rpcpass")) {
+                    throw new IllegalArgumentException("Need to set rpcpass parameter (rpc server login)");
+                }
+
+                String rpcuser = (String)options.valueOf("rpcuser");
+                String rpcpass = (String)options.valueOf("rpcpass");
+
+                coin = new BitcoinCore(netParams, rpcuser, rpcpass);
+                break;
+            }
             case "btcd" : {
 
                 if (!options.has("blockchain")) {
@@ -331,8 +349,8 @@ public class Shuffle {
                 // fallthrough.
             } default : {
                 throw new IllegalArgumentException(
-                        "Invalid option for 'blockchain' supplied. Only option is 'btcd'. " +
-                                "'btcd' allows for querying on a local instance of " +
+                        "Invalid option for 'blockchain' supplied. Available options are 'bitcoin-core' and 'btcd'. " +
+                                "'bitcoin-core' and 'btcd' allow for querying a local instance of " +
                                 "the blockchain. "
                 );
             }
