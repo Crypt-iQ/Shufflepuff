@@ -61,16 +61,12 @@ public class BitcoinCore extends Bitcoin {
     public synchronized com.shuffle.bitcoin.Transaction getConflictingTransactionInner(com.shuffle.bitcoin.Transaction t, Address a, long amount)
         throws CoinNetworkException, AddressFormatException, BlockStoreException, BitcoindException, CommunicationException, IOException {
 
-        if (!(t instanceof Transaction)) throw new IllegalArgumentException();
-        Transaction transaction = (Transaction) t;
-
-        AddressUtxoImpl addrUtxo = (AddressUtxoImpl) a;
-
-        for (TransactionOutPoint to : addrUtxo.getUtxos()) {
-            org.bitcoinj.core.Transaction tx = getTransaction(to.getHash().toString());
-            // TODO - query mempool ?
-        }
-
+        // TODO
+        /**
+         *  Is this even possible with Bitcoin-Core ? We can only query the mempool, we can't
+         *  realistically search the blockchain for a UTXO that was spent.  (Searching the
+         *  blockchain for a spent UTXO would take far too long...)
+         */
         return null;
     }
 
