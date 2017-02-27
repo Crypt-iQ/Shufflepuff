@@ -54,15 +54,7 @@ import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
  * Instructions:
  *
  * In your Btcd.conf file, set an rpcuser and rpcpass (rpclimituser & rpclimitpass also works).
- * Make sure addrindex = 1 (this indexes Bitcoin addresses) and notls = 1 (currently TLS is not supported)
- *
- * Alternatively, if you do not wish to edit the config file for addrindex and notls,
- * you can use the two flags in the command line:
- * "./btcd --addrindex --notls"
- * 
- * Note: Currently, Btcd requires the "addrindex" flag to search for conflicting transactions in the mempool.
- *       However, it can be removed if one changes getConflictingTransactionsInner() to search through the
- *       mempool.  This option might come in a future update.
+ * Make sure notls = 1 (currently TLS is not supported)
  *
  */
 public class Btcd extends Bitcoin {
@@ -175,6 +167,8 @@ public class Btcd extends Bitcoin {
     /**
      * This method will take in an address hash and return a List of all transactions associated with 
      * this address.  These transactions are in our Bitcoin.Transaction object format.
+     * 
+     * Note: Currently not used in ShufflePuff.
      */
     public synchronized List<Transaction> getAddressTransactions(String address) throws IOException {
 
