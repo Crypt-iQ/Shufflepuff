@@ -69,12 +69,6 @@ public class BitcoinCore extends Bitcoin {
     public synchronized com.shuffle.bitcoin.Transaction getConflictingTransactionInner(com.shuffle.bitcoin.Transaction t, Address a, long amount)
         throws CoinNetworkException, AddressFormatException, BlockStoreException, BitcoindException, CommunicationException, IOException {
 
-        // TODO
-
-        // 1. List<String> mempoolTx = client.getRawMempool();
-        // 2. BitcoinCore.TransactionWithConfirmations tx = getTransaction(MEMPOOL_TX_HERE)
-        // 3. Compare Inputs
-
         if (!(t instanceof Transaction)) throw new IllegalArgumentException();
         Transaction transaction = (Transaction) t;
 
