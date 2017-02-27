@@ -18,6 +18,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.bitcoinj.core.AddressFormatException;
 import org.bitcoinj.core.Context;
 import org.bitcoinj.core.NetworkParameters;
+import org.bitcoinj.core.Transaction;
 import org.bitcoinj.core.TransactionInput;
 import org.bitcoinj.core.TransactionOutPoint;
 import org.bitcoinj.store.BlockStoreException;
@@ -461,6 +462,7 @@ public class Btcd extends Bitcoin {
         return mempoolTx;
     }
 
+    // Transaction is never used
     @Override
     synchronized com.shuffle.bitcoin.Transaction getConflictingTransactionInner(com.shuffle.bitcoin.Transaction t, Address a, long amount)
             throws CoinNetworkException, AddressFormatException, BlockStoreException, BitcoindException, CommunicationException, IOException {
@@ -469,13 +471,28 @@ public class Btcd extends Bitcoin {
         Transaction transaction = (Transaction) t;
 
         AddressUtxoImpl addrUtxo = (AddressUtxoImpl) a;
-        HashSet<TransactionOutPoint> utxos = addrUtxo.getUtxos();
+        HashSet<TransactionOutPoint> notInUtxoSet = new HashSet<>();
 
-        // 1. Have a list of UTXOs
-        // 2. isUtxo(), if not, check mempool, return tx, else return null.
-        // 3. t is never used...
+        for (TransactionOutPoint to : addrUtxo.getUtxos()) {
+            if (!isUtxo(to.getHash().toString(), (int) to.getIndex())) {
+                notInUtxoSet.add(to);
+            }
+        }
 
-        
+        if (notInUtxoSet.isEmpty()) return null;
+
+        List<String> mempool = getMempool();
+
+        for (String txid : mempool) {
+            org.bitcoinj.core.Transaction mempoolTx = getTransaction(txid);
+            for (TransactionInput txInput : mempoolTx.getInputs()) {
+                if (notInUtxoSet.contains(txInput.getOutpoint())) {
+                    // canSend = false because it's already in the mempool
+                    // confirmed = false because it's in the mempool
+                    return new Transaction(txid, mempoolTx, false, false);
+                }
+            }
+        }
 
         return null;
     }
