@@ -59,15 +59,19 @@ public class BitcoinCore extends Bitcoin {
         return client.getTxOut(transactionHash, vout, false);
     }
 
+    public synchronized List<String> getMempool() throws BitcoindException, CommunicationException {
+        return client.getRawMemPool();
+    }
+
     public synchronized com.shuffle.bitcoin.Transaction getConflictingTransactionInner(com.shuffle.bitcoin.Transaction t, Address a, long amount)
         throws CoinNetworkException, AddressFormatException, BlockStoreException, BitcoindException, CommunicationException, IOException {
 
         // TODO
-        /**
-         *  Is this even possible with Bitcoin-Core ? We can only query the mempool, we can't
-         *  realistically search the blockchain for a UTXO that was spent.  (Searching the
-         *  blockchain for a spent UTXO would take far too long...)
-         */
+        
+        // 1. List<String> mempoolTx = client.getRawMempool();
+        // 2. BitcoinCore.TransactionWithConfirmations tx = getTransaction(MEMPOOL_TX_HERE)
+        // 3. Compare Inputs
+        
         return null;
     }
 
@@ -96,6 +100,7 @@ public class BitcoinCore extends Bitcoin {
     public synchronized TransactionWithConfirmations getTransaction(String transactionHash) throws IOException {
         RawTransaction rx;
         Object rawObject;
+        boolean confirmed;
 
         try {
             rawObject = client.getRawTransaction(transactionHash, 1);
@@ -106,8 +111,12 @@ public class BitcoinCore extends Bitcoin {
         rx = (RawTransaction) rawObject;
 
         // only confirmed transactions
-        int confirmations = rx.getConfirmations();
-        boolean confirmed = (confirmations != 0);
+        try {
+            int confirmations = rx.getConfirmations();
+            confirmed = (confirmations != 0);
+        } catch (NullPointerException e) {
+            confirmed = false;
+        }
 
         String rawHex = rx.getHex();
         HexBinaryAdapter adapter = new HexBinaryAdapter();

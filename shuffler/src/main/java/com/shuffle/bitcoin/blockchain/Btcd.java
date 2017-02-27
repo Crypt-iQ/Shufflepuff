@@ -412,6 +412,55 @@ public class Btcd extends Bitcoin {
         return jsonArray.toString().contains("\"" + transactionHash + "\"");
     }
 
+    private synchronized List<String> getMempool() throws IOException {
+        String requestBody = "{\"jsonrpc\":\"2.0\",\"id\":\"null\",\"method\":\"getrawmempool\", \"params\":[false]}";
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setDoInput(true);
+        connection.setDoOutput(true);
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setRequestProperty("Accept", "application/json");
+        Base64 b = new Base64();
+        String authString = "admin" + ":" + "pass";
+        String encoding = b.encodeAsString(authString.getBytes());
+        connection.setRequestProperty("Authorization", "Basic " + encoding);
+        connection.setRequestProperty("Content-Length", Integer.toString(requestBody.getBytes().length));
+        OutputStream out = connection.getOutputStream();
+        out.write(requestBody.getBytes());
+        if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) throw new IOException();
+        InputStream is = connection.getInputStream();
+        BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+        String line;
+        StringBuilder response = new StringBuilder();
+        while (true) {
+            try {
+                if ((line = rd.readLine()) == null) break;
+            } catch (IOException e) {
+                throw new IOException();
+            }
+            response.append(line);
+            response.append('\r');
+        }
+        rd.close();
+        JSONObject json = new JSONObject(response.toString());
+        // TODO
+        // What about an empty Btcd mempool ?
+        if (json.isNull("result")) {
+            JSONObject errorObj = json.getJSONObject("error");
+            String errorMsg = errorObj.getString("message");
+            if (errorMsg.isEmpty()) {
+                throw new IOException();
+            }
+        }
+
+        JSONArray jsonArray = json.getJSONArray("result");
+        List<String> mempoolTx = new ArrayList<>(jsonArray.length());
+        for (int i = 0; i < jsonArray.length(); i++) {
+            mempoolTx.add(jsonArray.get(i).toString());
+        }
+        return mempoolTx;
+    }
+
     @Override
     synchronized com.shuffle.bitcoin.Transaction getConflictingTransactionInner(com.shuffle.bitcoin.Transaction t, Address a, long amount)
             throws CoinNetworkException, AddressFormatException, BlockStoreException, BitcoindException, CommunicationException, IOException {
@@ -420,21 +469,13 @@ public class Btcd extends Bitcoin {
         Transaction transaction = (Transaction) t;
 
         AddressUtxoImpl addrUtxo = (AddressUtxoImpl) a;
+        HashSet<TransactionOutPoint> utxos = addrUtxo.getUtxos();
 
-        for (TransactionOutPoint to : addrUtxo.getUtxos()) {
+        // 1. Have a list of UTXOs
+        // 2. isUtxo(), if not, check mempool, return tx, else return null.
+        // 3. t is never used...
 
-            org.bitcoinj.core.Transaction tx = getTransaction(to.getHash().toString());
-            String addressP2pkh = tx.getOutput(to.getIndex()).getAddressFromP2PKHScript(netParams).toString();
-            List<Transaction> addressTransactions = getAddressTransactions(addressP2pkh);
-
-            for (Transaction addressTx : addressTransactions) {
-                for (TransactionInput addressTxInput : addressTx.bitcoinj().getInputs()) {
-                    for (TransactionInput transactionInput : transaction.bitcoinj().getInputs()) {
-                        if (addressTxInput.equals(transactionInput)) return addressTx;
-                    }
-                }
-            }
-        }
+        
 
         return null;
     }
