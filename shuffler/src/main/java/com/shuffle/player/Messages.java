@@ -207,7 +207,7 @@ public class Messages implements MessageFactory {
         // TODO make this a parameter.
         Inbox.Envelope<VerificationKey,
                 Signed<com.shuffle.chan.packet.Packet<VerificationKey, Payload>>> e
-                = receive.receive(10000, TimeUnit.MILLISECONDS);
+                = receive.receive(25000, TimeUnit.MILLISECONDS);
 
         if (e == null) return null;
 
