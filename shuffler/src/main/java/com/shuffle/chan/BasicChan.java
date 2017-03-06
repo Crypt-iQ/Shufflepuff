@@ -72,8 +72,9 @@ public class BasicChan<X> implements Chan<X> {
         if (closed && !closeSent) {
             // There is definitely room in the queue because we just removed
             // one element and no more were allowed to be put in.
-            q.add(new Message());
-            closeSent = true;
+            if (q.offer(new Message())) {
+                closeSent = true;
+            }
         }
 
         return m.x;
