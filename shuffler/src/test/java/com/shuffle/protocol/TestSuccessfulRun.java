@@ -59,10 +59,13 @@ public class TestSuccessfulRun extends TestShuffleMachine {
 
         // Tests for successful runs.
         int minPlayers = 2;
-        int maxPlayers = 13;
-        for (int numPlayer = minPlayers; numPlayer <= maxPlayers; numPlayer++) {
-            log.info("Protocol successful run with " + numPlayer + " players.");
-            SuccessfulRun(numPlayer);
+        int maxPlayers = 5;
+        for (int i = 0; i < 100; i++) {
+            for (int numPlayer = minPlayers; numPlayer <= maxPlayers; numPlayer++) {
+                log.info("Protocol successful run with " + numPlayer + " players.");
+                SuccessfulRun(numPlayer);
+            }
+            Thread.sleep(1000);
         }
     }
 

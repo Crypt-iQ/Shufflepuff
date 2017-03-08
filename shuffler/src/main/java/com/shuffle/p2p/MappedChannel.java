@@ -93,7 +93,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
         }
 
         @Override
-        public boolean send(Bytestring message) throws InterruptedException, IOException {
+        public synchronized boolean send(Bytestring message) throws InterruptedException, IOException {
             if (closed) return false;
 
             if (!initialized) {
@@ -134,52 +134,54 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
         }
 
         @Override
-        public boolean send(Bytestring message) throws InterruptedException, IOException {
+        public synchronized boolean send(Bytestring message) throws InterruptedException, IOException {
             if (closed) return false;
 
             if (!initialized) {
                 Identity you = null;
 
                 String msg = new String(message.bytes);
-
-                for (Map.Entry<Object, Identity> e : inverse.entrySet()) {
-                    if (e.getValue().toString().equals(msg)) {
-                        you = e.getValue();
-                        break;
-                    }
-                }
-                
-                if (you == null) {
-                    close();
-                    return false;
-                }
-                
-                synchronized (lock) {
-                    if (halfOpenSessions.containsKey(you)) {
-
-                        // flip coin
-                        if (rand.nextBoolean()) {
-                            // Close this session.
-                            close();
-                            return false;
-                        } else {
-                            // Close the half-open session.
-                            Session<Object, Bytestring> halfOpen = halfOpenSessions.get(you);
-                            halfOpen.close();
-                            halfOpenSessions.remove(you);
+                if (msg.equals("received-ack")) {
+                    initialized = true;
+                    return true;
+                } else {
+                    for (Map.Entry<Object, Identity> e : inverse.entrySet()) {
+                        if (e.getValue().toString().equals(msg)) {
+                            you = e.getValue();
+                            break;
                         }
                     }
 
-                    MappedSession m = new MappedSession(s, you);
-                    if (!m.send(new Bytestring("received".getBytes()))) {
-                        this.s.close();
+                    if (you == null) {
+                        close();
                         return false;
                     }
-                    this.z = l.newSession(m);
-                }
 
-                initialized = true;
-                return true;
+                    synchronized (lock) {
+                        if (halfOpenSessions.containsKey(you)) {
+
+                            // flip coin
+                            if (rand.nextBoolean()) {
+                                // Close this session.
+                                close();
+                                return false;
+                            } else {
+                                // Close the half-open session.
+                                Session<Object, Bytestring> halfOpen = halfOpenSessions.get(you);
+                                halfOpen.close();
+                                halfOpenSessions.remove(you);
+                            }
+                        }
+
+                        MappedSession m = new MappedSession(s, you);
+                        if (!m.send(new Bytestring("received".getBytes()))) {
+                            this.s.close();
+                            return false;
+                        }
+                        this.z = l.newSession(m);
+                    }
+                    return true;
+                }
             }
 
             return this.z.send(message);
@@ -227,6 +229,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
 
                 // initialization string - sends Alice's identity to Bob
                 if (!session.send(new Bytestring(myIdentity().toString().getBytes()))) {
+                    if (1==1) throw new NullPointerException("Ze-Ze");
                     return null;
                 }
 
@@ -239,6 +242,11 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
                 if (result == null || !result) {
                     session.close();
                     halfOpenSessions.remove(identity);
+                    return null;
+                }
+                
+                if (!session.send(new Bytestring("received-ack".getBytes()))) {
+                    if (1==1) throw new NullPointerException("Ak-Ak");
                     return null;
                 }
 
