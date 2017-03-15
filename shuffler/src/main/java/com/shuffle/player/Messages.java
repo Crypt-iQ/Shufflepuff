@@ -163,8 +163,10 @@ public class Messages implements MessageFactory {
                             Signed<Packet<VerificationKey, Payload>>>> receive,
                     ShuffleMarshaller m) throws NoSuchAlgorithmException {
 
-        if (session == null || me == null || net == null || receive == null)
+        if (session == null || me == null || net == null || receive == null) {
+            System.out.println("Unable-99");
             throw new NullPointerException();
+        }
 
         this.session = session;
         this.me = me;
@@ -178,7 +180,8 @@ public class Messages implements MessageFactory {
         VerificationKey vk = me.VerificationKey();
 
         for (Map.Entry<VerificationKey, Send<Signed<Packet<VerificationKey, Payload>>>> z : net.entrySet()) {
-
+            
+            System.out.println("me: " + vk + " peer: " + z.getKey());
             VerificationKey k = z.getKey();
             if (vk.equals(k)) continue;
             
@@ -194,6 +197,18 @@ public class Messages implements MessageFactory {
 
         Send<Payload> p = new OutgoingPacketSend<>(new SigningSend<>(h, pm, me), session, vk, vk);
         this.net.put(vk, new Outgoing(p, h, vk));
+        
+        for (Map.Entry<VerificationKey, Send<Signed<Packet<VerificationKey, Payload>>>> z : net.entrySet()) {
+            VerificationKey k = z.getKey();
+            if (!this.net.containsKey(k)) {
+                System.out.println("me: " + vk + " Error " + k + " is not contained");
+            } else {
+                System.out.println("me: " + vk + " peer: " + k + " is in net");
+                if (this.net.get(k) == null) {
+                    System.out.println("NULL: me: " + vk + " peer: " + k + " is null");
+                }
+            }
+        }
     }
 
     @Override
@@ -231,13 +246,25 @@ public class Messages implements MessageFactory {
 
         Outgoing x = m.messages.net.get(to);
 
-        if (x == null) return null;
-
-        // About to send message.
-        if (!x.out.send(new Payload(phase, m))) {
+        if (x == null) {
+            if (m.messages.net.containsKey(to)) {
+                System.out.println("me: " + this.me.VerificationKey() + " peer: " +  to + " Unable-20");
+            } else {
+                System.out.println("me: " + this.me.VerificationKey() + " peer: " + to + " Unable-21");
+            }
+            System.out.println("Unable-10" + m.messages.net.values());
             return null;
         }
 
-        return new SignedPacket(x.last());
+        // About to send message.
+        if (!x.out.send(new Payload(phase, m))) {
+            System.out.println("Unable");
+            return null;
+        }
+
+        SignedPacket sp = new SignedPacket(x.last());
+        if (sp == null || x.last() == null) {System.out.println("Unable-2");}
+
+        return sp;
     }
 }

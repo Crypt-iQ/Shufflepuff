@@ -109,6 +109,8 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
                     return false;
                 }
             }
+            
+            //System.out.println(me + " " + message);
 
             return this.z.send(message);
         }
@@ -181,6 +183,8 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
                 initialized = true;
                 return true;
             }
+            
+            //System.out.println(me + " " + message);
 
             return this.z.send(message);
         }

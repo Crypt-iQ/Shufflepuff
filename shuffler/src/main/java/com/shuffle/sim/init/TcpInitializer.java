@@ -15,6 +15,7 @@ import com.shuffle.p2p.MarshallChannel;
 import com.shuffle.p2p.OtrChannel;
 import com.shuffle.p2p.Session;
 import com.shuffle.p2p.TcpChannel;
+import com.shuffle.protocol.FormatException;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -23,6 +24,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 /**
  * TcpInitializer creates TcpChannels for all peers during a simulation.
  *
@@ -30,6 +34,8 @@ import java.util.Map;
  */
 
 public class TcpInitializer<X> implements Initializer<X> {
+    private static final Logger log = LogManager.getLogger(TcpInitializer.class);
+    
     // The set of incoming mailboxes for each player.
     private final Map<SigningKey, Inbox<VerificationKey, Signed<X>>> mailboxes = new HashMap<>();
 
@@ -101,8 +107,43 @@ public class TcpInitializer<X> implements Initializer<X> {
             VerificationKey kv = ks.VerificationKey();
 
             // And create a corresponding session the other way.
-
-            inputs.put(kv, channel.getPeer(kv).openSession(inbox.receivesFrom(vk)));
+            
+            Session<VerificationKey, Signed<X>> s = channel.getPeer(kv).openSession(inbox.receivesFrom(vk));
+            /*
+            SigningKey signk = null;
+            for (Map.Entry<SigningKey, HistoryChannel<VerificationKey, Signed<X>>> entry : channels.entrySet()) {
+                if (entry.getValue().equals(channel)) {
+                    signk = entry.getKey();
+                }
+            }
+            if (signk != null) {
+                Bytestring b = new Bytestring("hello".getBytes());
+                Bytestring signb = signk.sign(b);
+                Signed<X> sx;
+                try {
+                    sx = marshaller.unmarshall(signb);
+                    s.send(sx);
+                } catch (FormatException e) {
+                    System.out.println(e);
+                }
+            }*/
+            
+            if (s == null) {System.out.println("Unable-100");} //else {System.out.println("Unable-101");}
+            //inputs.put(kv, channel.getPeer(kv).openSession(inbox.receivesFrom(vk)));
+            inputs.put(kv, s);
+        }
+        
+        // check is pointless
+        for (Map.Entry<VerificationKey, InetSocketAddress> entry : addresses.entrySet()) {
+            if (!inputs.containsKey(entry.getKey())) {
+                System.out.println("Unable-200 " + entry.getKey() + " connect: " + sk.VerificationKey());
+            }
+            else {
+                System.out.println("Unable-201 " + entry.getKey() + " connect: " + sk.VerificationKey());
+                if (inputs.get(entry.getKey()) == null) {
+                    System.out.println("Unable-202 " + entry.getKey() + " is null... connect: " + sk.VerificationKey());
+                }
+            }
         }
 
         // Put the mailbox in the set.
@@ -122,6 +163,37 @@ public class TcpInitializer<X> implements Initializer<X> {
             histories.put(entry.getKey().VerificationKey(), entry.getValue().histories());
         }
 
+        if (channels.size() <= 2) {
+            /*
+            for (SigningKey s : mailboxes.keySet()) {
+                for (Map.Entry<VerificationKey, List<HistoryChannel<VerificationKey, Signed<X>>.HistorySession>> e : channels.get(s).histories().entrySet()) {
+                    for (int i = 0; i < e.getValue().size(); i++) {
+                        for (int j = 0; j < e.getValue().get(i).sent().size(); j++) {
+                            log.info("Sent " + e.getValue().get(i).sent().get(j));
+                        }
+                        for (int j = 0; j < e.getValue().get(i).received().size(); j++) {
+                            log.info("Recv " + e.getValue().get(i).received().get(j));
+                        }
+                    }
+                }
+            }*/
+            for (Map.Entry<SigningKey, HistoryChannel<VerificationKey, Signed<X>>> entry : channels.entrySet()) {
+                for (Map.Entry<VerificationKey, List<HistoryChannel<VerificationKey, Signed<X>>.HistorySession>> e : entry.getValue().histories().entrySet()) {
+                    for (int i = 0; i < e.getValue().size(); i++) {
+                        for (int j = 0; j < e.getValue().get(i).sent().size(); j++) {
+                            log.info("Sent " + e.getValue().get(i).sent().get(j));
+                            //System.out.println("Sent " + e.getValue().get(i).sent().get(j));
+                        }
+                        for (int j = 0; j < e.getValue().get(i).received().size(); j++) {
+                            log.info("Recv " + e.getValue().get(i).received().get(j));
+                            //System.out.println("Recv " + e.getValue().get(i).received().get(j));
+                        }
+                    }
+                }
+            }
+            
+        }
+        
         return histories;
     }
 }

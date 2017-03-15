@@ -229,6 +229,7 @@ public class TcpChannel implements Channel<InetSocketAddress, Bytestring> {
                 synchronized (lock) { }
 
                 if (socket == null || socket.isClosed()) {
+                    System.out.println("Unable-7");
                     return false;
                 }
 
@@ -236,6 +237,7 @@ public class TcpChannel implements Channel<InetSocketAddress, Bytestring> {
                     socket.getOutputStream().write(header.makeHeader(message.bytes.length).bytes);
                     socket.getOutputStream().write(message.bytes);
                 } catch (IOException e) {
+                    System.out.println("Unable-6");
                     socket = null;
                     throw e;
                 }

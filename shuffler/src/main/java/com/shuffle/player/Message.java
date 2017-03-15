@@ -339,9 +339,14 @@ public class Message implements com.shuffle.protocol.message.Message, Serializab
     public com.shuffle.protocol.message.Packet send(Phase phase, VerificationKey to)
             throws InterruptedException, IOException {
 
-        if (messages == null) return null;
+        if (messages == null) {
+            System.out.println("Unable-1");
+            return null;
+        }
 
-        return messages.send(this, phase, to);
+        Messages.SignedPacket sp = messages.send(this, phase, to);
+        if (sp == null) {System.out.println("Unable-3");}
+        return sp;
     }
 
     @Override

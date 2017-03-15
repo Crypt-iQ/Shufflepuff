@@ -14,7 +14,6 @@ import com.shuffle.chan.Send;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.ConnectException;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -230,6 +229,7 @@ public class Connect<Identity, P extends Serializable> implements Connection<Ide
                     continue;
                 }
             } catch (SocketException e) {
+                System.out.println(identity + " Unable-9 " + e);
                 // Try again later.
             }
 
@@ -247,6 +247,7 @@ public class Connect<Identity, P extends Serializable> implements Connection<Ide
             // We were not able to connect to this peer this time,
             // so we move on to the next one for now.
             if (!peers.rotate()) {
+                System.out.println("Unable-5");
                 break;
             }
         }

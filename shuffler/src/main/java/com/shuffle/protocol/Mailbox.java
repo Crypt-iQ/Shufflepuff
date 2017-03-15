@@ -74,6 +74,7 @@ public class Mailbox {
         }
 
         Packet packet = m.send(phase, to);
+        if (packet == null) {System.out.println(me + " Unable-4");}
 
         // If this is a message to myself, don't send it. Just pretend we received it.
         // This is useful later when we have to collect all blame messages later.
