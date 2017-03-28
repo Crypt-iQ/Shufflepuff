@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <VBox alignment="CENTER" layoutY="-32.0" prefHeight="410.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <children>
+            <HBox alignment="CENTER">
+               <children>
+              <Label fx:id="titleLabel" alignment="TOP_LEFT" prefHeight="65.0" prefWidth="386.0" text="There are many ways to Rome, &#10;which is yours?" textAlignment="CENTER">
+                <font>
+                  <Font size="25.0" />
+                </font>
+              </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label fx:id="titleLabel13" alignment="TOP_LEFT" text="Using Full Node?">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="nodeBox" prefWidth="150.0">
+                     <HBox.margin>
+                        <Insets left="45.0" />
+                     </HBox.margin>
+                  </ChoiceBox>
+               </children>
+            </HBox>
+            <HBox fx:id="topHBox" spacing="15.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label fx:id="titleLabel1" alignment="TOP_LEFT" text="How will you import the funds?">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox>
+                           <children>
+                              <RadioButton fx:id="fundsInReceiveAddress" mnemonicParsing="false" selected="true" text="Send to ShufflePuff">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="shuffleInOptions" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="fundsInPrivKeyWIF" mnemonicParsing="false" text="Private Keys (WIF)" toggleGroup="$shuffleInOptions" />
+                              <RadioButton fx:id="fundsInMasterPrivKey" mnemonicParsing="false" text="Master PrivKey" toggleGroup="$shuffleInOptions" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox fx:id="topHBox1" spacing="15.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label fx:id="titleLabel11" alignment="TOP_LEFT" text="Where will the shuffled funds go to?">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox>
+                           <children>
+                              <RadioButton fx:id="fundsOutInternalHD" mnemonicParsing="false" selected="true" text="ShufflePuffWallet (HD Seed)">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="shuffleOutOptions" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="fundsOutExtAddresses" mnemonicParsing="false" text="external address(es)" toggleGroup="$shuffleOutOptions" />
+                              <RadioButton fx:id="fundsOutXPub" mnemonicParsing="false" text="xPub" toggleGroup="$shuffleOutOptions" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox fx:id="topHBox2" spacing="15.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label fx:id="titleLabel12" alignment="TOP_LEFT" text="How will you connect to other peers?">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox>
+                           <children>
+                              <RadioButton fx:id="connectByIP" mnemonicParsing="false" selected="true" text="provide IPs manually">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="shuffleConnectOptions" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="connectByFetch" mnemonicParsing="false" text="fetch from Mycelium" toggleGroup="$shuffleConnectOptions" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+        <HBox alignment="CENTER_RIGHT" fillHeight="true" prefHeight="30.0" prefWidth="600.0" spacing="15.0" VBox.vgrow="NEVER">
+          <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Next Step: Let's do this!" />
+            <Button fx:id="cancelBtn" cancelButton="true" mnemonicParsing="false" onAction="#cancel" prefWidth="79.0" text="Cancel" />
+            <Button fx:id="nextBtn" defaultButton="true" mnemonicParsing="false" onAction="#next" prefWidth="79.0" text="Next" />
+          </children>
+        </HBox>
+      </children>
+      <effect>
+        <DropShadow />
+      </effect>
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+    </VBox>
+  </children>
+</AnchorPane>

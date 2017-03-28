@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO"
+               packages="com.mycelium.utils.TextAreaAppender">
+    <Properties>
+        <Property name="filename">logs/test.log</Property>
+    </Properties>
+    <Appenders>
+        <Appender name="Console" type="Console">
+            <Layout type="PatternLayout" pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Appender>
+        <Appender type="File" name="File" fileName="${filename}">
+            <Layout type="PatternLayout">
+                <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+            </Layout>
+        </Appender>
+        <TextAreaAppender name="TextAreaAppender">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %c{1}:%L - %m%n"/>
+        </TextAreaAppender>
+    </Appenders>
+    <Loggers>
+        <Logger name="My Logger" level="debug" additivity="false">
+            <appender-ref ref="TextAreaAppender" level="debug"/>
+        </Logger>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+        <Root level="debug">
+            <AppenderRef ref="TextAreaAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

@@ -109,7 +109,7 @@ public class TcpInitializer<X> implements Initializer<X> {
             // And create a corresponding session the other way.
             
             Session<VerificationKey, Signed<X>> s = channel.getPeer(kv).openSession(inbox.receivesFrom(vk));
-            /*
+            
             SigningKey signk = null;
             for (Map.Entry<SigningKey, HistoryChannel<VerificationKey, Signed<X>>> entry : channels.entrySet()) {
                 if (entry.getValue().equals(channel)) {
@@ -126,7 +126,7 @@ public class TcpInitializer<X> implements Initializer<X> {
                 } catch (FormatException e) {
                     System.out.println(e);
                 }
-            }*/
+            }
             
             if (s == null) {System.out.println("Unable-100");} //else {System.out.println("Unable-101");}
             //inputs.put(kv, channel.getPeer(kv).openSession(inbox.receivesFrom(vk)));

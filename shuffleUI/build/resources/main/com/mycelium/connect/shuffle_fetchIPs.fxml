@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <VBox alignment="CENTER_LEFT" layoutY="49.0" prefHeight="303.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <children>
+            <HBox>
+               <children>
+                  <VBox alignment="CENTER">
+                     <children>
+                    <Label fx:id="titleLabel" alignment="TOP_LEFT" contentDisplay="CENTER" text="Fetch other peers from">
+                      <font>
+                        <Font size="25.0" />
+                      </font>
+                           <VBox.margin>
+                              <Insets right="5.0" />
+                           </VBox.margin>
+                    </Label>
+                     </children>
+                  </VBox>
+                  <ImageView id="mycLogo" cache="true" fitHeight="70.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../mycelium-logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox fx:id="topHBox" alignment="CENTER" spacing="15.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="46.0" prefWidth="379.0">
+                     <children>
+                        <Label fx:id="titleLabel1" alignment="TOP_LEFT" contentDisplay="CENTER" text="coming soon">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="46.0" prefWidth="52.0" />
+                  <VBox alignment="CENTER" prefHeight="65.0" prefWidth="54.0">
+                     <children>
+                        <Label fx:id="btcLabel11" alignment="CENTER" contentDisplay="CENTER" visible="false" wrapText="true">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="15.0" />
+        <HBox alignment="CENTER_RIGHT" fillHeight="true" prefHeight="30.0" prefWidth="600.0" spacing="15.0" VBox.vgrow="NEVER">
+          <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Next Step: Start Shuffle!" />
+            <Button fx:id="backBtn" cancelButton="true" mnemonicParsing="false" onAction="#cancel" prefWidth="79.0" text="Back" />
+            <Button fx:id="nextBtn" defaultButton="true" mnemonicParsing="false" onAction="#next" prefWidth="79.0" text="Next" />
+          </children>
+        </HBox>
+      </children>
+      <effect>
+        <DropShadow />
+      </effect>
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+    </VBox>
+  </children>
+</AnchorPane>

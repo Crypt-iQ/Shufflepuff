@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <VBox alignment="CENTER_LEFT" layoutY="13.0" prefHeight="370.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <children>
+        <Label fx:id="titleLabel" alignment="TOP_LEFT" text="Add IPs to connect to">
+          <font>
+            <Font size="25.0" />
+          </font>
+        </Label>
+            <HBox fx:id="topHBox" alignment="CENTER" spacing="15.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="65.0" prefWidth="276.0">
+                     <children>
+                        <Label fx:id="btcLabel" alignment="CENTER" contentDisplay="CENTER" text="IP">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="inputHashEdit" prefHeight="27.0" prefWidth="350.0" promptText="192.168.0.1" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="46.0" prefWidth="52.0">
+                     <children>
+                        <Label fx:id="btcLabel2" alignment="CENTER" contentDisplay="CENTER" text="Port">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="inputIndexEdit" alignment="TOP_CENTER" maxWidth="54.0" minWidth="10.0" prefHeight="27.0" prefWidth="54.0" promptText="2017" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="65.0" prefWidth="54.0">
+                     <children>
+                        <Label fx:id="btcLabel11" alignment="CENTER" contentDisplay="CENTER" visible="false" wrapText="true">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="AddBtn" alignment="CENTER" mnemonicParsing="false" onAction="#addInput" prefWidth="79.0" text="Add" />
+                     </children>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <Label fx:id="btcLabel1111" alignment="CENTER" contentDisplay="CENTER" visible="false" wrapText="true">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="btcLabel11111" alignment="CENTER" contentDisplay="CENTER" visible="false" wrapText="true">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="65.0" prefWidth="79.0">
+                     <children>
+                        <Label fx:id="btcLabel111" alignment="CENTER" contentDisplay="CENTER" visible="false" wrapText="true">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="RmvBtn" alignment="CENTER" mnemonicParsing="false" onAction="#removeLastInput" prefHeight="12.0" prefWidth="70.0" text="Remove" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="15.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="add the IPs public encryption key here:" />
+                  <TextField fx:id="inputEKedit" prefHeight="27.0" prefWidth="320.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="15.0">
+               <children>
+                  <ListView fx:id="inputListView" prefHeight="79.0" prefWidth="534.0" />
+               </children>
+            </HBox>
+        <HBox alignment="CENTER_RIGHT" fillHeight="true" prefHeight="30.0" prefWidth="600.0" spacing="15.0" VBox.vgrow="NEVER">
+          <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Next Step: Start Shuffle!" />
+            <Button fx:id="backBtn" cancelButton="true" mnemonicParsing="false" onAction="#cancel" prefWidth="79.0" text="Back" />
+            <Button fx:id="nextBtn" defaultButton="true" mnemonicParsing="false" onAction="#next" prefWidth="79.0" text="Next" />
+          </children>
+        </HBox>
+      </children>
+      <effect>
+        <DropShadow />
+      </effect>
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+    </VBox>
+  </children>
+</AnchorPane>

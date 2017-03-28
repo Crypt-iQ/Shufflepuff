@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+       <VBox alignment="CENTER_LEFT" layoutY="26.0" prefHeight="348.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+           <effect>
+               <DropShadow />
+           </effect>
+           <padding>
+               <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+           </padding>
+          <children>
+              <Label fx:id="titleLabel" alignment="TOP_LEFT" text="Add private Keys holding funds">
+                  <font>
+                      <Font size="25.0" />
+                  </font>
+              </Label>
+              <HBox fx:id="topHBox" alignment="CENTER" spacing="15.0">
+                 <children>
+                     <HBox prefHeight="46.0" prefWidth="544.0">
+                        <children>
+                            <VBox alignment="CENTER" prefHeight="46.0" prefWidth="380.0">
+                               <children>
+                                   <Label fx:id="privKLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="507.0" text="in WIF (52 characters base58, starts with a 'K' or 'L')">
+                                       <font>
+                                           <Font size="15.0" />
+                                       </font>
+                                   </Label>
+                                   <TextField fx:id="inputPrivKEdit" prefHeight="27.0" prefWidth="392.0" promptText="L4jHPh9qxfyZuXYRC2pm15jFJpsvwqTmFAhbwRerA9gZRB5Aszj1" />
+                               </children>
+                            </VBox>
+                            <VBox alignment="CENTER" prefHeight="65.0" prefWidth="54.0">
+                               <children>
+                                   <Label fx:id="btcLabel11" alignment="CENTER" contentDisplay="CENTER" visible="false" wrapText="true">
+                                       <font>
+                                           <Font size="15.0" />
+                                       </font>
+                                   </Label>
+                                   <Button fx:id="AddBtn" alignment="CENTER" mnemonicParsing="false" onAction="#addInput" prefHeight="27.0" prefWidth="44.0" text="Add" />
+                               </children>
+                            </VBox>
+                        <VBox alignment="CENTER" prefHeight="46.0" prefWidth="96.0">
+                           <children>
+                              <Label fx:id="btcLabel111" alignment="CENTER" contentDisplay="CENTER" visible="false" wrapText="true">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="rmvBtn" alignment="CENTER" mnemonicParsing="false" onAction="#removeLastPrivKey" prefHeight="27.0" prefWidth="71.0" text="Remove" />
+                           </children>
+                        </VBox>
+                        </children>
+                     </HBox>
+                 </children>
+              </HBox>
+              <HBox alignment="CENTER_LEFT" prefHeight="108.0" prefWidth="473.0" spacing="15.0">
+                 <children>
+                     <VBox prefHeight="108.0" prefWidth="521.0">
+                        <children>
+                        <HBox>
+                           <children>
+                                  <Label fx:id="privKListLabel" text="private keys to be shuffled:">
+                                 <HBox.margin>
+                                    <Insets right="55.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label fx:id="addressListLabel" text="double check address of private key:">
+                                 <HBox.margin>
+                                    <Insets left="55.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                                  <ListView fx:id="privKeyListView" prefHeight="84.0" prefWidth="265.0">
+                                 <HBox.margin>
+                                    <Insets right="15.0" />
+                                 </HBox.margin>
+                              </ListView>
+                              <ListView fx:id="addressListView" prefHeight="84.0" prefWidth="268.0">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </ListView>
+                           </children>
+                        </HBox>
+                        </children>
+                     </VBox>
+                 </children>
+              </HBox>
+              <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="600.0" spacing="15.0">
+                 <children>
+                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Next Step: add Outputs" />
+                     <Button fx:id="backBtn" cancelButton="true" mnemonicParsing="false" onAction="#cancel" prefWidth="79.0" text="Back" />
+                     <Button fx:id="nextBtn" defaultButton="true" mnemonicParsing="false" onAction="#next" prefWidth="79.0" text="Next" />
+                 </children>
+              </HBox>
+          </children>
+       </VBox>
+   </children>
+</AnchorPane>

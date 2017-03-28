@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+       <VBox alignment="CENTER_LEFT" layoutY="26.0" prefHeight="348.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+           <effect>
+               <DropShadow />
+           </effect>
+           <padding>
+               <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+           </padding>
+          <children>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                    <Label fx:id="titleLabel" alignment="TOP_LEFT" text="to ShufflePuff">
+                        <font>
+                            <Font size="25.0" />
+                        </font>
+                    </Label>
+                  <ImageView fitHeight="51.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../shuffle_logo_tiny.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="titleLabel1" alignment="TOP_LEFT" text="Wallet">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+              <HBox alignment="CENTER_LEFT" prefHeight="108.0" prefWidth="473.0" spacing="15.0">
+                 <children>
+                     <VBox alignment="CENTER" prefHeight="108.0" prefWidth="540.0">
+                        <children>
+                        <VBox>
+                           <children>
+                                  <Label fx:id="usageLabel" prefHeight="31.0" prefWidth="294.0" text="the following address will be used:">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <Label fx:id="extAddressLabel1" prefHeight="17.0" prefWidth="285.0" text="1FnE116QKWHXBixUBphceJt895zPFcg16E">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                            <Label fx:id="extAddressLabel2" disable="true" prefHeight="17.0" prefWidth="285.0"
+                                   text="1FnE116QKWHXBixUBphceJt895zPFcg16E">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                            <Label fx:id="extAddressLabel3" disable="true" prefHeight="17.0" prefWidth="285.0"
+                                   text="1FnE116QKWHXBixUBphceJt895zPFcg16E">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                            <Label fx:id="extAddressLabel4" disable="true" prefHeight="17.0" prefWidth="285.0"
+                                   text="1FnE116QKWHXBixUBphceJt895zPFcg16E">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        </children>
+                     </VBox>
+                 </children>
+              </HBox>
+              <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="600.0" spacing="15.0">
+                 <children>
+                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Next Step: find peers" />
+                     <Button fx:id="backBtn" cancelButton="true" mnemonicParsing="false" onAction="#cancel" prefWidth="79.0" text="Back" />
+                     <Button fx:id="nextBtn" defaultButton="true" mnemonicParsing="false" onAction="#next" prefWidth="79.0" text="Next" />
+                 </children>
+              </HBox>
+          </children>
+       </VBox>
+   </children>
+</AnchorPane>
