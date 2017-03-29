@@ -405,6 +405,7 @@ public class InitialState {
             Communication<Packet<VerificationKey, Payload>> c = connections.get(player.sk);
             
             try {
+                while (c.send.size() != players.size()-1);
                 p.put(player.sk,
                         player.adversary(new Messages(testCase.session, player.sk, c.send, c.receive,
                                 testCase.proto())));
