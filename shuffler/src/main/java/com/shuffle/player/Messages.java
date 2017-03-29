@@ -167,6 +167,8 @@ public class Messages implements MessageFactory {
             System.out.println("Unable-99");
             throw new NullPointerException();
         }
+        
+        // net will have one less entry than it should...
 
         this.session = session;
         this.me = me;
@@ -209,6 +211,8 @@ public class Messages implements MessageFactory {
                 }
             }
         }
+        System.out.println("Net " + net.size());
+        System.out.println("Net2 " + this.net.size());
     }
 
     @Override

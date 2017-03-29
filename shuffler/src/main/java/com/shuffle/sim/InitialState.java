@@ -394,25 +394,40 @@ public class InitialState {
 
         for (final PlayerInitialState player : players) {
             if (player.sk == null) {
+                if (1 == 1) throw new NullPointerException();
                 continue;
             }
 
             connections.put(player.sk, initializer.connect(player.sk));
         }
+        
+        System.out.println(players.size() == connections.size());
+        System.out.println("Pl " + players);
+        System.out.println("Co " + connections);
+
 
         for (final PlayerInitialState player : players) {
 
             Communication<Packet<VerificationKey, Payload>> c = connections.get(player.sk);
-            
+
             try {
+                System.out.println("1 " + c.send);
+                System.out.println("11 " + c.receive);
                 p.put(player.sk,
                         player.adversary(new Messages(testCase.session, player.sk, c.send, c.receive,
                                 testCase.proto())));
-
+                System.out.println("2 " + c.send);
+                System.out.println("22 " + c.receive);
             } catch (FormatException | CoinNetworkException | NoSuchAlgorithmException e) {
                 e.printStackTrace();
                 throw new RuntimeException(e);
             }
+        }
+
+        for (final PlayerInitialState player : players) {
+            Communication<Packet<VerificationKey, Payload>> c = connections.get(player.sk);
+            System.out.println("CC " + c.send);
+            System.out.println("CR " + c.receive);
         }
 
         networkPoints = null;
