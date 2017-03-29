@@ -399,18 +399,21 @@ public class InitialState {
             }
 
             connections.put(player.sk, initializer.connect(player.sk));
+            // c.send.size() vs player_num-1
         }
-        
+
         System.out.println(players.size() == connections.size());
         System.out.println("Pl " + players);
         System.out.println("Co " + connections);
-
 
         for (final PlayerInitialState player : players) {
 
             Communication<Packet<VerificationKey, Payload>> c = connections.get(player.sk);
 
             try {
+                //if (c.send.size() != players.size()-1) throw new NullPointerException();
+                if (c.send.size() != players.size()-1) Thread.sleep(10000);
+                while (c.send.size() != players.size()-1);
                 System.out.println("1 " + c.send);
                 System.out.println("11 " + c.receive);
                 p.put(player.sk,

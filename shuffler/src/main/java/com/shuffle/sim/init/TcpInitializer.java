@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -67,7 +68,7 @@ public class TcpInitializer<X> implements Initializer<X> {
         VerificationKey vk = sk.VerificationKey();
 
         // Create a new map. This will contain the channels from this mailbox to the others.
-        final Map<VerificationKey, Send<Signed<X>>> inputs = new HashMap<>();
+        final Map<VerificationKey, Send<Signed<X>>> inputs = new ConcurrentHashMap<>();
 
         // Create a new mailbox.
         final Inbox<VerificationKey, Signed<X>> inbox = new Inbox<>(capacity);
