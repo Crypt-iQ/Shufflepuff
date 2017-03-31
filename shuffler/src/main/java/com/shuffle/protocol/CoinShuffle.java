@@ -307,7 +307,7 @@ public class CoinShuffle {
             }
 
             // Send the transaction into the net.
-            t.send();
+            //t.send();
 
             // The protocol has completed successfully.
             phase.set(Phase.Completed);
