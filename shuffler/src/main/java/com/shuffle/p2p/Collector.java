@@ -18,12 +18,14 @@ public class Collector<Address, X extends Serializable> implements Listener<Addr
     public final ConcurrentMap<Address, Send<X>> connected = new ConcurrentHashMap<>();
 
     public final Inbox<Address, X> inbox;
+    private final Object lock;
 
-    public Collector(Inbox<Address, X> inbox) {
+    public Collector(Inbox<Address, X> inbox, Object lock) {
         if (inbox == null) throw new NullPointerException();
         if (inbox.closed()) throw new IllegalArgumentException();
 
         this.inbox = inbox;
+        this.lock = lock;
     }
 
     public Send<X> get(Address address) {
@@ -48,7 +50,9 @@ public class Collector<Address, X extends Serializable> implements Listener<Addr
     public Send<X> newSession(Session<Address, X> session) throws InterruptedException {
         if (session == null) throw new NullPointerException();
 
-        if (!put(session)) return null;
+        synchronized (lock) {
+            if (!put(session)) return null;
+        }
 
         return inbox.receivesFrom(session.peer().identity());
     }

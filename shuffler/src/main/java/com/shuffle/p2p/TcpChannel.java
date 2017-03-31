@@ -314,6 +314,7 @@ public class TcpChannel implements Channel<InetSocketAddress, Bytestring> {
                     send.send(new Bytestring(msg));
 
                 } catch (IOException | InterruptedException e) {
+                    System.out.println(e);
                     session.close();
                     break;
                 }
