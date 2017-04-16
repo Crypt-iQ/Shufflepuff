@@ -88,7 +88,7 @@ public class Connect<Identity, P extends Serializable> implements Connection<Ide
             synchronized (lock) {
 
                 if (collector.connected.containsKey(identity)) {
-                    System.out.println("Collector contains " + identity);
+                    System.out.println("Collector contains " + identity + " " + System.currentTimeMillis() + " " + Thread.currentThread());
                     remove();
                     remaining.remove(identity);
                     return false;
@@ -97,10 +97,12 @@ public class Connect<Identity, P extends Serializable> implements Connection<Ide
                 Send<P> processor = collector.inbox.receivesFrom(identity);
                 if (processor != null) {
 
+                    System.out.println("start " + Thread.currentThread());
+
                     Session<Identity, P> session = peer.openSession(processor);
                     
                     if (collector.connected.containsKey(identity)) {
-                        System.out.println("Collector number 2 contains " + identity);
+                        System.out.println("Collector number 2 contains " + identity + " " + System.currentTimeMillis() + " " + Thread.currentThread());
                     }
 
                     if (session != null) {
@@ -247,6 +249,7 @@ public class Connect<Identity, P extends Serializable> implements Connection<Ide
 
             try{
                 if (peers.openSession(identity, peer)) {
+                    System.out.println("C " + System.currentTimeMillis() + " " + Thread.currentThread());
                     continue;
                 }
             } catch (SocketException e) {

@@ -42,6 +42,8 @@ public class Collector<Address, X extends Serializable> implements Listener<Addr
             session.close();
             return false;
         }
+        
+        System.out.println("Collector " + System.currentTimeMillis() + " " + Thread.currentThread());
 
         return true;
     }

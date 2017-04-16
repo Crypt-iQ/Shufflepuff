@@ -90,7 +90,8 @@ public class TestConnect {
                 connectTo.remove(me);
 
                 Collector<Integer, Bytestring> m = conn.connect(connectTo, maxRetries);
-
+                System.out.println("Hello " + System.currentTimeMillis() + " " + Thread.currentThread());
+                
                 if (m != null) {
                     net.send(m);
                 }
@@ -304,7 +305,8 @@ public class TestConnect {
         int seed = 245;
         int msgNo = 100;
         for (TestCase tc: cases) {
-            for (int i = 2; i <= tc.rounds(); i++) {
+            //for (int i = 2; i <= tc.rounds(); i++) {
+            for (int i = 2; i <= 2; i++) {
                 System.out.println("Trial " + i + ": ");
                 Simulation sim = new Simulation(i, seed + i, tc.network());
                 Map<Integer, Collector<Integer, Bytestring>> nets = sim.networks();

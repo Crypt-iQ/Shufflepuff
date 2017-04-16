@@ -171,6 +171,7 @@ public class TcpChannel implements Channel<InetSocketAddress, Bytestring> {
 
         TcpSession newSession() throws IOException {
             InetSocketAddress identity = identity();
+            System.out.println("Hey");
 
             InetAddress address = identity.getAddress();
 
