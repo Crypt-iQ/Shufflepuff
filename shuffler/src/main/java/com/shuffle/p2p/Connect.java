@@ -41,11 +41,13 @@ public class Connect<Identity, P extends Serializable> implements Connection<Ide
         // The list of peers which we have not connected with yet.
         private final Queue<Identity> unconnected = new LinkedList<>();
         private final Set<Identity> remaining = new TreeSet<>();
+        private final Object lock;
 
         private final Collector<Identity, P> collector;
 
-        private Peers(Collector<Identity, P> collector) {
+        private Peers(Collector<Identity, P> collector, Object lock) {
             this.collector = collector;
+            this.lock = lock;
         }
 
         public void queue(Identity identity) {
@@ -83,21 +85,34 @@ public class Connect<Identity, P extends Serializable> implements Connection<Ide
         public synchronized boolean openSession(
                 Identity identity,
                 Peer<Identity, P> peer) throws InterruptedException, IOException {
-
-            Send<P> processor = collector.inbox.receivesFrom(identity);
-            if (processor != null) {
-                Session<Identity, P> session =
-                        peer.openSession(processor);
-
-                if (session != null) {
-                    remove();
-                    connect(session);
-                    return true;
-                } else {
-                    processor.close();
+            
+            if (collector.connected.containsKey(identity)) {
+                return false;
+            }
+            
+            synchronized (lock) {
+                
+                if (collector.connected.containsKey(identity)) {
                     return false;
                 }
+
+                Send<P> processor = collector.inbox.receivesFrom(identity);
+                if (processor != null) {
+                    Session<Identity, P> session =
+                            peer.openSession(processor);
+
+                    if (session != null) {
+                        remove();
+                        connect(session);
+                        return true;
+                    } else {
+                        processor.close();
+                        return false;
+                    }
+                }
+                
             }
+            
             return false;
         }
 
@@ -149,6 +164,8 @@ public class Connect<Identity, P extends Serializable> implements Connection<Ide
     private final Crypto crypto;
 
     private boolean finished = false;
+    
+    private final Object lock;
 
     public Connect(Channel<Identity, P> channel, Crypto crypto)
             throws InterruptedException, IOException {
@@ -160,6 +177,8 @@ public class Connect<Identity, P extends Serializable> implements Connection<Ide
             throws InterruptedException, IOException {
 
         if (channel == null || crypto == null) throw new NullPointerException();
+        
+        this.lock = new Object();
 
         collector = new Collector<>(new Inbox<Identity, P>(capacity));
 
@@ -183,7 +202,7 @@ public class Connect<Identity, P extends Serializable> implements Connection<Ide
             return null;
         }
 
-        Peers peers = new Peers(collector);
+        Peers peers = new Peers(collector, lock);
 
         // Randomly arrange the list of peers.
         // First, put all peers in an array.

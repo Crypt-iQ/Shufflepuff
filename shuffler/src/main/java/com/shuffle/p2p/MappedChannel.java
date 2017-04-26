@@ -154,6 +154,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
                     return false;
                 }
                 
+                MappedSession m;
                 synchronized (lock) {
                     if (halfOpenSessions.containsKey(you)) {
 
@@ -170,13 +171,13 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
                         }
                     }
 
-                    MappedSession m = new MappedSession(s, you);
+                    m = new MappedSession(s, you);
                     if (!m.send(new Bytestring("received".getBytes()))) {
                         this.s.close();
                         return false;
                     }
-                    this.z = l.newSession(m);
                 }
+                this.z = l.newSession(m);
 
                 initialized = true;
                 return true;

@@ -141,14 +141,16 @@ class Player {
             connectTo.addAll(addrs);
             connectTo.remove(sk.VerificationKey());
 
-            long wait = time - System.currentTimeMillis();
-            Thread.sleep(wait);
+            //long wait = time - System.currentTimeMillis();
+            //Thread.sleep(wait);
 
             // Run the protocol.
             int count = 0;
             Collector<VerificationKey, Signed<Packet<VerificationKey, Payload>>> collector = null;
             while (count < 5) {
                 try {
+                    
+                    Thread.sleep((time + (count)*30000L) - System.currentTimeMillis());
 
                     // Begin connecting to all peers.
                     collector = connect.connect(connectTo, 10);
