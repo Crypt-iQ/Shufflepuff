@@ -176,7 +176,7 @@ public class Messages implements MessageFactory {
         Marshaller<Packet<VerificationKey, Payload>> pm = m.packetMarshaller();
 
         VerificationKey vk = me.VerificationKey();
-
+        
         for (Map.Entry<VerificationKey, Send<Signed<Packet<VerificationKey, Payload>>>> z : net.entrySet()) {
 
             VerificationKey k = z.getKey();

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Daniel Krawisz on 5/27/16.
@@ -154,6 +155,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
                     return false;
                 }
                 
+                MappedSession m;
                 synchronized (lock) {
                     if (halfOpenSessions.containsKey(you)) {
 
@@ -170,13 +172,13 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
                         }
                     }
 
-                    MappedSession m = new MappedSession(s, you);
+                    m = new MappedSession(s, you);
                     if (!m.send(new Bytestring("received".getBytes()))) {
                         this.s.close();
                         return false;
                     }
-                    this.z = l.newSession(m);
                 }
+                this.z = l.newSession(m);
 
                 initialized = true;
                 return true;
@@ -234,8 +236,10 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
             }
 
             Boolean result = chan.receive();
-            
+
+            System.out.println("M");
             synchronized (lock) {
+                System.out.println("M22222");
                 if (result == null || !result) {
                     session.close();
                     halfOpenSessions.remove(identity);
@@ -246,6 +250,7 @@ public class MappedChannel<Identity> implements Channel<Identity, Bytestring> {
                 halfOpenSessions.remove(identity);
             }
             
+            //System.out.println("Mapped " + System.currentTimeMillis() + " " + Thread.currentThread());
             return new MappedSession(session, identity);
         }
 

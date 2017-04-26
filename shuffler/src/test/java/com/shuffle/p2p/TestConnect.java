@@ -248,7 +248,7 @@ public class TestConnect {
 
     // There are two test cases. One uses a MockChannel, the other a TcpChannel.
     private TestCase[] cases = new TestCase[]{
-        new TestCase() {
+        /*new TestCase() {
             @Override
             public int rounds() {
                 return 13;
@@ -267,7 +267,7 @@ public class TestConnect {
                     }
                 };
             }
-        }, new TestCase() {
+        }, */new TestCase() {
             int port = 5000;
 
             @Override
@@ -305,8 +305,8 @@ public class TestConnect {
         int seed = 245;
         int msgNo = 100;
         for (TestCase tc: cases) {
-            //for (int i = 2; i <= tc.rounds(); i++) {
-            for (int i = 2; i <= 2; i++) {
+            for (int i = 2; i <= tc.rounds(); i++) {
+            //for (int i = 2; i <= 2; i++) {
                 System.out.println("Trial " + i + ": ");
                 Simulation sim = new Simulation(i, seed + i, tc.network());
                 Map<Integer, Collector<Integer, Bytestring>> nets = sim.networks();

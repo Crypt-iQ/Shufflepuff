@@ -41,12 +41,13 @@ public class Connect<Identity, P extends Serializable> implements Connection<Ide
         // The list of peers which we have not connected with yet.
         private final Queue<Identity> unconnected = new LinkedList<>();
         private final Set<Identity> remaining = new TreeSet<>();
-        private final Object lock = new Object();
+        private final Object lock;
 
         private final Collector<Identity, P> collector;
 
-        private Peers(Collector<Identity, P> collector) {
+        private Peers(Collector<Identity, P> collector, Object lock) {
             this.collector = collector;
+            this.lock = lock;
         }
 
         public void queue(Identity identity) {
@@ -84,22 +85,28 @@ public class Connect<Identity, P extends Serializable> implements Connection<Ide
         public synchronized boolean openSession(
                 Identity identity,
                 Peer<Identity, P> peer) throws InterruptedException, IOException {
+            
+            if (collector.connected.containsKey(identity)) {
+                return false;
+            }
 
             synchronized (lock) {
 
                 if (collector.connected.containsKey(identity)) {
                     System.out.println("Collector contains " + identity + " " + System.currentTimeMillis() + " " + Thread.currentThread());
-                    remove();
-                    remaining.remove(identity);
+                    //remove();
+                    //remaining.remove(identity);
                     return false;
                 }
                 
                 Send<P> processor = collector.inbox.receivesFrom(identity);
                 if (processor != null) {
 
-                    System.out.println("start " + Thread.currentThread());
+                    System.out.println("start " + System.currentTimeMillis() + " " + Thread.currentThread());
 
                     Session<Identity, P> session = peer.openSession(processor);
+                    
+                    System.out.println("open " + System.currentTimeMillis() + " " + Thread.currentThread());
                     
                     if (collector.connected.containsKey(identity)) {
                         System.out.println("Collector number 2 contains " + identity + " " + System.currentTimeMillis() + " " + Thread.currentThread());
@@ -204,7 +211,7 @@ public class Connect<Identity, P extends Serializable> implements Connection<Ide
             return null;
         }
 
-        Peers peers = new Peers(collector);
+        Peers peers = new Peers(this.collector, this.lock);
 
         // Randomly arrange the list of peers.
         // First, put all peers in an array.
