@@ -142,38 +142,52 @@ class Player {
             connectTo.remove(sk.VerificationKey());
 
             long wait = time - System.currentTimeMillis();
+            Thread.sleep(wait);
 
             // Run the protocol.
-            try {
-                Thread.sleep(wait);
+            int count = 0;
+            Collector<VerificationKey, Signed<Packet<VerificationKey, Payload>>> collector = null;
+            while (count < 5) {
+                try {
 
-                // Begin connecting to all peers.
-                final Collector<VerificationKey, Signed<Packet<VerificationKey, Payload>>> collector
-                        = connect.connect(connectTo, 10);
+                    // Begin connecting to all peers.
+                    collector = connect.connect(connectTo, 10);
 
-                if (collector == null) return Report.invalidInitialState("Could not connect to peers.");
+                    if (collector == null) {
+                        count++;
+                        continue;
+                    }
+                        //return Report.invalidInitialState("Could not connect to peers.");
 
-                // If the protocol returns correctly without throwing a Matrix, then
-                // it has been successful.
-                Messages messages = new Messages(session, sk, collector.connected, collector.inbox, m);
-                CoinShuffle cs = new CoinShuffle(messages, crypto, coin);
-                return Report.success(cs.runProtocol(amount, fee, sk, addrs, anon, change, ch));
-            } catch (Matrix m) {
-                return Report.failure(m, addrs);
-            } catch (TimeoutException e) {
-                e.printStackTrace();
-                return Report.timeout(e);
-            } catch (CoinNetworkException
-                    | IOException
-                    | InvalidParticipantSetException
-                    | FormatException
-                    | NoSuchAlgorithmException
-                    | AddressFormatException
-                    | ExecutionException e) {
+                    // If the protocol returns correctly without throwing a Matrix, then
+                    // it has been successful.
+                    Messages messages = new Messages(session, sk, collector.connected, collector.inbox, m);
+                    CoinShuffle cs = new CoinShuffle(messages, crypto, coin);
+                    return Report.success(cs.runProtocol(amount, fee, sk, addrs, anon, change, ch));
+                } catch (Matrix m) {
+                    return Report.failure(m, addrs);
+                } catch (TimeoutException e) {
+                    if (count < 5) {
+                        collector.close();
+                        count++;
+                    } else {
+                        e.printStackTrace();
+                        return Report.timeout(e);
+                    }
+                } catch (CoinNetworkException
+                        | IOException
+                        | InvalidParticipantSetException
+                        | FormatException
+                        | NoSuchAlgorithmException
+                        | AddressFormatException
+                        | ExecutionException e) {
 
-                stream.println("  Player " + sk.VerificationKey() + " reports error " +  e.getMessage());
-                return Report.error(e.getMessage());
+                    stream.println("  Player " + sk.VerificationKey() + " reports error " + e.getMessage());
+                    return Report.error(e.getMessage());
+                }
             }
+            
+            return Report.error("Error");
 
         }
 

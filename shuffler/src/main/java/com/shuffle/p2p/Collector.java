@@ -4,6 +4,7 @@ import com.shuffle.chan.Inbox;
 import com.shuffle.chan.Send;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -42,6 +43,14 @@ public class Collector<Address, X extends Serializable> implements Listener<Addr
         }
 
         return true;
+    }
+    
+    public void close() {
+        for (Map.Entry<Address, Send<X>> entry : connected.entrySet()) {
+            entry.getValue().close();
+            connected.remove(entry.getKey());
+        }
+        //inbox.close();
     }
 
     @Override

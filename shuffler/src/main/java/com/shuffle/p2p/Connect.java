@@ -144,7 +144,7 @@ public class Connect<Identity, P extends Serializable> implements Connection<Ide
     }
 
     private final Channel<Identity, P> channel;
-    private final Connection<Identity> connection;
+    private Connection<Identity> connection;
     private final Collector<Identity, P> collector;
     private final Crypto crypto;
 
@@ -178,7 +178,8 @@ public class Connect<Identity, P extends Serializable> implements Connection<Ide
         if (addrs == null) throw new NullPointerException();
 
         if (finished) {
-            connection.close();
+            collector.close();
+            finished = false;
             return null;
         }
 
@@ -240,7 +241,8 @@ public class Connect<Identity, P extends Serializable> implements Connection<Ide
                 // TODO In some instances, it should be possible to run coin shuffle with fewer
                 // players, so we should still return the network object.
                 System.out.println("Reached maximum connection retry limit - could not connect to peer: " + peer.identity());
-                connection.close();
+                collector.close();
+                //connection.close();
                 return null;
             }
 
